@@ -1,9 +1,13 @@
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheControl';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import { typeDefs } from './schemas/typeDefs.js';
 import { resolvers } from './resolvers/index.js';
@@ -26,13 +30,50 @@ async function startServer() {
   const app = express();
   const httpServer = http.createServer(app);
 
+  // Security middleware
+  app.use(helmet({
+    contentSecurityPolicy: process.env.NODE_ENV === 'production',
+    crossOriginEmbedderPolicy: false
+  }));
+
+  // Compression middleware
+  app.use(compression({
+    filter: (req, res) => {
+      if (req.headers['x-no-compression']) {
+        return false;
+      }
+      return compression.filter(req, res);
+    },
+    level: 6,
+    threshold: 1024
+  }));
+
+  // Rate limiting
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: process.env.NODE_ENV === 'production' ? 100 : 1000, // limit each IP
+    message: {
+      error: 'Too many requests from this IP, please try again later.',
+      retryAfter: '15 minutes'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+
+  app.use('/graphql', limiter);
+
   // Create Apollo Server
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    introspection: process.env.NODE_ENV !== 'production',
-    playground: process.env.NODE_ENV !== 'production'
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginCacheControl({
+        defaultMaxAge: 300, // 5 minutes default cache
+        calculateHttpHeaders: false
+      })
+    ],
+    introspection: process.env.NODE_ENV !== 'production'
   });
 
   // Start Apollo Server

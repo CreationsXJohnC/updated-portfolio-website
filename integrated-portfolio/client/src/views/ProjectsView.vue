@@ -80,7 +80,15 @@
             @click="navigateToProject(project.id)"
           >
             <div class="project-image">
-              <img :src="project.imageUrl" :alt="project.title" />
+              <LazyImage 
+                :src="project.imageUrl" 
+                :alt="project.title"
+                :width="400"
+                :height="250"
+                image-class="project-img"
+                @load="onImageLoad"
+                @error="onImageError"
+              />
               <div class="project-overlay">
                 <div class="project-actions">
                   <a 
@@ -183,6 +191,7 @@ import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
+import LazyImage from '@/components/LazyImage.vue'
 
 const GET_PROJECTS = gql`
   query GetProjects {
@@ -204,7 +213,8 @@ const GET_PROJECTS = gql`
 export default {
   name: 'ProjectsView',
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    LazyImage
   },
   setup() {
     const router = useRouter()
@@ -274,6 +284,15 @@ export default {
       }
     }
 
+    const onImageLoad = () => {
+      // Image loaded successfully
+    }
+
+    const onImageError = () => {
+      // Handle image load error
+      console.warn('Failed to load project image')
+    }
+
     onMounted(() => {
       updateData()
     })
@@ -292,7 +311,9 @@ export default {
       clearFilters,
       navigateToProject,
       formatDate,
-      updateData
+      updateData,
+      onImageLoad,
+      onImageError
     }
   },
   watch: {
@@ -445,6 +466,23 @@ export default {
   height: 200px;
   overflow: hidden;
 
+  :deep(.lazy-image-container) {
+    width: 100%;
+    height: 100%;
+  }
+
+  :deep(.project-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover :deep(.project-img) {
+    transform: scale(1.05);
+  }
+
+  // Legacy support for regular img tags
   img {
     width: 100%;
     height: 100%;
