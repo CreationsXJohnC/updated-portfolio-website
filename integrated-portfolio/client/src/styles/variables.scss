@@ -1,0 +1,154 @@
+// Color Palette - Grey, Black, White Theme
+$primary-color: #000000;
+$secondary-color: #404040;
+$accent-color: #666666;
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$error-color: #ef4444;
+
+// Light Theme Colors - White and Grey
+$light-bg-primary: #ffffff;
+$light-bg-secondary: #f8f8f8;
+$light-bg-tertiary: #f0f0f0;
+$light-text-primary: #000000;
+$light-text-secondary: #404040;
+$light-text-muted: #666666;
+$light-border-color: #e0e0e0;
+
+// Dark Theme Colors - Black and Grey
+$dark-bg-primary: #000000;
+$dark-bg-secondary: #1a1a1a;
+$dark-bg-tertiary: #2a2a2a;
+$dark-text-primary: #ffffff;
+$dark-text-secondary: #cccccc;
+$dark-text-muted: #999999;
+$dark-border-color: #404040;
+
+// Typography
+$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+// Font Weights
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// Font Sizes
+$font-xs: 0.75rem;    // 12px
+$font-sm: 0.875rem;   // 14px
+$font-base: 1rem;     // 16px
+$font-lg: 1.125rem;   // 18px
+$font-xl: 1.25rem;    // 20px
+$font-2xl: 1.5rem;    // 24px
+$font-3xl: 1.875rem;  // 30px
+$font-4xl: 2.25rem;   // 36px
+$font-5xl: 3rem;      // 48px
+$font-6xl: 3.75rem;   // 60px
+
+// Spacing
+$space-1: 0.25rem;    // 4px
+$space-2: 0.5rem;     // 8px
+$space-3: 0.75rem;    // 12px
+$space-4: 1rem;       // 16px
+$space-5: 1.25rem;    // 20px
+$space-6: 1.5rem;     // 24px
+$space-8: 2rem;       // 32px
+$space-10: 2.5rem;    // 40px
+$space-12: 3rem;      // 48px
+$space-16: 4rem;      // 64px
+$space-20: 5rem;      // 80px
+$space-24: 6rem;      // 96px
+$space-32: 8rem;      // 128px
+
+// Layout
+$container-max-width: 1200px;
+$container-padding: 1.5rem;
+$section-padding: 5rem;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+$border-radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Z-index
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// Transitions
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// CSS Custom Properties (CSS Variables)
+:root {
+  // Colors
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-primary: #{$accent-color};
+  --accent-secondary: #{$secondary-color};
+  --success-color: #{$success-color};
+  --warning-color: #{$warning-color};
+  --error-color: #{$error-color};
+
+  // RGB values for alpha transparency
+  --primary-color-rgb: 0, 0, 0;
+  --accent-primary-rgb: 102, 102, 102;
+  --bg-primary-rgb: 255, 255, 255;
+  --text-primary-rgb: 0, 0, 0;
+
+  // Light theme (default)
+  --bg-primary: #{$light-bg-primary};
+  --bg-secondary: #{$light-bg-secondary};
+  --bg-tertiary: #{$light-bg-tertiary};
+  --text-primary: #{$light-text-primary};
+  --text-secondary: #{$light-text-secondary};
+  --text-muted: #{$light-text-muted};
+  --border-color: #{$light-border-color};
+
+  // Typography
+  --font-primary: #{$font-primary};
+  --font-mono: #{$font-mono};
+
+  // Layout
+  --container-max-width: #{$container-max-width};
+  --container-padding: #{$container-padding};
+  --section-padding: #{$section-padding};
+
+  // Border radius
+  --border-radius: #{$border-radius};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-full: #{$border-radius-full};
+
+  // Shadows
+  --shadow: #{$shadow};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-base: #{$transition-base};
+  --transition-slow: #{$transition-slow};
+}

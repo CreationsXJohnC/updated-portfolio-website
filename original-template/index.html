@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creations X JohnC - Design Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2b91275d3a.js" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "OYylWZHPRCLJHLpX7",
+      });
+   })();
+</script>
+</head>
+<body>
+    <section id="landing-page" onmousemove="moveBackground(event)">
+    <nav>
+        <figure>
+            <a href="https://www.johnccreations.com/creationsx/">
+                <img class="nav__logo--img" src="./Tutorial Exclusive Eportfolio/assets/CreationsX Emoji Sticker logo(no background).png" alt="">
+            </a>
+        </figure>
+        <ul class="nav__link--list">
+            <li class="nav__link" onclick="toggleModal()">
+                <a href="#" class="
+                   nav__link--anchor
+                   link__hover-effect
+                   link__hover-effect--black 
+                ">About</a>
+            </li>
+            <li class="nav__link">
+                <a href="#projects" class="
+                   nav__link--anchor
+                   link__hover-effect
+                   link__hover-effect--black 
+                ">Projects</a>
+            </li>
+            <li class="nav__link" onclick="toggleModal()">
+                <a href="#" class="
+                   nav__link--anchor
+                   link__hover-effect
+                   link__hover-effect--black 
+                ">Contact</a>
+            </li>
+            <li class="nav__link click" onclick="toggleContrast()">
+                <a href="#" 
+                class="nav__link--anchor link__hover-effect link__hover-effect--black"
+                >
+                <i class="fa-solid fa-circle-half-stroke"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header class="header">
+        <div class="header__content">
+            <h1 class="title">Hey</h1>
+            <h1 class="title red">I'm Che.</h1>
+            <p class="header__para">
+                I'm a <b class="blue">Frontend Software Engineer</b> driven by the mantra <b class="red">"Think 2 Create & Create 2 Inspire."</b> I design intuitive web applications and build businesses that deliver seamless user experiences, inspire audiences, and leave a lasting impact.
+                <br>
+                Here's a bit more <b class="blue click" onclick="toggleModal()">about me</b>.
+            </p>
+            <div class="social__list">
+                <a href="https://www.linkedin.com/in/johnccreations/" class="social__link click">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/CreationsXJohnC" class="social__link click">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="./Tutorial Exclusive Eportfolio/assets/John_Che_Larracuente-Resume-2025.pdf" target="_blank" class="social__link click">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <a href="#">
+        <button class="mail__btn click" onclick="toggleModal()">
+            <i class="fa-solid fa-envelope"></i>
+        </button>
+    </a>
+        <a href="#projects" class="scroll">
+            <div class="scroll__icon click"></div>
+        </a>
+        <div class="modal">
+            <div class="modal__half modal__about">
+                <h3 class="modal__title modal__title--about">Here's a bit about me.</h3>
+                <h4 class="modal__sub-title modal__sub-title--about">Frontend Software Engineer.</h4>
+                <p class="modal__para">
+                    I'm a 35 year-old <b class="blue">Frontend Developer and Creative Technologist</b> with expertise in <b class="blue">JavaScript, React, and responsive design.</b> Founder of Creations X (media agency) and Ori Company (consulting business), I bring 10+ years of experience in <b class="blue">digital content, project management, and entrepreneurship.</b>
+                <br>
+                    I am passionate about <b class="red">building</b> user-friendly web applications and <b class="red">leveraging creativity</b> and <b class="red">problem-solving</b> to drive innovation in tech.
+                </p>
+                <div class="modal__languages">
+                    <figure class="modal__language">
+                        <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/240px-HTML5_Badge.svg.png" alt="">
+                        <span class="language__name">HTML</span>
+                    </figure>
+                    <figure class="modal__language">
+                        <img class="modal__language--img" src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png" alt="">
+                        <span class="language__name">CSS</span>
+                    </figure>
+                    <figure class="modal__language">
+                        <img class="modal__language--img" src="https://cdn.iconscout.com/icon/free/png-256/javascript-1-225993.png" alt="">
+                        <span class="language__name">JavaScript</span>
+                    </figure>
+                    <figure class="modal__language">
+                        <img class="modal__language--img" src="https://cdn.iconscout.com/icon/free/png-256/react-3-1175109.png" alt="">
+                        <span class="language__name">React</span>
+                    </figure>
+                </div>
+            </div>
+            <div class="modal__half modal__contact">
+                <i class="fas fa-times modal__exit click" onclick="toggleModal()"></i>
+                <h3 class="modal__title modal__title--contact">
+                    Let's have a chat!
+                </h3>
+                <h3 class="modal__sub-title modal__sub-title--contact">
+                    I'm currently open to new opportunities.
+                </h3>
+                <form id="contact__form" onsubmit="contact(event)">
+                    <div class="form__item">
+                        <label class="form__item--label">Name</label>
+                        <input class="input" name="user_name" type="text" required></input>
+                    </div>
+                    <div class="form__item">
+                        <label class="form__item--label">Email</label>
+                        <input class="input" name="user_email" type="email" required></input>
+                    </div>
+                    <div class="form__item">
+                        <label class="form__item--label">Message</label>
+                        <textarea class="input" name="message" type="text" required></textarea>
+                    </div>
+                    <button id="contact__submit" class="form__submit">
+                        Send it my way
+                    </button>
+                </form>
+                <div class="modal__overlay modal__overlay--loading">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div class="modal__overlay modal__overlay--success">
+                    Thanks for the meassage! Looking forward to speaking with you soon!
+                </div>
+            </div>
+        </div>
+        <img src="./Tutorial Exclusive Eportfolio/assets/semi circle.svg" class="shape shape--0">
+        <img src="./Tutorial Exclusive Eportfolio/assets/circle.svg" class="shape shape--1">
+        <img src="./Tutorial Exclusive Eportfolio/assets/squiggly.svg" class="shape shape--2">
+        <img src="./Tutorial Exclusive Eportfolio/assets/circle.svg" class="shape shape--3">
+        <img src="./Tutorial Exclusive Eportfolio/assets/triangle.svg" class="shape shape--4">
+        <img src="./Tutorial Exclusive Eportfolio/assets/circle.svg" class="shape shape--5">
+        <img src="./Tutorial Exclusive Eportfolio/assets/squiggly.svg" class="shape shape--6">
+        <img src="./Tutorial Exclusive Eportfolio/assets/circle.svg" class="shape shape--7">
+        <img src="./Tutorial Exclusive Eportfolio/assets/semi circle.svg" class="shape shape--8">
+    </section>
+    <section id="projects">
+        <div class="container">
+            <div class="row">
+                <h1 class="section__title">
+                    <span class="blue">Check Out</span> some of my <span class="red">Projects</span>
+                </h1>
+                <ul class="project__list">
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Skinstric AI - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Skinstic AI <br>Sophisticated Skincare</br>
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Html, CSS, JavaScript, React
+                                </h4>
+                                <p class="project__description--para">
+                                    Skinstric developed an A.I. that creates a highly-personalized routine tailored to what your skin needs.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/CreationsXJohnC/skinstric-ai-internship" class="project__description--link">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                    <a href="https://skinstric-ai-internship-gold.vercel.app/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Netfilx Clone - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Netflix <br>Website Clone</br>
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Html, CSS, JavaScript, React, Vite, & Firebase
+                                </h4>
+                                <p class="project__description--para">
+                                    This is a cloned Netflix website utilizing React, Vite, and Firebase
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/CreationsXJohnC/netflix-clone-website" class="project__description--link">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                    <a href="https://netflix-clone-website-creationsx.vercel.app/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Ultraverse NFT World - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Ultraverse Market <br>NFT World</br>
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Html, CSS, JavaScript, React
+                                </h4>
+                                <p class="project__description--para">
+                                    Create, Sell, or Collect digital items. Unit of data stored on a digital ledger, called a blockchain, that certifies a digital asset to be unique and therefore not interchangeable
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/CreationsXJohnC/nft-marketplace-internship" class="project__description--link">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                    <a href="https://nft-marketplace-internship-creationsx.vercel.app/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Movie Entertainment - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Movie Entertainment <br>Browser Library</br>
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Html, CSS, JavaScript, React, & OMDb API
+                                </h4>
+                                <p class="project__description--para">
+                                    The World's Largest Online Movie Library. Find your favorite Movie!
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/CreationsXJohnC/movie-entertainment-online-library" class="project__description--link">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                    <a href="https://movie-entertainment-online-library.vercel.app/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/E-Commerce Book Library - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    E-Book Library
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Html, CSS, JavaScript, React
+                                </h4>
+                                <p class="project__description--para">
+                                    America's most awarded online library platform. Find your dream book with Library!
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/CreationsXJohnC/e-commerce-book-library" class="project__description--link">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                    <a href="https://e-commerce-book-library.vercel.app/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Creations X Platform - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Creations X JohnC
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Content Creation, Media Production, & Creative Consulting
+                                </h4>
+                                <p class="project__description--para">
+                                    Creations X (pronounced “Creations by”) lives by the mantra “Think 2 Create & Create 2 Inspire.” We are a creative collaboration agency specializing in media production, digital design, and software development, committed to highlighting our client's stories above our own. Every project is a chance to innovate, inspire, and showcase your vision.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://johnccreations.com/creationsx/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="project">
+                        <div class="project__wrapper">
+                            <img src="./Tutorial Exclusive Eportfolio/assets/Ori Company - website screenshot.png" class="project__img" alt="">
+                            <div class="project__wrapper--bg"></div>
+                            <div class="project__description">
+                                <h3 class="project__description--title">
+                                    Ori Company <br>Flourish Naturally, Live Better.</br>
+                                </h3>
+                                <h4 class="project__description--sub-title">
+                                    Web Design, Brand Strategy, & Business Development
+                                </h4>
+                                <p class="project__description--para">
+                                    At Ori Company, we believe in the power of cannabis to transform lives—naturally. As a Medical Cannabis cultivation & retail company, we provide premium, sustainable cannabis products that enhance the health and wellness of our diverse consumer base.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://oricompanydc.com/" class="project__description--link">
+                                        <i class="fas fa-link"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row footer__row">
+            <figure>
+                <a href="https://www.johnccreations.com/creationsx">
+                    <img class="footer__logo--img" src="./Tutorial Exclusive Eportfolio/assets/Creation X Logo Updated.svg" alt="">
+                </a>
+            </figure>
+            <div class="footer__social--list">
+                <a href="https://github.com/CreationsXJohnC" target="_blank" class="
+                footer__social--link
+                link__hover-effect
+                link__hover-effect--black
+                footer__link__hover-effect--black
+                ">
+                GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/johnccreations/" target="_blank" class="
+                footer__social--link
+                link__hover-effect
+                link__hover-effect--black
+                footer__link__hover-effect--black
+                ">
+                LinkedIn
+                </a>
+                <a href="#" onclick="toggleModal()" class="
+                footer__social--link
+                link__hover-effect
+                link__hover-effect--black
+                footer__link__hover-effect--black
+                ">
+                Contact
+                </a>
+                <a href="./Tutorial Exclusive Eportfolio/assets/John_Che_Larracuente-Resume-2025.pdf" target="_blank" class="
+                footer__social--link
+                link__hover-effect
+                link__hover-effect--black
+                footer__link__hover-effect--black
+                ">
+                Resume
+                </a>
+            </div>
+            <div class="footer__copyright">Copyright © 2025 John C Creations LLC</div>
+        </div>
+            </div>
+    </footer>
+</body>
+</html>

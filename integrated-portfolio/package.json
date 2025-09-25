@@ -1,0 +1,20 @@
+{
+  "name": "integrated-portfolio",
+  "version": "1.0.0",
+  "description": "Modern portfolio website with Vue.js frontend and Apollo GraphQL backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": ["portfolio", "vue", "graphql", "apollo", "postgresql"],
+  "author": "Creations Studio",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
