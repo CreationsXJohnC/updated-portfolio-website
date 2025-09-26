@@ -1111,7 +1111,7 @@ export default {
 
 // Hide large-screen-only items on smaller screens
 .large-screen-only {
-  @media (max-width: 1023px) {
+  @media (max-width: 1159px) {
     display: none;
   }
 }

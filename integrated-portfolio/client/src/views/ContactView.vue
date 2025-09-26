@@ -31,8 +31,8 @@
                 </div>
                 <div class="method-content">
                   <h3 class="method-title">Email</h3>
-                  <a href="mailto:contact@example.com" class="method-link hover-target">
-                    contact@example.com
+                  <a href="mailto:johnccreations21@gmail.com" class="method-link hover-target">
+                    johnccreations21@gmail.com
                   </a>
                 </div>
               </div>
@@ -64,7 +64,7 @@
               <h3 class="social-title">Follow Me</h3>
               <div class="social-icons">
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/CreationsXJohnC" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="social-link hover-target"
@@ -73,7 +73,7 @@
                   <i class="fab fa-github"></i>
                 </a>
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/johnccreations/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="social-link hover-target"
@@ -82,13 +82,13 @@
                   <i class="fab fa-linkedin-in"></i>
                 </a>
                 <a 
-                  href="https://twitter.com" 
+                  href="https://www.youtube.com/@Creations_X" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="social-link hover-target"
-                  aria-label="Twitter"
+                  aria-label="YouTube"
                 >
-                  <i class="fab fa-twitter"></i>
+                  <i class="fab fa-youtube"></i>
                 </a>
                 <a 
                   href="https://dribbble.com" 

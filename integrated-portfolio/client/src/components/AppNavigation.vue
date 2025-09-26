@@ -75,6 +75,13 @@ export default {
       isScrolled.value = window.scrollY > 50
     }
 
+    const handleResize = () => {
+      // Close mobile menu when screen size is larger than mobile breakpoint
+      if (window.innerWidth > 770 && isMenuOpen.value) {
+        closeMobileMenu()
+      }
+    }
+
     const toggleMobileMenu = () => {
       isMenuOpen.value = !isMenuOpen.value
       document.body.style.overflow = isMenuOpen.value ? 'hidden' : ''
@@ -87,10 +94,12 @@ export default {
 
     onMounted(() => {
       window.addEventListener('scroll', handleScroll)
+      window.addEventListener('resize', handleResize)
     })
 
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
       document.body.style.overflow = ''
     })
 
@@ -334,28 +343,49 @@ export default {
 }
 
 .mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 100%;
   right: 0;
-  bottom: 0;
-  background: rgba(var(--bg-primary-rgb), 0.98);
-  backdrop-filter: blur(20px);
+  width: 200px;
+  background: #ffffff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-top: none;
   opacity: 0;
   visibility: hidden;
+  transform: translateY(-10px);
   transition: all 0.3s ease;
+  z-index: 1000;
+
+  // Hide completely on desktop screens
+  @media (min-width: 771px) {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 
   &.active {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
+    
+    // Still hide on desktop even when active
+    @media (min-width: 771px) {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
   }
 }
 
 .mobile-menu {
-  @include flex-column-center;
-  height: 100vh;
-  gap: 2rem;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  padding: 0.5rem 0;
   list-style: none;
 }
 
@@ -364,25 +394,38 @@ export default {
 }
 
 .mobile-nav-link {
+  color: #333333;
+  font-weight: 700;
+  font-size: 1.1rem;
+  position: relative;
+  transition: all 300ms ease;
   outline: none !important;
-  border: none;
+  text-decoration: none !important;
+  border: none !important;
   background: none !important;
   box-shadow: none !important;
+  padding: 0.75rem 1rem;
+  display: block;
+  margin: 0 0.5rem;
+  text-align: center;
 
   &:focus,
   &:focus-within,
   &:focus-visible,
-  &:active {
+  &:active,
+  &:hover:focus,
+  &:visited {
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
     background: none !important;
+    text-decoration: none !important;
   }
 
   .mobile-link-text {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #333333;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
     position: relative;
     transition: all 300ms ease;
     text-decoration: none !important;
@@ -390,7 +433,7 @@ export default {
     &::after {
       content: "";
       position: absolute;
-      bottom: -5px;
+      bottom: -3px;
       height: 3px;
       width: 0;
       right: 0;
@@ -400,7 +443,7 @@ export default {
   }
 
   &:hover {
-    background: none !important;
+    color: #000000;
     
     .mobile-link-text {
       color: #000000;
@@ -412,12 +455,16 @@ export default {
     }
   }
 
-  &.router-link-active .mobile-link-text {
+  &.router-link-active {
     color: #000000;
+    
+    .mobile-link-text {
+      color: #000000;
 
-    &::after {
-      left: 0;
-      width: 100%;
+      &::after {
+        left: 0;
+        width: 100%;
+      }
     }
   }
 }

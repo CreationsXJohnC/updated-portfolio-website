@@ -9,11 +9,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: pointer !important;
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  cursor: pointer !important;
   
   @include mobile {
     font-size: 14px;
@@ -29,6 +31,35 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: pointer !important;
+}
+
+// Force pointer cursor on all elements with maximum specificity
+html *,
+html *::before,
+html *::after,
+body *,
+body *::before,
+body *::after,
+div,
+span,
+p,
+h1, h2, h3, h4, h5, h6,
+a,
+button,
+input,
+textarea,
+select,
+img,
+svg,
+section,
+article,
+header,
+footer,
+nav,
+main,
+aside {
+  cursor: pointer !important;
 }
 
 // Typography

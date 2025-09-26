@@ -79,7 +79,8 @@ export const typeDefs = gql`
   type SocialLinks {
     github: String
     linkedin: String
-    twitter: String
+    youtube: String
+    facebook: String
     instagram: String
     website: String
     behance: String
@@ -210,7 +211,8 @@ export const typeDefs = gql`
   input SocialLinksInput {
     github: String
     linkedin: String
-    twitter: String
+    youtube: String
+    facebook: String
     instagram: String
     website: String
     behance: String
