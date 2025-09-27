@@ -319,7 +319,6 @@ export default {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(var(--text-primary-rgb), 0.1);
   padding-top: 2rem;
 }
 

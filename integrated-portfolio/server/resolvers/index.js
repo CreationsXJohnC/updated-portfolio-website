@@ -1,6 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language/index.js';
 import { Project, Skill, Experience, ContactMessage, Profile } from '../models/index.js';
+import { sendContactEmail } from '../config/emailService.js';
 import { Op } from 'sequelize';
 
 // Custom Date scalar
@@ -94,10 +95,26 @@ export const resolvers = {
     // Contact
     sendContactMessage: async (_, { input }, { req }) => {
       try {
+        // Save the contact message to database
         const contactMessage = await ContactMessage.create({
           ...input,
           ipAddress: req.ip || req.connection.remoteAddress
         });
+
+        // Send email notification
+        const emailResult = await sendContactEmail({
+          name: input.name,
+          email: input.email,
+          subject: input.subject,
+          message: input.message
+        });
+
+        if (emailResult.success) {
+          console.log('Contact email sent successfully:', emailResult.messageId);
+        } else {
+          console.error('Failed to send contact email:', emailResult.error);
+          // Note: We still return success for the database save even if email fails
+        }
 
         return {
           success: true,

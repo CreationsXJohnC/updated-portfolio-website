@@ -18,6 +18,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+const CORS_ORIGIN = process.env.CORS_ORIGIN || FRONTEND_URL;
 
 async function startServer() {
   // Test database connection
@@ -73,7 +74,9 @@ async function startServer() {
         calculateHttpHeaders: false
       })
     ],
-    introspection: process.env.NODE_ENV !== 'production'
+    introspection: process.env.GRAPHQL_INTROSPECTION === 'true' || process.env.NODE_ENV !== 'production',
+    csrfPrevention: true,
+    cache: 'bounded'
   });
 
   // Start Apollo Server
@@ -81,7 +84,9 @@ async function startServer() {
 
   // Configure CORS
   const corsOptions = {
-    origin: [FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'],
+    origin: process.env.NODE_ENV === 'production' 
+      ? [CORS_ORIGIN] 
+      : [FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']

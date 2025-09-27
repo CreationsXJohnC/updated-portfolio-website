@@ -34,7 +34,7 @@
                 <span class="stat-label">Projects Completed</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">7+</span>
+                <span class="stat-number">10+</span>
                 <span class="stat-label">Technologies</span>
               </div>
               <div class="stat-item">
@@ -49,13 +49,13 @@
                 <i class="fas fa-arrow-right"></i>
               </router-link>
               <a 
-                href="/John_Che_Larracuente-Resume-2025.pdf" 
-                target="_blank"
-                class="btn btn-outline hover-target"
-              >
-                Download Resume
-                <i class="fas fa-download"></i>
-              </a>
+                  href="/John_Che_Larracuente-Updated_Resume-2025.pdf" 
+                  target="_blank" 
+                  class="btn btn-outline hover-target"
+                >
+                  Download Resume
+                  <i class="fas fa-download"></i>
+                </a>
             </div>
           </div>
         </div>
@@ -113,6 +113,31 @@
           <p class="section-description">
             My journey through various roles and companies
           </p>
+        </div>
+
+        <!-- Company Logos -->
+        <div class="logos-grid">
+          <div class="logo-item">
+            <img 
+              src="/src/assets/images/logos/Ori-Badge01.png" 
+              alt="Ori Company Logo" 
+              class="company-logo"
+            />
+          </div>
+          <div class="logo-item">
+            <img 
+              src="/src/assets/images/logos/SkinstricAI logo.png" 
+              alt="SkinstricAI Logo" 
+              class="company-logo"
+            />
+          </div>
+          <div class="logo-item">
+            <img 
+              src="/src/assets/images/logos/Watermark with Slogan GREY.png" 
+              alt="Watermark with Slogan" 
+              class="company-logo"
+            />
+          </div>
         </div>
 
         <div class="timeline" v-if="experiences.length">
@@ -472,12 +497,12 @@ export default {
 }
 
 .interests-section {
-  padding: 6rem 0;
+  padding: 0.5rem 0 6rem 0;
   background: #ffffff;
 }
 
 .experience-section {
-  padding: 3rem 0 6rem 0;
+  padding: 3rem 0 2rem 0;
   background: #ffffff;
 }
 
@@ -1106,6 +1131,233 @@ export default {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
     }
+  }
+}
+
+// Company Logos within Experience Section
+.experience-section .logos-grid {
+  display: grid;
+  gap: 2rem;
+  margin: 3rem auto 4rem;
+  align-items: center;
+  justify-items: center;
+  
+  // Desktop: Responsive grid that fits viewport
+  @media (min-width: 769px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 95vw;
+    width: 100%;
+    padding: 0 2rem;
+  }
+  
+  // Tablet and mobile: Single column layout
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 0 2rem;
+    max-width: 100%;
+  }
+}
+
+.experience-section .logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  
+  // Desktop: Responsive dimensions that fit viewport
+  @media (min-width: 769px) {
+    width: 100%;
+    max-width: 30vw;
+    min-height: 250px;
+    padding: 2rem 1rem;
+  }
+  
+  // Tablet and mobile: Responsive layout
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    min-height: 180px;
+    width: 100%;
+  }
+
+  // Left logo: Consistent padding and size locking
+  &:nth-child(1) {
+    @media (min-width: 769px) {
+      padding: 2rem 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 2rem 1rem;
+    }
+
+    .company-logo {
+      @media (min-width: 769px) {
+        max-height: min(180px, 12vw) !important;
+        max-width: min(180px, 12vw) !important;
+        min-height: min(120px, 8vw) !important;
+        min-width: min(120px, 8vw) !important;
+        transform: none !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+      }
+      
+      @media (max-width: 768px) {
+        max-height: 180px;
+        max-width: 100%;
+        transform: none;
+      }
+    }
+  }
+
+  // Make only the middle logo larger
+  &:nth-child(2) {
+    @media (min-width: 769px) {
+      padding: 3rem 1rem 3rem 3rem;
+      min-height: 220px;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 2rem 1rem;
+    }
+
+    .company-logo {
+      @media (min-width: 769px) {
+        max-height: min(250px, 16vw) !important;
+        max-width: min(250px, 16vw) !important;
+        min-height: min(200px, 13vw) !important;
+        min-width: min(200px, 13vw) !important;
+        transform: scale(1.2) !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+      }
+      
+      @media (max-width: 768px) {
+        max-height: 180px;
+        max-width: 100%;
+        transform: none;
+      }
+    }
+  }
+
+  // Make the right logo larger too
+  &:nth-child(3) {
+    @media (min-width: 769px) {
+      padding: 3.5rem 1rem 3.5rem 3.5rem;
+      min-height: 220px;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 2rem 1rem;
+    }
+
+    .company-logo {
+      @media (min-width: 769px) {
+        max-height: min(280px, 18vw) !important;
+        max-width: min(280px, 18vw) !important;
+        min-height: min(220px, 14vw) !important;
+        min-width: min(220px, 14vw) !important;
+        transform: scale(1.3) !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+      }
+      
+      @media (max-width: 768px) {
+        max-height: 180px;
+        max-width: 100%;
+        transform: none;
+      }
+    }
+  }
+}
+
+.experience-section .company-logo {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  
+  // Only apply base mobile sizing below tablet breakpoint
+  @media (max-width: 768px) {
+    max-width: 100%;
+    max-height: 180px;
+  }
+}
+
+// Responsive adjustments for logos in experience section
+@media (max-width: 768px) {
+  .experience-section .logos-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 3rem auto 4rem;
+    max-width: 400px;
+    padding: 0 2rem;
+  }
+  
+  .experience-section .logo-item {
+    padding: 2rem 1rem;
+    min-height: 220px;
+    justify-content: center;
+    align-items: center;
+
+    // Reset all logo items to same styling - no special cases
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      padding: 2rem 1rem;
+      min-height: 220px;
+
+      .company-logo {
+        max-height: 180px !important;
+        max-width: 100% !important;
+        transform: none !important;
+      }
+    }
+  }
+  
+  .experience-section .company-logo {
+    max-width: 100%;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-section .logos-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 2rem auto 3rem;
+    padding: 0 1rem;
+    max-width: 300px;
+  }
+  
+  .experience-section .logo-item {
+    padding: 1.5rem 1rem;
+    min-height: 180px;
+    justify-content: center;
+    align-items: center;
+
+    // Reset all logo items to consistent styling for vertical layout
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      padding: 1.5rem 1rem;
+      min-height: 180px;
+
+      .company-logo {
+        max-height: 150px !important;
+        max-width: 100% !important;
+        transform: none !important;
+      }
+    }
+  }
+  
+  .experience-section .company-logo {
+    max-height: 150px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 }
 

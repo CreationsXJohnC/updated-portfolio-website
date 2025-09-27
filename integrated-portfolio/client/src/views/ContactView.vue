@@ -6,7 +6,7 @@
         <div class="hero-content">
           <h1 class="page-title">Get In Touch</h1>
           <p class="page-subtitle">
-            Let's discuss your project ideas and bring them to life together
+            I'm always interested in hearing about new opportunities and exciting ideas. Let's discuss your project ideas and bring them to life together. Whether you have a couple questions or even just want to say hi, feel free to reach out!
           </p>
         </div>
       </div>
@@ -18,12 +18,6 @@
         <div class="contact-content">
           <!-- Contact Information -->
           <div class="contact-info">
-            <h2 class="info-title">Let's Connect</h2>
-            <p class="info-description">
-              I'm always interested in hearing about new opportunities and exciting projects. 
-              Whether you have a question or just want to say hi, feel free to reach out!
-            </p>
-
             <div class="contact-methods">
               <div class="contact-method">
                 <div class="method-icon">
@@ -31,9 +25,7 @@
                 </div>
                 <div class="method-content">
                   <h3 class="method-title">Email</h3>
-                  <a href="mailto:johnccreations21@gmail.com" class="method-link hover-target">
-                    johnccreations21@gmail.com
-                  </a>
+                  <span class="method-text">johnccreations21@gmail.com</span>
                 </div>
               </div>
 
@@ -43,9 +35,7 @@
                 </div>
                 <div class="method-content">
                   <h3 class="method-title">Phone</h3>
-                  <a href="tel:+1234567890" class="method-link hover-target">
-                    +1 (234) 567-890
-                  </a>
+                  <span class="method-text">+1 (202) 446-3976</span>
                 </div>
               </div>
 
@@ -55,52 +45,23 @@
                 </div>
                 <div class="method-content">
                   <h3 class="method-title">Location</h3>
-                  <span class="method-text">San Francisco, CA</span>
+                  <span class="method-text">Washington, DC</span>
+                </div>
+              </div>
+
+              <!-- Animated Encouragement -->
+              <div class="message-encouragement">
+                <div class="encouragement-content pulse">
+                  <p class="encouragement-text">I Would Love To Hear From You!</p>
+                  <div class="arrow-container">
+                    <img src="@/assets/images/animations/AnimationArrow.png" 
+                         alt="Animation Arrow" 
+                         class="animation-arrow-image" />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="social-links">
-              <h3 class="social-title">Follow Me</h3>
-              <div class="social-icons">
-                <a 
-                  href="https://github.com/CreationsXJohnC" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="social-link hover-target"
-                  aria-label="GitHub"
-                >
-                  <i class="fab fa-github"></i>
-                </a>
-                <a 
-                  href="https://www.linkedin.com/in/johnccreations/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="social-link hover-target"
-                  aria-label="LinkedIn"
-                >
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a 
-                  href="https://www.youtube.com/@Creations_X" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="social-link hover-target"
-                  aria-label="YouTube"
-                >
-                  <i class="fab fa-youtube"></i>
-                </a>
-                <a 
-                  href="https://dribbble.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="social-link hover-target"
-                  aria-label="Dribbble"
-                >
-                  <i class="fab fa-dribbble"></i>
-                </a>
-              </div>
-            </div>
           </div>
 
           <!-- Contact Form -->
@@ -137,7 +98,7 @@
               </div>
 
               <div class="form-group">
-                <label for="email" class="form-label">Email Address *</label>
+                <label for="email" class="form-label">Your Email Address *</label>
                 <input
                   id="email"
                   v-model="form.email"
@@ -388,7 +349,7 @@ export default {
 }
 
 .contact-section {
-  padding: 6rem 0;
+  padding: 0.6rem 0 6rem 0;
   background: #ffffff;
 }
 
@@ -410,6 +371,7 @@ export default {
 }
 
 .contact-info {
+  
   .info-title {
     font-size: 2rem;
     font-weight: 700;
@@ -428,37 +390,41 @@ export default {
 .contact-methods {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
   margin-bottom: 3rem;
 }
 
 .contact-method {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .method-icon {
   @include flex-center;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background: #f0f0f0;
   border-radius: 50%;
   color: #666666;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  flex-shrink: 0;
 }
 
 .method-content {
+  
   .method-title {
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
     color: #000000;
+    font-size: 1.5rem;
   }
 
   .method-link {
     color: #666666;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-size: 1.3rem;
 
     &:hover {
       color: #000000;
@@ -467,6 +433,7 @@ export default {
 
   .method-text {
     color: #666666;
+    font-size: 1.3rem;
   }
 }
 
@@ -660,6 +627,223 @@ export default {
         color: #666666;
       }
     }
+  }
+}
+
+// Message Encouragement Animation
+.message-encouragement {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  margin-left: 5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.encouragement-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.encouragement-text {
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: 700;
+  margin: 0;
+}
+
+// Arrow Container
+.arrow-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: -1.5rem 0 0.5rem 0;
+  padding-left: 16rem;
+}
+
+.animation-arrow-image {
+  max-width: 180px;
+  height: auto;
+}
+
+// Pulse animation for the text
+.pulse {
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Center all text and buttons above the send message grid before 1024px breakpoint
+@media (max-width: 1023px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-hero {
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+
+    .contact-methods {
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-method {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .method-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .social-links {
+      text-align: center;
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  }
+
+  // Hide animation at mobile/tablet breakpoint
+  .pulse {
+    animation: none !important;
+  }
+
+  // Hide the entire message encouragement section on smaller screens
+  .message-encouragement {
+    display: none;
+  }
+}
+
+// Apply same layout at hamburger menu breakpoint
+@media (max-width: 770px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-hero {
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+
+    .contact-methods {
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-method {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .method-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .social-links {
+      text-align: center;
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  }
+
+  // Hide animation at mobile/tablet breakpoint
+  .pulse {
+    animation: none !important;
+  }
+
+  // Hide the entire message encouragement section on smaller screens
+  .message-encouragement {
+    display: none;
+  }
+}
+
+// Apply same layout at 768px and all smaller breakpoints
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-hero {
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+
+    .contact-methods {
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-method {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .method-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .social-links {
+      text-align: center;
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  }
+
+  // Hide animation at mobile/tablet breakpoint
+  .pulse {
+    animation: none !important;
+  }
+
+  // Hide the entire message encouragement section on smaller screens
+  .message-encouragement {
+    display: none;
   }
 }
 </style>

@@ -1,44 +1,28 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "integrated-portfolio/client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
+      "source": "/api/(.*)",
+      "destination": "/api/graphql"
     },
     {
-      "src": "integrated-portfolio/server/index.js",
-      "use": "@vercel/node"
+      "source": "/graphql",
+      "destination": "/api/graphql"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/health"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/integrated-portfolio/server/index.js"
-    },
-    {
-      "src": "/graphql",
-      "dest": "/integrated-portfolio/server/index.js"
-    },
-    {
-      "src": "/health",
-      "dest": "/integrated-portfolio/server/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/integrated-portfolio/client/dist/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  },
   "functions": {
-    "integrated-portfolio/server/index.js": {
+    "api/graphql.js": {
       "maxDuration": 30
+    },
+    "api/health.js": {
+      "maxDuration": 10
     }
   },
   "installCommand": "cd integrated-portfolio && npm run install:all",
-  "buildCommand": "cd integrated-portfolio && npm run build"
+  "buildCommand": "cd integrated-portfolio && npm run build",
+  "outputDirectory": "integrated-portfolio/client/dist"
 }
