@@ -6,156 +6,71 @@
         <div class="hero-content">
           <h1 class="page-title">My Projects</h1>
           <p class="page-subtitle">
-            A collection of my work showcasing various technologies and creative solutions
+            I'm a Software Engineer and Creative Technologist specializing in modern JavaScript with HTML5/CSS3 across the full stack. I build performant, responsive interfaces with React 18 and Vue.js 3, and implement secure backends using Node.js, Express, and Apollo GraphQL (JWT/bcryptjs), backed by PostgreSQL or SQLite via Sequelize and, when useful, Firebase. I work comfortably with Vite, Webpack, Babel, and Git; uphold quality with Jest and ESLint; and ship polished, accessible UIs using Tailwind CSS, Sass/SCSS, and robust patterns like state management (Pinia/Vue Router), dynamic routing, skeleton loading states, and progressive web app features. You'll see clear examples of these skills and approaches in the projects showcased below.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Filters Section -->
-    <section class="filters-section">
-      <div class="section-container">
-        <div class="filters-container">
-          <div class="filter-group">
-            <label class="filter-label">Filter by Category:</label>
-            <div class="filter-buttons">
-              <button 
-                class="filter-btn hover-target"
-                :class="{ 'active': selectedCategory === 'all' }"
-                @click="setCategory('all')"
-              >
-                All Projects
-              </button>
-              <button 
-                v-for="category in categories" 
-                :key="category"
-                class="filter-btn hover-target"
-                :class="{ 'active': selectedCategory === category }"
-                @click="setCategory(category)"
-              >
-                {{ category }}
-              </button>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <label class="filter-label">Filter by Technology:</label>
-            <div class="filter-buttons">
-              <button 
-                class="filter-btn hover-target"
-                :class="{ 'active': selectedTechnology === 'all' }"
-                @click="setTechnology('all')"
-              >
-                All Technologies
-              </button>
-              <button 
-                v-for="tech in technologies" 
-                :key="tech"
-                class="filter-btn hover-target"
-                :class="{ 'active': selectedTechnology === tech }"
-                @click="setTechnology(tech)"
-              >
-                {{ tech }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- Projects Grid Section -->
     <section class="projects-section">
       <div class="section-container">
         <div class="projects-header">
           <h2 class="section-title">
-            {{ filteredProjects.length }} Project{{ filteredProjects.length !== 1 ? 's' : '' }} Found
           </h2>
         </div>
 
-        <div class="projects-grid" v-if="filteredProjects.length">
+        <div v-if="loading" class="loading-state">
+          <p>Loading projects...</p>
+        </div>
+        
+        <div v-else-if="error" class="error-state">
+          <p>Error loading projects: {{ error.message }}</p>
+        </div>
+
+        <!-- Projects Grid -->
+     <div v-if="filteredProjects.length" class="projects-grid">
           <div 
             v-for="project in filteredProjects" 
             :key="project.id"
             class="project-card hover-large"
+            :style="{ backgroundImage: `url('${encodeURI(project.imageUrl)}')` }"
             @click="navigateToProject(project.id)"
           >
-            <div class="project-image">
-              <LazyImage 
-                :src="project.imageUrl" 
-                :alt="project.title"
-                :width="400"
-                :height="250"
-                image-class="project-img"
-                @load="onImageLoad"
-                @error="onImageError"
-              />
-              <div class="project-overlay">
-                <div class="project-actions">
-                  <a 
-                    v-if="project.liveUrl" 
-                    :href="project.liveUrl" 
-                    target="_blank"
-                    class="project-action hover-target"
-                    @click.stop
-                    aria-label="View Live Demo"
-                  >
-                    <i class="fas fa-external-link-alt"></i>
-                  </a>
-                  <a 
-                    v-if="project.githubUrl" 
-                    :href="project.githubUrl" 
-                    target="_blank"
-                    class="project-action hover-target"
-                    @click.stop
-                    aria-label="View Source Code"
-                  >
-                    <i class="fab fa-github"></i>
-                  </a>
-                  <button 
-                    class="project-action hover-target"
-                    @click.stop="navigateToProject(project.id)"
-                    aria-label="View Details"
-                  >
-                    <i class="fas fa-info-circle"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            
             <div class="project-content">
-              <div class="project-header">
-                <h3 class="project-title">{{ project.title }}</h3>
-                <span class="project-category">{{ project.category }}</span>
+              <div class="project-actions">
+                <a 
+                  v-if="project.liveUrl" 
+                  :href="project.liveUrl" 
+                  target="_blank"
+                  class="project-action hover-target"
+                  @click.stop
+                >
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a 
+                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                  :href="project.githubUrl" 
+                  target="_blank"
+                  class="project-action hover-target"
+                  @click.stop
+                >
+                  <i class="fab fa-github"></i>
+                </a>
               </div>
-              
+              <h3 class="project-title">{{ project.title }}</h3>
+
               <p class="project-description">{{ project.description }}</p>
-              
               <div class="project-tech">
                 <span 
-                  v-for="tech in project.technologies.slice(0, 4)" 
+                  v-for="tech in project.technologies.slice(0, 3)" 
                   :key="tech"
                   class="tech-tag"
                 >
                   {{ tech }}
                 </span>
-                <span 
-                  v-if="project.technologies.length > 4"
-                  class="tech-more"
-                >
-                  +{{ project.technologies.length - 4 }} more
-                </span>
-              </div>
-              
-              <div class="project-meta">
-                <span class="project-date">{{ formatDate(project.createdAt) }}</span>
-                <div class="project-status">
-                  <span 
-                    class="status-badge"
-                    :class="`status-${project.status?.toLowerCase() || 'completed'}`"
-                  >
-                    {{ project.status || 'Completed' }}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -186,12 +101,11 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
-import LazyImage from '@/components/LazyImage.vue'
 
 const GET_PROJECTS = gql`
   query GetProjects {
@@ -206,6 +120,7 @@ const GET_PROJECTS = gql`
       liveUrl
       githubUrl
       createdAt
+      order
     }
   }
 `
@@ -213,16 +128,18 @@ const GET_PROJECTS = gql`
 export default {
   name: 'ProjectsView',
   components: {
-    LoadingOverlay,
-    LazyImage
+    LoadingOverlay
   },
   setup() {
     const router = useRouter()
-    const projects = ref([])
     const selectedCategory = ref('all')
     const selectedTechnology = ref('all')
 
     const { result, loading, error } = useQuery(GET_PROJECTS)
+
+    const projects = computed(() => {
+      return result.value?.projects || []
+    })
 
     const categories = computed(() => {
       if (!projects.value.length) return []
@@ -237,7 +154,7 @@ export default {
     })
 
     const filteredProjects = computed(() => {
-      let filtered = projects.value
+      let filtered = [...projects.value] // Create a copy to avoid read-only errors
 
       if (selectedCategory.value !== 'all') {
         filtered = filtered.filter(p => p.category === selectedCategory.value)
@@ -249,7 +166,18 @@ export default {
         )
       }
 
-      return filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      // Sort by order field (ascending)
+      return filtered.sort((a, b) => {
+        // If both have order, sort by order
+        if (a.order && b.order) {
+          return a.order - b.order
+        }
+        // If only one has order, prioritize it
+        if (a.order) return -1
+        if (b.order) return 1
+        // If neither has order, sort by creation date (newest first)
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      })
     })
 
     const setCategory = (category) => {
@@ -278,24 +206,7 @@ export default {
       })
     }
 
-    const updateData = () => {
-      if (result.value) {
-        projects.value = result.value.projects || []
-      }
-    }
 
-    const onImageLoad = () => {
-      // Image loaded successfully
-    }
-
-    const onImageError = () => {
-      // Handle image load error
-      console.warn('Failed to load project image')
-    }
-
-    onMounted(() => {
-      updateData()
-    })
 
     return {
       projects,
@@ -310,15 +221,7 @@ export default {
       setTechnology,
       clearFilters,
       navigateToProject,
-      formatDate,
-      updateData,
-      onImageLoad,
-      onImageError
-    }
-  },
-  watch: {
-    'result'() {
-      this.updateData()
+      formatDate
     }
   }
 }
@@ -333,7 +236,7 @@ export default {
 
 .projects-hero {
   background: #ffffff;
-  padding: 4rem 0;
+  padding: 4rem 0 1px 0;
   text-align: center;
 }
 
@@ -353,7 +256,7 @@ export default {
 .page-subtitle {
   font-size: 1.2rem;
   color: #666666;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -425,7 +328,7 @@ export default {
 }
 
 .projects-section {
-  padding: 4rem 0;
+  padding: 2rem 0 4rem 0;
   background: #ffffff;
 }
 
@@ -440,151 +343,118 @@ export default {
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-
-  @include mobile {
-    grid-template-columns: 1fr;
-  }
+  margin-bottom: 3rem;
 }
 
 .project-card {
   @include card;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
   overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 110%;
+    background-position: center;
+    background-image: inherit;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.project-image {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-
-  :deep(.lazy-image-container) {
-    width: 100%;
-    height: 100%;
-  }
-
-  :deep(.project-img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover :deep(.project-img) {
-    transform: scale(1.05);
-  }
-
-  // Legacy support for regular img tags
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.05);
-  }
-}
-
-.project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  @include flex-center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-
-  .project-card:hover & {
-    opacity: 1;
+    
+    &::before {
+      background-size: 340%;
+      background-position: top left;
+    }
   }
 }
 
 .project-actions {
   display: flex;
   gap: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: relative;
+  z-index: 10;
+  
+  .project-card:hover & {
+    opacity: 1;
+  }
 }
 
 .project-action {
   @include flex-center;
-  width: 44px;
-  height: 44px;
-  background: #666666;
+  width: 50px;
+  height: 50px;
+  background: var(--accent-primary);
   color: white;
-  border: none;
   border-radius: 50%;
-  cursor: pointer;
+  font-size: 1.2rem;
   transition: all 0.3s ease;
 
   &:hover {
-    background: #333333;
+    background: var(--accent-secondary);
     transform: scale(1.1);
   }
-
-  i {
-    font-size: 1.1rem;
+  
+  .fab.fa-github {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .project-content {
-  padding: 1.5rem;
-}
-
-.project-header {
-  @include flex-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-  gap: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  z-index: 2;
 }
 
 .project-title {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #000000;
-  flex: 1;
-}
-
-.project-category {
-  background: #f0f0f0;
-  color: #666666;
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--border-radius-sm);
-  font-size: 0.8rem;
-  font-weight: 500;
-  white-space: nowrap;
+  margin-bottom: 0.75rem;
+  color: white;
 }
 
 .project-description {
-  color: #666666;
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: 1.5;
 }
 
 .project-tech {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
 }
 
 .tech-tag {
-  background: #f0f0f0;
-  color: #666666;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
   padding: 0.25rem 0.75rem;
   border-radius: var(--border-radius-sm);
   font-size: 0.8rem;

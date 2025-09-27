@@ -79,7 +79,7 @@
                 @mouseleave="handleLogoHover(false)"
               >
                 <img 
-                  src="/CreationsX Emoji Sticker logo(no background).png" 
+                  :src="creationsXLogo" 
                   alt="CreationsX Logo" 
                   draggable="false"
                 />
@@ -97,6 +97,7 @@
 
 <script>
 import { computed } from 'vue'
+import creationsXLogo from '@/assets/images/logos/CreationsX Emoji Sticker logo(no background).png'
 
 export default {
   name: 'AppFooter',
@@ -127,7 +128,8 @@ export default {
     const currentYear = computed(() => new Date().getFullYear())
 
     return {
-      currentYear
+      currentYear,
+      creationsXLogo
     }
   }
 }

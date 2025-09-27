@@ -9,14 +9,23 @@ const DateType = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
   serialize(value) {
-    return value instanceof Date ? value.toISOString() : null;
+    if (!value) return null;
+    if (value instanceof Date) return value.toISOString();
+    if (typeof value === 'string') {
+      const date = new Date(value);
+      return isNaN(date.getTime()) ? null : date.toISOString();
+    }
+    return null;
   },
   parseValue(value) {
-    return new Date(value);
+    if (!value) return null;
+    const date = new Date(value);
+    return isNaN(date.getTime()) ? null : date;
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.STRING) {
-      return new Date(ast.value);
+      const date = new Date(ast.value);
+      return isNaN(date.getTime()) ? null : date;
     }
     return null;
   },

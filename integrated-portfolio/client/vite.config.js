@@ -74,10 +74,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/styles/variables.scss";`,
+        additionalData: `@use "@/styles/variables.scss" as *;`,
       },
     },
-    // Enable CSS code splitting
+    // Enable CSS source maps in development
     devSourcemap: true,
   },
   // Enable experimental features for better performance

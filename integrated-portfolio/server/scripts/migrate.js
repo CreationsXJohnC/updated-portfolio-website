@@ -11,7 +11,7 @@ const seedData = {
     email: 'johnccreations21@gmail.com',
     phone: '+1 (555) 123-4567',
     location: 'United States',
-    avatarUrl: '/assets/Creation X Logo Updated.svg',
+    avatarUrl: '/DSCF8979.jpg',
     socialLinks: {
       github: 'https://github.com/CreationsXJohnC',
       linkedin: 'https://www.linkedin.com/in/johnccreations/',
@@ -98,43 +98,95 @@ const seedData = {
 
   projects: [
     {
-      title: 'John C Creations Platform',
-      description: 'A comprehensive creative platform showcasing innovative digital solutions and design services. Features portfolio management, client collaboration tools, and project showcase capabilities built with modern web technologies.',
-      shortDescription: 'Creative platform for digital solutions and design services',
-      technologies: ['Vue.js', 'Node.js', 'GraphQL', 'PostgreSQL', 'AWS'],
-      githubUrl: 'https://github.com/CreationsXJohnC/platform',
-      liveUrl: 'https://johncreations.com',
-      imageUrl: '/assets/johncreations-platform.jpg',
+      title: 'Skinstric AI',
+      description: 'An AI-powered skincare analysis platform that provides personalized skincare recommendations. Uses machine learning to analyze skin conditions and suggest appropriate treatments and products.',
+      shortDescription: 'AI-powered skincare analysis and recommendations',
+      technologies: ['ES6+', 'Next.js', 'TailwindCSS'],
+      githubUrl: 'https://github.com/CreationsXJohnC/skinstric-ai-internship',
+      liveUrl: 'https://skinstric-ai-internship-gold.vercel.app/',
+      imageUrl: '/projects/Skinstric AI - website screenshot.png',
       featured: true,
       order: 1,
       status: 'published',
-      category: 'platform'
+      category: 'ai'
     },
     {
-      title: 'Creative Studio Dashboard',
-      description: 'An advanced project management and creative workflow dashboard designed for creative agencies. Includes client management, project tracking, asset organization, and team collaboration features.',
-      shortDescription: 'Project management dashboard for creative workflows',
-      technologies: ['React', 'TypeScript', 'Express', 'MongoDB', 'Socket.io'],
-      githubUrl: 'https://github.com/CreationsXJohnC/studio-dashboard',
-      liveUrl: 'https://dashboard.johncreations.com',
-      imageUrl: '/assets/studio-dashboard.jpg',
+      title: 'Netflix Clone',
+      description: 'A fully functional Netflix clone built with modern web technologies. Features user authentication, movie browsing, search functionality, and responsive design that mimics the original Netflix interface.',
+      shortDescription: 'Netflix clone with streaming interface',
+      technologies: ['React', 'Vite', 'Firebase'],
+      githubUrl: 'https://github.com/CreationsXJohnC/netflix-clone-website',
+      liveUrl: 'https://netflix-clone-website-creationsx.vercel.app/',
+      imageUrl: '/projects/Netfilx Clone - website screenshot.png',
       featured: true,
       order: 2,
       status: 'published',
-      category: 'dashboard'
+      category: 'web-app'
     },
     {
-      title: 'Digital Brand Identity System',
-      description: 'A comprehensive digital brand identity system that helps businesses establish consistent visual presence across all digital platforms. Includes logo generation, color palette tools, and brand guideline creation.',
-      shortDescription: 'Digital brand identity and visual consistency system',
-      technologies: ['JavaScript', 'CSS3', 'SVG', 'Design Systems', 'Figma API'],
-      githubUrl: 'https://github.com/CreationsXJohnC/brand-identity',
-      liveUrl: 'https://branding.johncreations.com',
-      imageUrl: '/assets/brand-identity.jpg',
-      featured: false,
+      title: 'Ultraverse NFT World',
+      description: 'A cutting-edge NFT marketplace and virtual world platform that combines blockchain technology with immersive 3D experiences. Features NFT trading, virtual galleries, and interactive metaverse environments.',
+      shortDescription: 'NFT marketplace and virtual world platform',
+      technologies: ['JavaScript', 'CSS3', 'Node.js'],
+      githubUrl: 'https://github.com/CreationsXJohnC/nft-marketplace-internship',
+      liveUrl: 'https://nft-marketplace-internship-creationsx.vercel.app/',
+      imageUrl: '/projects/Ultraverse NFT World - website screenshot.png',
+      featured: true,
       order: 3,
       status: 'published',
-      category: 'branding'
+      category: 'blockchain'
+    },
+    {
+      title: 'Movie Entertainment',
+      description: 'A dynamic movie discovery platform with advanced filtering, ratings, and personalized recommendations. Features a sleek interface for browsing and discovering new films.',
+      shortDescription: 'Movie discovery and entertainment platform',
+      technologies: ['TypeScript', 'React', 'OMDb API'],
+      githubUrl: 'https://github.com/CreationsXJohnC/movie-entertainment-online-library',
+      liveUrl: 'https://movie-entertainment-online-library.vercel.app/',
+      imageUrl: '/projects/Movie Entertainment - website screenshot.png',
+      featured: false,
+      order: 4,
+      status: 'published',
+      category: 'entertainment'
+    },
+    {
+      title: 'E-Commerce Book Library',
+      description: 'A comprehensive e-commerce platform for book lovers featuring advanced search, user reviews, and secure payment processing. Built with modern web technologies and optimized for performance.',
+      shortDescription: 'E-commerce platform for book enthusiasts',
+      technologies: ['HTML5', 'CSS', 'Babel'],
+      githubUrl: 'https://github.com/CreationsXJohnC/e-commerce-book-library',
+      liveUrl: 'https://e-commerce-book-library.vercel.app/',
+      imageUrl: '/projects/E-Commerce Book Library - website screenshot.png',
+      featured: false,
+      order: 5,
+      status: 'published',
+      category: 'e-commerce'
+    },
+    {
+      title: 'Ori Company',
+      description: 'A professional corporate website showcasing business services and company portfolio. Features modern design, responsive layout, and integrated contact management system.',
+      shortDescription: 'Corporate website with service showcase',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      githubUrl: null,
+      liveUrl: 'https://oricompanydc.com/',
+      imageUrl: '/projects/Ori Company - website screenshot.png',
+      featured: false,
+      order: 6,
+      status: 'published',
+      category: 'corporate'
+    },
+    {
+      title: 'Creations X Platform',
+      description: 'A comprehensive creative platform showcasing innovative digital solutions and design services. Features portfolio management, client collaboration tools, and project showcase capabilities built with modern web technologies.',
+      shortDescription: 'Creative platform for digital solutions and design services',
+      technologies: ['Canva', 'HTML', 'CSS'],
+      githubUrl: null,
+      liveUrl: 'https://www.johnccreations.com/creationsx',
+      imageUrl: '/projects/Creations X Platform - website screenshot.png',
+      featured: false,
+      order: 7,
+      status: 'published',
+      category: 'platform'
     }
   ]
 };
@@ -173,10 +225,14 @@ async function migrate() {
     // Seed Projects
     console.log('🚀 Creating projects...');
     for (const project of seedData.projects) {
-      await Project.findOrCreate({
-        where: { title: project.title },
-        defaults: project
-      });
+      const existingProject = await Project.findOne({ where: { title: project.title } });
+      if (existingProject) {
+        await existingProject.update(project);
+        console.log(`Updated project: ${project.title}`);
+      } else {
+        await Project.create(project);
+        console.log(`Created project: ${project.title}`);
+      }
     }
 
     console.log('✅ Database migration completed successfully!');

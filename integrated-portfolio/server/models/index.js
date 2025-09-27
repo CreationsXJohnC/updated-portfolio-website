@@ -20,6 +20,10 @@ export const Project = sequelize.define('Project', {
     type: DataTypes.STRING(200),
     allowNull: true
   },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   technologies: {
     type: DataTypes.JSON,
     allowNull: false,

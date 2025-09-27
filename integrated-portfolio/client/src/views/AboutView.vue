@@ -18,7 +18,7 @@
         <div class="personal-content">
           <div class="personal-image">
             <img 
-              :src="profile?.avatarUrl || '/DSCF8979.jpg'" 
+              :src="profile?.avatarUrl || profileImage" 
               :alt="profile?.name || 'John Che Larracuente'"
               class="profile-image"
             />
@@ -140,38 +140,7 @@
           </div>
         </div>
 
-        <div class="timeline" v-if="experiences.length">
-          <div 
-            v-for="(experience, index) in experiences" 
-            :key="experience.id"
-            class="timeline-item"
-            :class="{ 'timeline-item--alternate': index % 2 === 1 }"
-          >
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <div class="experience-card">
-                <div class="experience-header">
-                  <h3 class="experience-title">{{ experience.position }}</h3>
-                  <span class="experience-company">{{ experience.company }}</span>
-                  <span class="experience-period">
-                    {{ formatDate(experience.startDate) }} - 
-                    {{ experience.endDate ? formatDate(experience.endDate) : 'Present' }}
-                  </span>
-                </div>
-                <p class="experience-description">{{ experience.description }}</p>
-                <div class="experience-technologies" v-if="experience.technologies">
-                  <span 
-                    v-for="tech in experience.technologies" 
-                    :key="tech"
-                    class="tech-tag"
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
 
@@ -268,6 +237,7 @@
 import { ref, computed, watch } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
+import profileImage from '@/assets/images/profile/DSCF8979.jpg'
 
 const GET_ABOUT_DATA = gql`
   query GetAboutData {
@@ -326,7 +296,8 @@ export default {
       projects,
       loading,
       error,
-      formatDate
+      formatDate,
+      profileImage
     }
   }
 }

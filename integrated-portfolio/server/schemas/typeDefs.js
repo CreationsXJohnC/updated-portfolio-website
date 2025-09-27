@@ -8,6 +8,7 @@ export const typeDefs = gql`
     title: String!
     description: String!
     shortDescription: String
+    category: String
     technologies: [String!]!
     githubUrl: String
     liveUrl: String
@@ -163,6 +164,7 @@ export const typeDefs = gql`
     title: String!
     description: String!
     shortDescription: String
+    category: String
     technologies: [String!]!
     githubUrl: String
     liveUrl: String

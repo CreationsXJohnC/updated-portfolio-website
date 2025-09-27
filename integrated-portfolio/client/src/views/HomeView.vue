@@ -218,6 +218,18 @@
                 <div class="floating-code code-16">?</div>
                 <div class="floating-code code-17">|</div>
                 <div class="floating-code code-18">^</div>
+                <div class="floating-code code-19">::</div>
+                <div class="floating-code code-20">!=</div>
+                <div class="floating-code code-21">++</div>
+                <div class="floating-code code-22">--</div>
+                <div class="floating-code code-23">&&</div>
+                <div class="floating-code code-24">||</div>
+                <div class="floating-code code-25">...</div>
+                <div class="floating-code code-26">&lt;=</div>
+                <div class="floating-code code-27">&gt;=</div>
+                <div class="floating-code code-28">/*</div>
+                <div class="floating-code code-29">*/</div>
+                <div class="floating-code code-30">//</div>
               </div>
             </div>
           </div>
@@ -243,7 +255,15 @@
           </p>
         </div>
         
-        <div class="projects-grid" v-if="featuredProjects.length">
+        <div v-if="loading" class="loading-state">
+          <p>Loading featured projects...</p>
+        </div>
+        
+        <div v-else-if="error" class="error-state">
+          <p>Error loading projects: {{ error.message }}</p>
+        </div>
+        
+        <div class="projects-grid" v-else-if="featuredProjects.length">
           <div 
             v-for="project in featuredProjects" 
             :key="project.id"
@@ -263,7 +283,7 @@
                   <i class="fas fa-external-link-alt"></i>
                 </a>
                 <a 
-                  v-if="project.githubUrl" 
+                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
                   :href="project.githubUrl" 
                   target="_blank"
                   class="project-action hover-target"
@@ -301,44 +321,37 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useQuery } from '@vue/apollo-composable'
+import gql from 'graphql-tag'
+
+const GET_FEATURED_PROJECTS = gql`
+  query GetFeaturedProjects {
+    projects(featured: true) {
+      id
+      title
+      description
+      shortDescription
+      imageUrl
+      technologies
+      liveUrl
+      githubUrl
+    }
+  }
+`
 
 export default {
   name: 'HomeView',
   setup() {
     const router = useRouter()
     
-    // Hardcoded featured projects - exactly 3 projects
-    const featuredProjects = ref([
-      {
-        id: 'skinstric-ai',
-        title: 'Skinstric AI',
-        description: 'Skinstric developed an A.I. that creates a highly-personalized routine tailored to what your skin needs.',
-        imageUrl: '/Skinstric AI - website screenshot.png',
-        technologies: ['ES6+', 'Next.js', 'TailwindCSS', 'React'],
-        liveUrl: 'https://skinstric-ai-internship-gold.vercel.app/',
-        githubUrl: 'https://github.com/CreationsXJohnC/skinstric-ai-internship'
-      },
-      {
-        id: 'netflix-clone',
-        title: 'Netflix Clone',
-        description: 'This is a cloned Netflix website utilizing React, Vite, and Firebase',
-        imageUrl: '/Netfilx Clone - website screenshot.png',
-        technologies: ['React', 'Vite', 'Firebase'],
-        liveUrl: 'https://netflix-clone-website-creationsx.vercel.app/',
-        githubUrl: 'https://github.com/CreationsXJohnC/netflix-clone-website'
-      },
-      {
-        id: 'ultraverse-nft',
-        title: 'Ultraverse NFT World',
-        description: 'Create, Sell, or Collect digital items. Unit of data stored on a digital ledger, called a blockchain, that certifies a digital asset to be unique and therefore not interchangeable',
-        imageUrl: '/Ultraverse NFT World - website screenshot.png',
-        technologies: ['JavaScript', 'CSS', 'Node.js'],
-        liveUrl: 'https://nft-marketplace-internship-creationsx.vercel.app/',
-        githubUrl: 'https://github.com/CreationsXJohnC/nft-marketplace-internship'
-      }
-    ])
+    // Fetch featured projects from API
+    const { result, loading, error } = useQuery(GET_FEATURED_PROJECTS)
+    
+    const featuredProjects = computed(() => {
+      return result.value?.projects || []
+    })
 
     const navigateToProject = (projectId) => {
       router.push(`/projects/${projectId}`)
@@ -351,6 +364,8 @@ export default {
 
     return {
        featuredProjects,
+       loading,
+       error,
        navigateToProject,
        scrollToBottom
      }
@@ -1389,6 +1404,90 @@ export default {
   right: 40%;
   animation-delay: 4.5s;
   color: #70a1ff;
+}
+
+.code-19 {
+  top: 30%;
+  left: 30%;
+  animation-delay: 0.8s;
+  color: #ff7675;
+}
+
+.code-20 {
+  top: 65%;
+  left: 25%;
+  animation-delay: 1.3s;
+  color: #6c5ce7;
+}
+
+.code-21 {
+  top: 45%;
+  right: 20%;
+  animation-delay: 1.7s;
+  color: #fd79a8;
+}
+
+.code-22 {
+  bottom: 25%;
+  left: 30%;
+  animation-delay: 2.3s;
+  color: #00b894;
+}
+
+.code-23 {
+  top: 85%;
+  left: 35%;
+  animation-delay: 2.7s;
+  color: #e17055;
+}
+
+.code-24 {
+  top: 55%;
+  right: 35%;
+  animation-delay: 3.1s;
+  color: #0984e3;
+}
+
+.code-25 {
+  bottom: 35%;
+  right: 5%;
+  animation-delay: 3.6s;
+  color: #00cec9;
+}
+
+.code-26 {
+  top: 70%;
+  left: 5%;
+  animation-delay: 4.1s;
+  color: #fdcb6e;
+}
+
+.code-27 {
+  top: 12%;
+  right: 30%;
+  animation-delay: 0.3s;
+  color: #e84393;
+}
+
+.code-28 {
+  bottom: 50%;
+  left: 12%;
+  animation-delay: 1.6s;
+  color: #74b9ff;
+}
+
+.code-29 {
+  top: 90%;
+  right: 20%;
+  animation-delay: 2.1s;
+  color: #55a3ff;
+}
+
+.code-30 {
+  bottom: 45%;
+  right: 15%;
+  animation-delay: 3.9s;
+  color: #81ecec;
 }
 
 // Animations

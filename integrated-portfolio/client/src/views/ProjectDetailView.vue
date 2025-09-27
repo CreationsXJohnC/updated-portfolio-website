@@ -44,7 +44,7 @@
                 Live Demo
               </a>
               <a 
-                v-if="project.githubUrl" 
+                v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
                 :href="project.githubUrl" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -169,7 +169,7 @@
                     <span>Live Demo</span>
                   </a>
                   <a 
-                    v-if="project.githubUrl" 
+                    v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
                     :href="project.githubUrl" 
                     target="_blank" 
                     rel="noopener noreferrer"
