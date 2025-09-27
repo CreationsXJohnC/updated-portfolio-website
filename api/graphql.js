@@ -1,8 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { typeDefs } from '../integrated-portfolio/server/schemas/index.js';
+import { typeDefs } from '../integrated-portfolio/server/schemas/typeDefs.js';
 import { resolvers } from '../integrated-portfolio/server/resolvers/index.js';
-import { sequelize } from '../integrated-portfolio/server/config/database.js';
-import '../integrated-portfolio/server/models/index.js';
+import { sequelize, testConnection, initializeModels } from '../integrated-portfolio/server/models/index.js';
 
 const server = new ApolloServer({
   typeDefs,
@@ -19,6 +18,16 @@ const server = new ApolloServer({
 });
 
 const startServer = server.start();
+
+// Initialize database once
+let dbInitialized = false;
+async function initializeDatabase() {
+  if (!dbInitialized) {
+    await testConnection();
+    await initializeModels();
+    dbInitialized = true;
+  }
+}
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -40,8 +49,15 @@ export default async function handler(req, res) {
     console.error('Unable to connect to the database:', error);
   }
 
-  await startServer;
-  await server.createHandler({ path: '/api/graphql' })(req, res);
+  try {
+    // Initialize database and start server
+    await initializeDatabase();
+    await startServer;
+    await server.createHandler({ path: '/api/graphql' })(req, res);
+  } catch (error) {
+    console.error('GraphQL API Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 export const config = {
