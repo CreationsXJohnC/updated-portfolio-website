@@ -11,8 +11,7 @@
     "build:client": "cd client && npm run build",
     "start": "cd server && npm start",
     "install:all": "npm install && cd server && npm install && cd ../client && npm install",
-    "vercel-build": "npm run build:client",
-    "postinstall": "npm run install:all"
+    "vercel-build": "npm run build:client"
   },
   "keywords": ["portfolio", "vue", "graphql", "apollo", "postgresql"],
   "author": "Creations Studio",
