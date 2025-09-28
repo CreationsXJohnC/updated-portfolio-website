@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "runtime": "nodejs18.x",
   "rewrites": [
     {
       "source": "/graphql",

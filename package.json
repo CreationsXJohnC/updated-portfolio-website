@@ -1,14 +1,14 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
-  "description": "Full-stack portfolio website with Vue.js frontend and Node.js/GraphQL backend",
+  "description": "Portfolio website with serverless API endpoints",
+  "main": "index.js",
   "scripts": {
     "build": "echo 'Build completed'",
     "dev": "echo 'Development server'",
     "start": "echo 'Server started'"
   },
-  "dependencies": {},
-  "keywords": ["portfolio", "vue", "graphql", "nodejs"],
+  "keywords": ["portfolio", "serverless", "vercel"],
   "author": "John Che Larracuente",
   "license": "MIT"
 }
