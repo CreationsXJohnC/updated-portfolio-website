@@ -10,5 +10,8 @@
   },
   "keywords": ["portfolio", "serverless", "vercel"],
   "author": "John Che Larracuente",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.7"
+  }
 }
