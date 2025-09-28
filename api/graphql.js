@@ -30,56 +30,123 @@ module.exports = function(req, res) {
         var data = JSON.parse(body);
         var query = data.query;
         
-        // Mock data
+        // Mock data - Complete project list from migration
         var mockProjects = [
           {
             id: "1",
             title: "Skinstric AI",
-            description: "A.I. personalized skincare routine platform with advanced machine learning algorithms for skin analysis and product recommendations.",
-            shortDescription: "AI-powered skincare routine platform",
-            technologies: ["ES6+", "Next.js", "TailwindCSS", "OpenAI API", "Machine Learning"],
-            imageUrl: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&h=300&fit=crop",
-            liveUrl: "https://skinstric-ai.vercel.app",
-            githubUrl: "https://github.com/creationsstudio/skinstric-ai"
+            description: "An AI-powered skincare analysis platform that provides personalized skincare recommendations. Uses machine learning to analyze skin conditions and suggest appropriate treatments and products.",
+            shortDescription: "AI-powered skincare analysis and recommendations",
+            technologies: ["ES6+", "Next.js", "TailwindCSS"],
+            imageUrl: "/projects/Skinstric AI - website screenshot.png",
+            liveUrl: "https://skinstric-ai-internship-gold.vercel.app/",
+            githubUrl: "https://github.com/CreationsXJohnC/skinstric-ai-internship",
+            featured: true,
+            order: 1,
+            status: "published",
+            category: "ai"
           },
           {
             id: "2",
             title: "Netflix Clone",
-            description: "A full-featured Netflix clone built with React and Firebase, featuring user authentication, movie browsing, and streaming capabilities.",
-            shortDescription: "Full-featured Netflix clone with React",
-            technologies: ["React", "Vite", "Firebase", "CSS3", "JavaScript"],
-            imageUrl: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=500&h=300&fit=crop",
-            liveUrl: "https://netflix-clone-react.vercel.app",
-            githubUrl: "https://github.com/creationsstudio/netflix-clone"
+            description: "A fully functional Netflix clone built with modern web technologies. Features user authentication, movie browsing, search functionality, and responsive design that mimics the original Netflix interface.",
+            shortDescription: "Netflix clone with streaming interface",
+            technologies: ["React", "Vite", "Firebase"],
+            imageUrl: "/projects/Netfilx Clone - website screenshot.png",
+            liveUrl: "https://netflix-clone-website-creationsx.vercel.app/",
+            githubUrl: "https://github.com/CreationsXJohnC/netflix-clone-website",
+            featured: true,
+            order: 2,
+            status: "published",
+            category: "web-app"
           },
           {
             id: "3",
-            title: "Ori Company",
-            description: "A modern corporate website showcasing innovative business solutions with responsive design and interactive elements.",
-            shortDescription: "Modern corporate website with GSAP animations",
-            technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Responsive Design"],
-            imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
-            liveUrl: "https://ori-company.vercel.app",
-            githubUrl: "https://github.com/creationsstudio/ori-company"
+            title: "Ultraverse NFT World",
+            description: "A cutting-edge NFT marketplace and virtual world platform that combines blockchain technology with immersive 3D experiences. Features NFT trading, virtual galleries, and interactive metaverse environments.",
+            shortDescription: "NFT marketplace and virtual world platform",
+            technologies: ["JavaScript", "CSS3", "Node.js"],
+            imageUrl: "/projects/Ultraverse NFT World - website screenshot.png",
+            liveUrl: "https://nft-marketplace-internship-creationsx.vercel.app/",
+            githubUrl: "https://github.com/CreationsXJohnC/nft-marketplace-internship",
+            featured: true,
+            order: 3,
+            status: "published",
+            category: "blockchain"
           },
           {
             id: "4",
+            title: "Movie Entertainment",
+            description: "A dynamic movie discovery platform with advanced filtering, ratings, and personalized recommendations. Features a sleek interface for browsing and discovering new films.",
+            shortDescription: "Movie discovery and entertainment platform",
+            technologies: ["TypeScript", "React", "OMDb API"],
+            imageUrl: "/projects/Movie Entertainment - website screenshot.png",
+            liveUrl: "https://movie-entertainment-online-library.vercel.app/",
+            githubUrl: "https://github.com/CreationsXJohnC/movie-entertainment-online-library",
+            featured: false,
+            order: 4,
+            status: "published",
+            category: "entertainment"
+          },
+          {
+            id: "5",
+            title: "E-Commerce Book Library",
+            description: "A comprehensive e-commerce platform for book lovers featuring advanced search, user reviews, and secure payment processing. Built with modern web technologies and optimized for performance.",
+            shortDescription: "E-commerce platform for book enthusiasts",
+            technologies: ["HTML5", "CSS", "Babel"],
+            imageUrl: "/projects/E-Commerce Book Library - website screenshot.png",
+            liveUrl: "https://e-commerce-book-library.vercel.app/",
+            githubUrl: "https://github.com/CreationsXJohnC/e-commerce-book-library",
+            featured: false,
+            order: 5,
+            status: "published",
+            category: "e-commerce"
+          },
+          {
+            id: "6",
+            title: "Ori Company",
+            description: "A professional corporate website showcasing business services and company portfolio. Features modern design, responsive layout, and integrated contact management system.",
+            shortDescription: "Corporate website with service showcase",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            imageUrl: "/projects/Ori Company - website screenshot.png",
+            liveUrl: "https://oricompanydc.com/",
+            githubUrl: null,
+            featured: false,
+            order: 6,
+            status: "published",
+            category: "corporate"
+          },
+          {
+            id: "7",
             title: "Creations X Platform",
-            description: "A comprehensive creative platform for showcasing digital art, design work, and creative projects with portfolio management.",
-            shortDescription: "Creative platform for digital art showcase",
-            technologies: ["Vue.js", "Node.js", "MongoDB", "Express", "Socket.io"],
-            imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop",
-            liveUrl: "https://creations-x.vercel.app",
-            githubUrl: "https://github.com/creationsstudio/creations-x"
+            description: "A comprehensive creative platform showcasing innovative digital solutions and design services. Features portfolio management, client collaboration tools, and project showcase capabilities built with modern web technologies.",
+            shortDescription: "Creative platform for digital solutions and design services",
+            technologies: ["Canva", "HTML", "CSS"],
+            imageUrl: "/projects/Creations X Platform - website screenshot.png",
+            liveUrl: "https://www.johnccreations.com/creationsx",
+            githubUrl: null,
+            featured: false,
+            order: 7,
+            status: "published",
+            category: "platform"
           }
         ];
 
-        // Simple query parsing
+        // Simple query parsing with featured filter support
         if (query && query.indexOf('projects') !== -1) {
+          var projects = mockProjects;
+          
+          // Check if featured filter is requested
+          if (query.indexOf('featured: true') !== -1) {
+            projects = mockProjects.filter(function(project) {
+              return project.featured === true;
+            });
+          }
+          
           res.status(200);
           res.end(JSON.stringify({
             data: {
-              projects: mockProjects
+              projects: projects
             }
           }));
         } else {
