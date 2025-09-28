@@ -13,6 +13,7 @@ const server = new ApolloServer({
   context: ({ req }) => {
     return {
       req,
+      dbConnected,
     };
   },
 });
@@ -21,11 +22,21 @@ const startServer = server.start();
 
 // Initialize database once
 let dbInitialized = false;
+let dbConnected = false;
+
 async function initializeDatabase() {
   if (!dbInitialized) {
-    await testConnection();
-    await initializeModels();
-    dbInitialized = true;
+    try {
+      dbConnected = await testConnection();
+      if (dbConnected) {
+        await initializeModels();
+      }
+      dbInitialized = true;
+    } catch (error) {
+      console.warn('Database initialization failed, using mock data:', error.message);
+      dbConnected = false;
+      dbInitialized = true;
+    }
   }
 }
 
@@ -41,14 +52,6 @@ export default async function handler(req, res) {
     return false;
   }
 
-  // Test database connection
-  try {
-    await sequelize.authenticate();
-    console.log('Database connection established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-
   try {
     // Initialize database and start server
     await initializeDatabase();
@@ -56,7 +59,7 @@ export default async function handler(req, res) {
     await server.createHandler({ path: '/api/graphql' })(req, res);
   } catch (error) {
     console.error('GraphQL API Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error', message: error.message });
   }
 }
 
