@@ -1,24 +1,10 @@
-import { ApolloServer } from 'apollo-server-micro';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@as-integrations/express4';
+import express from 'express';
+import cors from 'cors';
 import { typeDefs } from '../integrated-portfolio/server/schemas/typeDefs.js';
 import { resolvers } from '../integrated-portfolio/server/resolvers/index.js';
-import { sequelize, testConnection, initializeModels } from '../integrated-portfolio/server/models/index.js';
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: process.env.NODE_ENV !== 'production',
-  playground: process.env.NODE_ENV !== 'production',
-  csrfPrevention: true,
-  cache: 'bounded',
-  context: ({ req }) => {
-    return {
-      req,
-      dbConnected,
-    };
-  },
-});
-
-const startServer = server.start();
+import { testConnection, initializeModels } from '../integrated-portfolio/server/models/index.js';
 
 // Initialize database once
 let dbInitialized = false;
@@ -40,31 +26,64 @@ async function initializeDatabase() {
   }
 }
 
-export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  introspection: process.env.GRAPHQL_INTROSPECTION === 'true' || process.env.NODE_ENV !== 'production',
+  csrfPrevention: true,
+  cache: 'bounded'
+});
 
-  if (req.method === 'OPTIONS') {
-    res.end();
-    return false;
-  }
+let app;
+let serverStarted = false;
 
-  try {
-    // Initialize database and start server
-    await initializeDatabase();
-    await startServer;
-    await server.createHandler({ path: '/api/graphql' })(req, res);
-  } catch (error) {
-    console.error('GraphQL API Error:', error);
-    res.status(500).json({ error: 'Internal server error', message: error.message });
+async function createApp() {
+  if (!app) {
+    app = express();
+    
+    await server.start();
+    serverStarted = true;
+    
+    // Configure CORS
+    const corsOptions = {
+      origin: process.env.NODE_ENV === 'production' 
+        ? [process.env.CORS_ORIGIN || 'https://updated-portfolio-website-omega.vercel.app'] 
+        : ['http://localhost:3000', 'http://localhost:5173'],
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization']
+    };
+
+    app.use(
+      '/api/graphql',
+      cors(corsOptions),
+      express.json({ limit: '50mb' }),
+      expressMiddleware(server, {
+        context: async ({ req, res }) => {
+          await initializeDatabase();
+          return {
+            req,
+            res,
+            dbConnected,
+          };
+        },
+      })
+    );
   }
+  return app;
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export default async function handler(req, res) {
+  try {
+    const app = await createApp();
+    
+    // Handle the request
+    app(req, res);
+  } catch (error) {
+    console.error('GraphQL API Error:', error);
+    res.status(500).json({ 
+      error: 'Internal server error', 
+      message: error.message 
+    });
+  }
+}
