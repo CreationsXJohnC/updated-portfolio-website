@@ -8,6 +8,10 @@
     {
       "source": "/health",
       "destination": "/api/health"
+    },
+    {
+      "source": "/contact",
+      "destination": "/api/contact"
     }
   ],
   "functions": {
@@ -21,6 +25,10 @@
     },
     "api/test.js": {
       "maxDuration": 10,
+      "memory": 512
+    },
+    "api/contact.js": {
+      "maxDuration": 15,
       "memory": 512
     }
   },
