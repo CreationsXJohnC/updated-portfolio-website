@@ -132,8 +132,103 @@ module.exports = function(req, res) {
           }
         ];
 
-        // Simple query parsing with featured filter support
-        if (query && query.indexOf('projects') !== -1) {
+        // Handle GraphQL queries and mutations
+        if (query.indexOf('mutation') !== -1 && query.indexOf('sendContactMessage') !== -1) {
+          // Handle sendContactMessage mutation
+          var variables = data.variables || {};
+          var input = variables.input || {};
+          
+          // Validate required fields
+          if (!input.name || !input.email || !input.message) {
+            res.status(400);
+            res.end(JSON.stringify({
+              errors: [{
+                message: 'Missing required fields: name, email, and message are required'
+              }]
+            }));
+            return;
+          }
+          
+          // Call the contact API endpoint to send the email
+          var https = require('https');
+          var contactData = JSON.stringify({
+            name: input.name,
+            email: input.email,
+            subject: input.subject || 'No subject',
+            message: input.message
+          });
+          
+          var options = {
+            hostname: req.headers.host,
+            port: 443,
+            path: '/api/contact',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Length': contactData.length
+            }
+          };
+          
+          var contactReq = https.request(options, function(contactRes) {
+            var contactBody = '';
+            contactRes.on('data', function(chunk) {
+              contactBody += chunk;
+            });
+            
+            contactRes.on('end', function() {
+              try {
+                var contactResult = JSON.parse(contactBody);
+                var contactMessage = {
+                  id: Date.now().toString(),
+                  name: input.name,
+                  email: input.email,
+                  subject: input.subject || 'No subject',
+                  message: input.message,
+                  createdAt: new Date().toISOString()
+                };
+                
+                if (contactResult.success) {
+                  res.status(200);
+                  res.end(JSON.stringify({
+                    data: {
+                      sendContactMessage: {
+                        success: true,
+                        message: 'Message sent successfully!',
+                        contactMessage: contactMessage
+                      }
+                    }
+                  }));
+                } else {
+                  res.status(500);
+                  res.end(JSON.stringify({
+                    errors: [{
+                      message: 'Failed to send email: ' + (contactResult.message || 'Unknown error')
+                    }]
+                  }));
+                }
+              } catch (parseError) {
+                res.status(500);
+                res.end(JSON.stringify({
+                  errors: [{
+                    message: 'Failed to process email response'
+                  }]
+                }));
+              }
+            });
+          });
+          
+          contactReq.on('error', function(error) {
+            res.status(500);
+            res.end(JSON.stringify({
+              errors: [{
+                message: 'Failed to send email: ' + error.message
+              }]
+            }));
+          });
+          
+          contactReq.write(contactData);
+          contactReq.end();
+        } else if (query && query.indexOf('projects') !== -1) {
           var projects = mockProjects;
           
           // Check if featured filter is requested
