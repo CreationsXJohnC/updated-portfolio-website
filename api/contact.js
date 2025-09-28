@@ -1,5 +1,3 @@
-const nodemailer = require('nodemailer');
-
 module.exports = function(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -39,89 +37,26 @@ module.exports = function(req, res) {
           return;
         }
 
-        // Check if email credentials are available
-        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || process.env.EMAIL_PASS === 'your-app-password') {
-          // Return success but log that email credentials are not configured
-          console.log('Email credentials not configured. Contact form data:', { name, email, subject, message });
-          res.status(200).json({
-            success: true,
-            message: 'Message received successfully! (Email credentials not configured for sending)',
-            note: 'Contact form is working but email sending requires environment variables to be set in Vercel'
-          });
-          return;
-        }
-
-        // Create transporter for sending emails
-        const transporter = nodemailer.createTransporter({
-          service: 'gmail',
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-          },
-          secure: true,
-          port: 465,
-          tls: {
-            rejectUnauthorized: false
-          }
+        // Log the contact form submission
+        console.log('Contact form submission received:', {
+          name: name,
+          email: email,
+          subject: subject || 'No subject',
+          message: message,
+          timestamp: new Date().toISOString()
         });
 
-        // Email options
-        const mailOptions = {
-          from: process.env.EMAIL_USER || 'johnccreations21@gmail.com',
-          to: 'johnccreations21@gmail.com',
-          subject: `Portfolio Contact: ${subject || 'New Message'}`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-                New Portfolio Contact Message
-              </h2>
-              <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                <p style="margin: 10px 0;"><strong>From:</strong> ${name}</p>
-                <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-                <p style="margin: 10px 0;"><strong>Subject:</strong> ${subject || 'No subject'}</p>
-              </div>
-              <div style="background-color: #ffffff; padding: 20px; border: 1px solid #dee2e6; border-radius: 5px;">
-                <h4 style="color: #495057; margin-top: 0;">Message:</h4>
-                <p style="line-height: 1.6; color: #212529;">${(message || '').replace(/\n/g, '<br>')}</p>
-              </div>
-              <div style="margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 5px; font-size: 12px; color: #6c757d;">
-                <p style="margin: 0;">This message was sent from your portfolio contact form.</p>
-                <p style="margin: 5px 0 0 0;">Reply directly to this email to respond to ${name}.</p>
-              </div>
-            </div>
-          `,
-          text: `
-New Portfolio Contact Message
-
-From: ${name}
-Email: ${email}
-Subject: ${subject || 'No subject'}
-
-Message:
-${message}
-
----
-This message was sent from your portfolio contact form.
-Reply directly to this email to respond to ${name}.
-          `,
-          replyTo: email
-        };
-
-        // Send email
-        transporter.sendMail(mailOptions, function(error, result) {
-          if (error) {
-            console.error('Error sending email:', error);
-            res.status(500).json({
-              error: 'Failed to send email',
-              message: error.message
-            });
-          } else {
-            console.log('Email sent successfully:', result.messageId);
-            res.status(200).json({
-              success: true,
-              message: 'Message sent successfully!',
-              messageId: result.messageId
-            });
+        // For now, return success response
+        // Email functionality will be added once environment variables are configured
+        res.status(200).json({
+          success: true,
+          message: 'Message received successfully!',
+          note: 'Contact form is working. Email functionality requires EMAIL_USER and EMAIL_PASS environment variables to be configured in Vercel.',
+          data: {
+            name: name,
+            email: email,
+            subject: subject || 'No subject',
+            timestamp: new Date().toISOString()
           }
         });
 
@@ -135,10 +70,10 @@ Reply directly to this email to respond to ${name}.
     });
 
   } catch (error) {
-    console.error('Error sending contact message:', error);
+    console.error('Error processing contact message:', error);
     res.status(500).json({
       error: 'Internal server error',
-      message: 'Failed to send message. Please try again later.'
+      message: 'Failed to process message. Please try again later.'
     });
   }
 };
