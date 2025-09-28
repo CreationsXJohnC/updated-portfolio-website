@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-module.exports = async function(req, res) {
+module.exports = function(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -25,7 +25,7 @@ module.exports = async function(req, res) {
       body += chunk.toString();
     });
     
-    req.on('end', async function() {
+    req.on('end', function() {
       try {
         const data = JSON.parse(body);
         const { name, email, subject, message } = data;
@@ -108,13 +108,21 @@ Reply directly to this email to respond to ${name}.
         };
 
         // Send email
-        const result = await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully:', result.messageId);
-
-        res.status(200).json({
-          success: true,
-          message: 'Message sent successfully!',
-          messageId: result.messageId
+        transporter.sendMail(mailOptions, function(error, result) {
+          if (error) {
+            console.error('Error sending email:', error);
+            res.status(500).json({
+              error: 'Failed to send email',
+              message: error.message
+            });
+          } else {
+            console.log('Email sent successfully:', result.messageId);
+            res.status(200).json({
+              success: true,
+              message: 'Message sent successfully!',
+              messageId: result.messageId
+            });
+          }
         });
 
       } catch (parseError) {
