@@ -7,11 +7,7 @@
     "dev": "echo 'Development server'",
     "start": "echo 'Server started'"
   },
-  "dependencies": {
-    "@apollo/server": "^5.0.0",
-    "@as-integrations/next": "^3.0.0",
-    "graphql": "^16.8.1"
-  },
+  "dependencies": {},
   "keywords": ["portfolio", "vue", "graphql", "nodejs"],
   "author": "John Che Larracuente",
   "license": "MIT"
