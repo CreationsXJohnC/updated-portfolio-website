@@ -2,10 +2,6 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/graphql"
-    },
-    {
       "source": "/graphql",
       "destination": "/api/graphql"
     },
@@ -20,6 +16,10 @@
       "memory": 1024
     },
     "api/health.js": {
+      "maxDuration": 10,
+      "memory": 512
+    },
+    "api/test.js": {
       "maxDuration": 10,
       "memory": 512
     }
@@ -61,8 +61,7 @@
       ]
     }
   ],
-  "installCommand": "cd integrated-portfolio && npm install && cd server && npm install --production=false && cd ../client && npm install --production=false",
-  "buildCommand": "cd integrated-portfolio/client && npx vite build",
-  "outputDirectory": "integrated-portfolio/client/dist",
-  "framework": "vite"
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
