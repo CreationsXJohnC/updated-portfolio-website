@@ -138,6 +138,22 @@ module.exports = function(req, res) {
           var variables = data.variables || {};
           var input = variables.input || {};
           
+          // If no variables, try to parse from inline query
+          if (!input.name && query.indexOf('name:') !== -1) {
+            // Parse inline arguments from query string
+            var nameMatch = query.match(/name:\s*"([^"]+)"/);
+            var emailMatch = query.match(/email:\s*"([^"]+)"/);
+            var subjectMatch = query.match(/subject:\s*"([^"]+)"/);
+            var messageMatch = query.match(/message:\s*"([^"]+)"/);
+            
+            input = {
+              name: nameMatch ? nameMatch[1] : '',
+              email: emailMatch ? emailMatch[1] : '',
+              subject: subjectMatch ? subjectMatch[1] : '',
+              message: messageMatch ? messageMatch[1] : ''
+            };
+          }
+          
           // Validate required fields
           if (!input.name || !input.email || !input.message) {
             res.status(400);
