@@ -62,6 +62,6 @@
     }
   ],
   "installCommand": "cd integrated-portfolio && npm run install:all",
-  "buildCommand": "cd integrated-portfolio && npm run build",
+  "buildCommand": "cd integrated-portfolio && npm run vercel-build",
   "outputDirectory": "integrated-portfolio/client/dist"
 }
