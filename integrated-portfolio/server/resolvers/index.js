@@ -3,6 +3,7 @@ import { Kind } from 'graphql/language/index.js';
 import { Project, Skill, Experience, ContactMessage, Profile } from '../models/index.js';
 import { sendContactEmail } from '../config/emailService.js';
 import { Op } from 'sequelize';
+import { mockData } from '../data/mockData.js';
 
 // Custom Date scalar
 const DateType = new GraphQLScalarType({
@@ -36,7 +37,18 @@ export const resolvers = {
 
   Query: {
     // Projects
-    projects: async (_, { featured, status }) => {
+    projects: async (_, { featured, status }, { dbConnected }) => {
+      if (!dbConnected) {
+        let projects = [...mockData.projects];
+        if (featured !== undefined) {
+          projects = projects.filter(p => p.featured === featured);
+        }
+        if (status) {
+          projects = projects.filter(p => p.status === status.toLowerCase());
+        }
+        return projects.sort((a, b) => a.order - b.order);
+      }
+
       const where = {};
       if (featured !== undefined) where.featured = featured;
       if (status) where.status = status.toLowerCase();
@@ -47,12 +59,23 @@ export const resolvers = {
       });
     },
 
-    project: async (_, { id }) => {
+    project: async (_, { id }, { dbConnected }) => {
+      if (!dbConnected) {
+        return mockData.projects.find(p => p.id === parseInt(id)) || null;
+      }
       return await Project.findByPk(id);
     },
 
     // Skills
-    skills: async (_, { category }) => {
+    skills: async (_, { category }, { dbConnected }) => {
+      if (!dbConnected) {
+        let skills = [...mockData.skills];
+        if (category) {
+          skills = skills.filter(s => s.category === category.toLowerCase());
+        }
+        return skills.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
+      }
+
       const where = {};
       if (category) where.category = category.toLowerCase();
       
@@ -62,30 +85,50 @@ export const resolvers = {
       });
     },
 
-    skill: async (_, { id }) => {
+    skill: async (_, { id }, { dbConnected }) => {
+      if (!dbConnected) {
+        return mockData.skills.find(s => s.id === parseInt(id)) || null;
+      }
       return await Skill.findByPk(id);
     },
 
     // Experiences
-    experiences: async () => {
+    experiences: async (_, args, { dbConnected }) => {
+      if (!dbConnected) {
+        return [...mockData.experiences].sort((a, b) => a.order - b.order || new Date(b.startDate) - new Date(a.startDate));
+      }
       return await Experience.findAll({
         order: [['order', 'ASC'], ['startDate', 'DESC']]
       });
     },
 
-    experience: async (_, { id }) => {
+    experience: async (_, { id }, { dbConnected }) => {
+      if (!dbConnected) {
+        return mockData.experiences.find(e => e.id === parseInt(id)) || null;
+      }
       return await Experience.findByPk(id);
     },
 
     // Profile
-    profile: async () => {
+    profile: async (_, args, { dbConnected }) => {
+      if (!dbConnected) {
+        return mockData.profile;
+      }
       return await Profile.findOne({
         where: { isActive: true }
       });
     },
 
     // Contact Messages
-    contactMessages: async (_, { status }) => {
+    contactMessages: async (_, { status }, { dbConnected }) => {
+      if (!dbConnected) {
+        let messages = [...mockData.contactMessages];
+        if (status) {
+          messages = messages.filter(m => m.status === status.toLowerCase());
+        }
+        return messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+
       const where = {};
       if (status) where.status = status.toLowerCase();
       
@@ -95,7 +138,10 @@ export const resolvers = {
       });
     },
 
-    contactMessage: async (_, { id }) => {
+    contactMessage: async (_, { id }, { dbConnected }) => {
+      if (!dbConnected) {
+        return mockData.contactMessages.find(m => m.id === parseInt(id)) || null;
+      }
       return await ContactMessage.findByPk(id);
     }
   },

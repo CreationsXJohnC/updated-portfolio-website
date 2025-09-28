@@ -22,10 +22,12 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || FRONTEND_URL;
 
 async function startServer() {
   // Test database connection
-  await testConnection();
+  const dbConnected = await testConnection();
   
-  // Initialize database models
-  await initializeModels();
+  // Initialize database models only if connected
+  if (dbConnected) {
+    await initializeModels();
+  }
 
   // Create Express app
   const app = express();
@@ -102,6 +104,7 @@ async function startServer() {
         return {
           req,
           res,
+          dbConnected,
           // Add authentication context here if needed
         };
       },
