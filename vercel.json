@@ -61,8 +61,8 @@
       ]
     }
   ],
-  "installCommand": "cd integrated-portfolio && npm run install:all",
-  "buildCommand": "cd integrated-portfolio && npm run vercel-build",
+  "installCommand": "cd integrated-portfolio && npm install && cd server && npm install && cd ../client && npm install",
+  "buildCommand": "cd integrated-portfolio/client && npx vite build",
   "outputDirectory": "integrated-portfolio/client/dist",
   "framework": "vite"
 }

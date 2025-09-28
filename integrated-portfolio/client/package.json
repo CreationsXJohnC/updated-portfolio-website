@@ -7,7 +7,8 @@
     "dev": "vite --open",
     "build": "npx vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "postinstall": "npx vite --version"
   },
   "dependencies": {
     "@apollo/client": "^3.8.8",
