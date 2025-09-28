@@ -7,7 +7,7 @@ const routes = [
     name: 'Home',
     component: HomeView,
     meta: {
-      title: 'John Creations - Portfolio'
+      title: 'John C Creations - Design Portfolio'
     }
   },
   {
@@ -15,7 +15,7 @@ const routes = [
     name: 'About',
     component: () => import('@/views/AboutView.vue'),
     meta: {
-      title: 'About - John Creations'
+      title: 'About - John C Creations'
     }
   },
   {
@@ -23,7 +23,7 @@ const routes = [
     name: 'Projects',
     component: () => import('@/views/ProjectsView.vue'),
     meta: {
-      title: 'Projects - John Creations'
+      title: 'Projects - John C Creations'
     }
   },
   {
@@ -31,7 +31,7 @@ const routes = [
     name: 'ProjectDetail',
     component: () => import('@/views/ProjectDetailView.vue'),
     meta: {
-      title: 'Project Details - John Creations'
+      title: 'Project Details - John C Creations'
     }
   },
   {
@@ -39,7 +39,7 @@ const routes = [
     name: 'Contact',
     component: () => import('@/views/ContactView.vue'),
     meta: {
-      title: 'Contact - John Creations'
+      title: 'Contact - John C Creations'
     }
   },
   {
@@ -47,7 +47,7 @@ const routes = [
     name: 'NotFound',
     component: () => import('@/views/NotFoundView.vue'),
     meta: {
-      title: 'Page Not Found - John Creations'
+      title: 'Page Not Found - John C Creations'
     }
   }
 ]
@@ -72,7 +72,7 @@ const router = createRouter({
 // Global navigation guards
 router.beforeEach((to, from, next) => {
   // Update document title
-  document.title = to.meta.title || 'John Creations - Portfolio'
+  document.title = to.meta.title || 'John C Creations - Design Portfolio'
   next()
 })
 
