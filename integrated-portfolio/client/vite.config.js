@@ -3,18 +3,10 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [
-    vue({
-      // Enable script setup and other optimizations
-      script: {
-        defineModel: true,
-        propsDestructure: true
-      }
-    })
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': resolve(process.cwd(), 'src'),
     },
   },
   server: {

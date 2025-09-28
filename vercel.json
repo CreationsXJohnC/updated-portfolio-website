@@ -61,7 +61,7 @@
       ]
     }
   ],
-  "installCommand": "cd integrated-portfolio && npm install && cd server && npm install && cd ../client && npm install",
+  "installCommand": "cd integrated-portfolio && npm install && cd server && npm install --production=false && cd ../client && npm install --production=false",
   "buildCommand": "cd integrated-portfolio/client && npx vite build",
   "outputDirectory": "integrated-portfolio/client/dist",
   "framework": "vite"
