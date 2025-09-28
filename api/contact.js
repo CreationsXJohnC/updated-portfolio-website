@@ -39,12 +39,24 @@ module.exports = async function(req, res) {
           return;
         }
 
+        // Check if email credentials are available
+        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || process.env.EMAIL_PASS === 'your-app-password') {
+          // Return success but log that email credentials are not configured
+          console.log('Email credentials not configured. Contact form data:', { name, email, subject, message });
+          res.status(200).json({
+            success: true,
+            message: 'Message received successfully! (Email credentials not configured for sending)',
+            note: 'Contact form is working but email sending requires environment variables to be set in Vercel'
+          });
+          return;
+        }
+
         // Create transporter for sending emails
         const transporter = nodemailer.createTransporter({
           service: 'gmail',
           auth: {
-            user: process.env.EMAIL_USER || 'johnccreations21@gmail.com',
-            pass: process.env.EMAIL_PASS || 'your-app-password'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
           },
           secure: true,
           port: 465,
