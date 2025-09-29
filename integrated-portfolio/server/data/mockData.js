@@ -129,6 +129,19 @@ export const mockExperiences = [
   }
 ];
 
+export const mockContactMessages = [
+  {
+    id: "1",
+    name: "Sample Contact",
+    email: "sample@example.com",
+    subject: "Sample Message",
+    message: "This is a sample contact message for testing purposes.",
+    status: "unread",
+    createdAt: new Date("2024-01-01"),
+    updatedAt: new Date("2024-01-01")
+  }
+];
+
 export const mockProfile = {
   id: "1",
   name: "John Che Larracuente",

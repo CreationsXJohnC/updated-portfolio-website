@@ -3,7 +3,7 @@ import { Kind } from 'graphql/language/index.js';
 import { Project, Skill, Experience, ContactMessage, Profile } from '../models/index.js';
 import { sendContactEmail } from '../config/emailService.js';
 import { Op } from 'sequelize';
-import { mockData } from '../data/mockData.js';
+import { mockProjects, mockSkills, mockExperiences, mockProfile, mockContactMessages } from '../data/mockData.js';
 
 // Custom Date scalar
 const DateType = new GraphQLScalarType({
@@ -39,7 +39,7 @@ export const resolvers = {
     // Projects
     projects: async (_, { featured, status }, { dbConnected }) => {
       if (!dbConnected) {
-        let projects = [...mockData.projects];
+        let projects = [...mockProjects];
         if (featured !== undefined) {
           projects = projects.filter(p => p.featured === featured);
         }
@@ -61,7 +61,7 @@ export const resolvers = {
 
     project: async (_, { id }, { dbConnected }) => {
       if (!dbConnected) {
-        return mockData.projects.find(p => p.id === parseInt(id)) || null;
+        return mockProjects.find(p => p.id === parseInt(id)) || null;
       }
       return await Project.findByPk(id);
     },
@@ -69,7 +69,7 @@ export const resolvers = {
     // Skills
     skills: async (_, { category }, { dbConnected }) => {
       if (!dbConnected) {
-        let skills = [...mockData.skills];
+        let skills = [...mockSkills];
         if (category) {
           skills = skills.filter(s => s.category === category.toLowerCase());
         }
@@ -87,7 +87,7 @@ export const resolvers = {
 
     skill: async (_, { id }, { dbConnected }) => {
       if (!dbConnected) {
-        return mockData.skills.find(s => s.id === parseInt(id)) || null;
+        return mockSkills.find(s => s.id === parseInt(id)) || null;
       }
       return await Skill.findByPk(id);
     },
@@ -95,7 +95,7 @@ export const resolvers = {
     // Experiences
     experiences: async (_, args, { dbConnected }) => {
       if (!dbConnected) {
-        return [...mockData.experiences].sort((a, b) => a.order - b.order || new Date(b.startDate) - new Date(a.startDate));
+        return [...mockExperiences].sort((a, b) => a.order - b.order || new Date(b.startDate) - new Date(a.startDate));
       }
       return await Experience.findAll({
         order: [['order', 'ASC'], ['startDate', 'DESC']]
@@ -104,7 +104,7 @@ export const resolvers = {
 
     experience: async (_, { id }, { dbConnected }) => {
       if (!dbConnected) {
-        return mockData.experiences.find(e => e.id === parseInt(id)) || null;
+        return mockExperiences.find(e => e.id === parseInt(id)) || null;
       }
       return await Experience.findByPk(id);
     },
@@ -112,7 +112,7 @@ export const resolvers = {
     // Profile
     profile: async (_, args, { dbConnected }) => {
       if (!dbConnected) {
-        return mockData.profile;
+        return mockProfile;
       }
       return await Profile.findOne({
         where: { isActive: true }
@@ -122,7 +122,7 @@ export const resolvers = {
     // Contact Messages
     contactMessages: async (_, { status }, { dbConnected }) => {
       if (!dbConnected) {
-        let messages = [...mockData.contactMessages];
+        let messages = [...mockContactMessages];
         if (status) {
           messages = messages.filter(m => m.status === status.toLowerCase());
         }
@@ -140,7 +140,7 @@ export const resolvers = {
 
     contactMessage: async (_, { id }, { dbConnected }) => {
       if (!dbConnected) {
-        return mockData.contactMessages.find(m => m.id === parseInt(id)) || null;
+        return mockContactMessages.find(m => m.id === parseInt(id)) || null;
       }
       return await ContactMessage.findByPk(id);
     }
