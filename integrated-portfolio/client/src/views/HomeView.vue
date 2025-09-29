@@ -1078,6 +1078,19 @@ export default {
     border-radius: 50%;
     z-index: -1;
   }
+  
+  @media (max-width: 480px) {
+    border-radius: 0 0 8px 8px;
+    border: 3px solid #2a2a2a;
+    border-top: none;
+    padding: 3px;
+    gap: 3px;
+    transform: translateZ(0px) rotateX(-1deg);
+    box-shadow: 
+      inset 0 1px 1px rgba(0,0,0,0.1),
+      inset 0 -1px 2px rgba(255,255,255,0.6),
+      0 4px 8px rgba(0,0,0,0.2);
+  }
 }
 
 .keyboard-keys {
@@ -1086,6 +1099,11 @@ export default {
   flex-direction: column;
   gap: 2px;
   min-height: 60px;
+  
+  @media (max-width: 480px) {
+    gap: 0.5px;
+    min-height: 38px;
+  }
 }
 
 .speaker-grille {
@@ -1097,6 +1115,12 @@ export default {
   align-items: center;
   justify-content: center;
   align-self: flex-start;
+  
+  @media (max-width: 480px) {
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+  }
 }
 
 .speaker-holes {
@@ -1106,6 +1130,14 @@ export default {
   gap: 0.8px;
   width: 37px;
   height: 20px;
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.5px;
+    width: 18px;
+    height: 10px;
+  }
 }
 
 .speaker-hole {
@@ -1129,6 +1161,10 @@ export default {
   gap: 2px;
   justify-content: center;
   align-items: center;
+  
+  @media (max-width: 480px) {
+    gap: 0.5px;
+  }
 }
 
 .key {
@@ -1150,6 +1186,16 @@ export default {
   animation: none;
   transition: all 0.1s ease;
   transform: translateZ(1px);
+  
+  @media (max-width: 480px) {
+    height: 6px;
+    border-radius: 1px;
+    font-size: 3px;
+    box-shadow: 
+      0 0.5px 1px rgba(0,0,0,0.15), 
+      inset 0 0.5px 0 rgba(255,255,255,0.9),
+      inset 0 -0.5px 0 rgba(0,0,0,0.1);
+  }
 }
 
 .key:hover {
@@ -1260,6 +1306,90 @@ export default {
   
   &:nth-child(odd) {
     animation-delay: 0.5s;
+  }
+}
+
+/* 480px Responsive Key Widths */
+@media (max-width: 480px) {
+  .function-row .key {
+    width: 7px;
+  }
+  
+  .number-row .key {
+    width: 7px;
+  }
+  
+  .backspace {
+    width: 12px !important;
+    font-size: 3px !important;
+  }
+  
+  .qwerty-row .key {
+    width: 7px;
+  }
+  
+  .tab {
+    width: 10px !important;
+    font-size: 2px !important;
+  }
+  
+  .backslash {
+    width: 9px !important;
+  }
+  
+  .asdf-row .key {
+    width: 7px;
+  }
+  
+  .caps {
+    width: 12px !important;
+    font-size: 2px !important;
+  }
+  
+  .enter {
+    width: 14px !important;
+    font-size: 3px !important;
+  }
+  
+  .zxcv-row .key {
+    width: 7px;
+  }
+  
+  .shift-left {
+    width: 15px !important;
+    font-size: 2px !important;
+  }
+  
+  .shift-right {
+    width: 17px !important;
+    font-size: 2px !important;
+  }
+  
+  .bottom-row .key {
+    width: 7px;
+  }
+  
+  .fn, .ctrl, .alt {
+    width: 8px !important;
+    font-size: 2px !important;
+  }
+  
+  .cmd {
+    width: 9px !important;
+    font-size: 3px !important;
+  }
+  
+  .spacebar {
+    width: 35px !important;
+  }
+  
+  .arrow {
+    width: 5px !important;
+    font-size: 2px !important;
+    
+    &.wide {
+      width: 15px;
+    }
   }
 }
 
