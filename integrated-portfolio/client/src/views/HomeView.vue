@@ -56,19 +56,12 @@
                   <!-- Left Speaker Grille -->
                   <div class="speaker-grille left-speaker">
                     <div class="speaker-holes">
-                      <!-- 60 holes total (5 columns × 12 rows) -->
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <!-- 60 holes total (12 columns × 5 rows) -->
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
                     </div>
                   </div>
                   
@@ -180,19 +173,12 @@
                   <!-- Right Speaker Grille -->
                   <div class="speaker-grille right-speaker">
                     <div class="speaker-holes">
-                      <!-- 60 holes total (5 columns × 12 rows) -->
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
-                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <!-- 60 holes total (12 columns × 5 rows) -->
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
+                      <div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div><div class="speaker-hole"></div>
                     </div>
                   </div>
                 </div>
@@ -1117,8 +1103,8 @@ export default {
   align-self: flex-start;
   
   @media (max-width: 480px) {
-    width: 22px;
-    height: 16px;
+    width: 27px;
+    height: 18px;
     border-radius: 2px;
   }
 }
@@ -1132,11 +1118,11 @@ export default {
   height: 20px;
   
   @media (max-width: 480px) {
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 0.5px;
-    width: 18px;
-    height: 10px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.6px;
+    width: 23px;
+    height: 12px;
   }
 }
 
@@ -1146,6 +1132,12 @@ export default {
   background: #333;
   border-radius: 50%;
   box-shadow: inset 0 0.2px 0.5px rgba(0,0,0,0.4);
+  
+  @media (max-width: 480px) {
+    &:nth-child(n+41) {
+      display: none;
+    }
+  }
 }
 
 .left-speaker {
@@ -1153,7 +1145,7 @@ export default {
 }
 
 .right-speaker {
-  margin: 0 0 0 -2px;
+  margin: 0 2px 0 0;
 }
 
 .keyboard-row {
@@ -1309,89 +1301,7 @@ export default {
   }
 }
 
-/* 480px Responsive Key Widths */
-@media (max-width: 480px) {
-  .function-row .key {
-    width: 7px;
-  }
-  
-  .number-row .key {
-    width: 7px;
-  }
-  
-  .backspace {
-    width: 12px !important;
-    font-size: 3px !important;
-  }
-  
-  .qwerty-row .key {
-    width: 7px;
-  }
-  
-  .tab {
-    width: 10px !important;
-    font-size: 2px !important;
-  }
-  
-  .backslash {
-    width: 9px !important;
-  }
-  
-  .asdf-row .key {
-    width: 7px;
-  }
-  
-  .caps {
-    width: 12px !important;
-    font-size: 2px !important;
-  }
-  
-  .enter {
-    width: 14px !important;
-    font-size: 3px !important;
-  }
-  
-  .zxcv-row .key {
-    width: 7px;
-  }
-  
-  .shift-left {
-    width: 15px !important;
-    font-size: 2px !important;
-  }
-  
-  .shift-right {
-    width: 17px !important;
-    font-size: 2px !important;
-  }
-  
-  .bottom-row .key {
-    width: 7px;
-  }
-  
-  .fn, .ctrl, .alt {
-    width: 8px !important;
-    font-size: 2px !important;
-  }
-  
-  .cmd {
-    width: 9px !important;
-    font-size: 3px !important;
-  }
-  
-  .spacebar {
-    width: 35px !important;
-  }
-  
-  .arrow {
-    width: 5px !important;
-    font-size: 2px !important;
-    
-    &.wide {
-      width: 15px;
-    }
-  }
-}
+
 
 .floating-elements {
   position: absolute;
