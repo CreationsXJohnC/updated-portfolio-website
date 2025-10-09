@@ -16,6 +16,9 @@ export const typeDefs = gql`
     featured: Boolean!
     order: Int!
     status: ProjectStatus!
+    year: Int
+    type: String
+    features: [String!]
     createdAt: Date!
     updatedAt: Date!
   }

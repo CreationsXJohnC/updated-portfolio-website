@@ -1,5 +1,6 @@
 <template>
   <div class="project-detail-view">
+
     <LoadingOverlay v-if="loading" />
     
     <div v-else-if="error" class="error-state">
@@ -15,18 +16,21 @@
     </div>
 
     <div v-else-if="project" class="project-content">
+      
       <!-- Hero Section -->
       <section class="project-hero">
-        <div class="hero-container">
+        <div class="hero-container single">
           <div class="hero-content">
+            <!-- Move heading here for alignment and readability -->
+            <div class="section-title top">
+              <h2>Project Overview</h2>
+            </div>
+
             <div class="project-meta">
               <router-link to="/projects" class="back-link hover-target">
                 <i class="fas fa-arrow-left"></i>
                 Back to Projects
               </router-link>
-              <div class="project-category">
-                <span class="category-tag">{{ project.category }}</span>
-              </div>
             </div>
             
             <h1 class="project-title">{{ project.title }}</h1>
@@ -54,85 +58,38 @@
                 View Code
               </a>
             </div>
-          </div>
-          
-          <div class="hero-image">
-            <div class="image-container">
-              <img 
-                :src="project.imageUrl" 
-                :alt="project.title"
-                class="project-image"
-              />
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <i class="fas fa-search-plus"></i>
-                  <span>View Full Size</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- Project Details Section -->
-      <section class="project-details">
-        <div class="details-container">
-          <div class="details-grid">
-            <!-- Project Information -->
-            <div class="project-info">
-              <h2 class="section-title">Project Overview</h2>
-              <div class="info-content">
-                <p class="project-long-description">
-                  {{ project.longDescription || project.description }}
-                </p>
-                
-                <div class="project-stats">
-                  <div class="stat-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <div class="stat-content">
-                      <span class="stat-label">Completed</span>
-                      <span class="stat-value">{{ formatDate(project.completedAt) }}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="stat-item">
-                    <i class="fas fa-clock"></i>
-                    <div class="stat-content">
-                      <span class="stat-label">Duration</span>
-                      <span class="stat-value">{{ project.duration || 'N/A' }}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="stat-item">
-                    <i class="fas fa-user"></i>
-                    <div class="stat-content">
-                      <span class="stat-label">Role</span>
-                      <span class="stat-value">{{ project.role || 'Full Stack Developer' }}</span>
-                    </div>
-                  </div>
+            <!-- Exact Project Card as on Projects page -->
+            <div 
+              class="project-card hover-large"
+              :style="{ backgroundImage: `url('${encodeURI(project.imageUrl)}')` }"
+            >
+              <div class="project-content">
+                <div class="project-actions">
+                  <a 
+                    v-if="project.liveUrl" 
+                    :href="project.liveUrl" 
+                    target="_blank"
+                    class="project-action hover-target"
+                    @click.stop
+                  >
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                  <a 
+                    v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                    :href="project.githubUrl" 
+                    target="_blank"
+                    class="project-action hover-target"
+                    @click.stop
+                  >
+                    <i class="fab fa-github"></i>
+                  </a>
                 </div>
-
-                <div v-if="project.challenges" class="project-section">
-                  <h3 class="subsection-title">Challenges & Solutions</h3>
-                  <p class="section-text">{{ project.challenges }}</p>
-                </div>
-
-                <div v-if="project.learnings" class="project-section">
-                  <h3 class="subsection-title">Key Learnings</h3>
-                  <p class="section-text">{{ project.learnings }}</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Technical Details -->
-            <div class="technical-details">
-              <h2 class="section-title">Technical Details</h2>
-              
-              <div class="tech-section">
-                <h3 class="tech-title">Technologies Used</h3>
-                <div class="tech-tags">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <p class="project-description">{{ project.description }}</p>
+                <div class="project-tech">
                   <span 
-                    v-for="tech in project.technologies" 
+                    v-for="tech in project.technologies.slice(0, 3)" 
                     :key="tech"
                     class="tech-tag"
                   >
@@ -140,95 +97,28 @@
                   </span>
                 </div>
               </div>
-
-              <div v-if="project.features" class="tech-section">
-                <h3 class="tech-title">Key Features</h3>
-                <ul class="features-list">
-                  <li 
-                    v-for="feature in project.features" 
-                    :key="feature"
-                    class="feature-item"
-                  >
-                    <i class="fas fa-check"></i>
-                    {{ feature }}
-                  </li>
-                </ul>
-              </div>
-
-              <div class="tech-section">
-                <h3 class="tech-title">Project Links</h3>
-                <div class="project-links">
-                  <a 
-                    v-if="project.liveUrl" 
-                    :href="project.liveUrl" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="project-link hover-target"
-                  >
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>Live Demo</span>
-                  </a>
-                  <a 
-                    v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
-                    :href="project.githubUrl" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="project-link hover-target"
-                  >
-                    <i class="fab fa-github"></i>
-                    <span>Source Code</span>
-                  </a>
-                  <a 
-                    v-if="project.designUrl" 
-                    :href="project.designUrl" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="project-link hover-target"
-                  >
-                    <i class="fas fa-paint-brush"></i>
-                    <span>Design Files</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+
+        <!-- Hero Image / Preview Column removed per request -->
       </section>
 
-      <!-- Related Projects Section -->
-      <section v-if="relatedProjects.length > 0" class="related-projects">
-        <div class="related-container">
-          <h2 class="section-title">Related Projects</h2>
-          <div class="related-grid">
-            <div 
-              v-for="relatedProject in relatedProjects" 
-              :key="relatedProject.id"
-              class="related-card hover-target"
-              @click="$router.push(`/projects/${relatedProject.id}`)"
-            >
-              <div class="related-image">
-                <img 
-                  :src="relatedProject.imageUrl" 
-                  :alt="relatedProject.title"
-                />
-              </div>
-              <div class="related-content">
-                <h3 class="related-title">{{ relatedProject.title }}</h3>
-                <p class="related-description">{{ relatedProject.description }}</p>
-                <div class="related-tech">
-                  <span 
-                    v-for="tech in relatedProject.technologies.slice(0, 3)" 
-                    :key="tech"
-                    class="tech-tag small"
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
-            </div>
+      <!-- Project Information Section (commented out per earlier request) -->
+      <!--
+      <section class="project-details">
+        <div class="details-container">
+          <div class="section-title">
+            <h2>Project Overview</h2>
           </div>
         </div>
       </section>
+      -->
+
+      <!-- Project Preview Section removed per request -->
+
+      <!-- Related Projects Section removed per request -->
+
     </div>
   </div>
 </template>
@@ -246,35 +136,18 @@ const GET_PROJECT_DETAIL = gql`
       id
       title
       description
-      longDescription
       imageUrl
       liveUrl
       githubUrl
-      designUrl
       category
-      technologies
+      year
+      status
+      type
       features
-      challenges
-      learnings
-      role
-      duration
-      completedAt
       featured
       createdAt
       updatedAt
-    }
-  }
-`
-
-const GET_RELATED_PROJECTS = gql`
-  query GetRelatedProjects($category: String!, $excludeId: ID!) {
-    projects(filter: { category: $category, excludeId: $excludeId, limit: 3 }) {
-      id
-      title
-      description
-      imageUrl
       technologies
-      category
     }
   }
 `
@@ -297,20 +170,6 @@ export default {
 
     const project = computed(() => projectResult.value?.project)
 
-    // Get related projects
-    const { result: relatedResult } = useQuery(
-      GET_RELATED_PROJECTS,
-      () => ({
-        category: project.value?.category,
-        excludeId: projectId.value
-      }),
-      () => ({ 
-        enabled: !!project.value?.category && !!projectId.value 
-      })
-    )
-
-    const relatedProjects = computed(() => relatedResult.value?.projects || [])
-
     const formatDate = (dateString) => {
       if (!dateString) return 'N/A'
       const date = new Date(dateString)
@@ -323,7 +182,6 @@ export default {
 
     return {
       project,
-      relatedProjects,
       loading,
       error,
       formatDate
@@ -335,9 +193,14 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/mixins.scss";
 
+.section-title.top {
+  margin-bottom: 1rem;
+}
+
 .project-detail-view {
   padding-top: 80px; // Account for fixed navigation
 }
+
 
 .error-state {
   @include flex-center;
@@ -379,7 +242,7 @@ export default {
 }
 
 .project-hero {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background: #000000;
   padding: 4rem 0;
 }
 
@@ -398,127 +261,89 @@ export default {
   }
 }
 
-.project-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.back-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: var(--accent-primary);
-  }
-}
-
-.category-tag {
-  background: rgba(var(--accent-primary-rgb), 0.1);
-  color: var(--accent-primary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.project-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  @include text-gradient;
-
-  @include mobile {
-    font-size: 2rem;
-  }
-}
-
-.project-description {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.project-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-
-  &.primary {
-    @include button-primary;
-  }
-
-  &.secondary {
-    @include button-secondary;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
+/* Hero image uses the same effect as project cards */
 .hero-image {
-  .image-container {
-    position: relative;
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
+  .hero-card {
+    @include card;
     cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: var(--border-radius);
+    overflow: hidden;
 
-    &:hover .image-overlay {
-      opacity: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: 110%;
+      background-position: center;
+      background-image: inherit;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      
+      &::before {
+        background-size: 340%;
+        background-position: top left;
+      }
+
+      .image-actions {
+        opacity: 1;
+      }
     }
   }
 
-  .project-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    @include flex-center;
-    flex-direction: column;
+  .image-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem;
     opacity: 0;
     transition: opacity 0.3s ease;
+    position: relative;
+    z-index: 10;
+  }
+
+  .project-action {
+    @include flex-center;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-primary);
     color: white;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
 
-    .overlay-content {
-      text-align: center;
-
-      i {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-      }
-
-      span {
-        font-weight: 500;
-      }
+    &:hover {
+      background: var(--accent-secondary);
+      transform: scale(1.1);
     }
+    
+    .fab.fa-github {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .image-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+    z-index: 2;
   }
 }
 
@@ -700,7 +525,7 @@ export default {
 }
 
 .related-projects {
-  background: var(--bg-secondary);
+  background: #000000;
   padding: 6rem 0;
 }
 
@@ -769,5 +594,137 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+/* Single-column hero layout when no screenshot column */
+.hero-container.single {
+  grid-template-columns: 1fr;
+}
+
+.project-preview {
+  padding: 0 0 4rem;
+  background: #000000;
+}
+
+.preview-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.project-card {
+  @include card;
+  position: relative;
+  height: 600px; /* Match ProjectsView card height */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 110%;
+    background-position: center;
+    background-image: inherit;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    
+    &::before {
+      background-size: 340%;
+      background-position: top left;
+    }
+  }
+}
+
+.project-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: relative;
+  z-index: 10;
+  
+  .project-card:hover & {
+    opacity: 1;
+  }
+}
+
+.project-action {
+  @include flex-center;
+  width: 50px;
+  height: 50px;
+  background: var(--accent-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--accent-secondary);
+    transform: scale(1.1);
+  }
+  
+  .fab.fa-github {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.project-card .project-content {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   padding: 2rem;
+   background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+   color: white;
+   z-index: 2;
+ }
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.project-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.project-tech {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tech-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.tech-more {
+  color: #999999;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 </style>

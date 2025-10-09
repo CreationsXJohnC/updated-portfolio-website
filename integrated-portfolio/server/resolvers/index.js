@@ -265,7 +265,27 @@ export const resolvers = {
 
   // Field resolvers for enum transformations
   Project: {
-    status: (project) => project.status.toUpperCase()
+    status: (project) => project.status.toUpperCase(),
+    year: (project) => {
+      if (typeof project.year === 'number') return project.year;
+      const dateSource = project.createdAt || project.updatedAt;
+      if (!dateSource) return null;
+      const d = new Date(dateSource);
+      return isNaN(d.getTime()) ? null : d.getFullYear();
+    },
+    type: (project) => {
+      if (project.type) return project.type;
+      const cat = project.category || '';
+      const formatted = String(cat)
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      return formatted || null;
+    },
+    features: (project) => {
+      if (Array.isArray(project.features)) return project.features;
+      const techs = project.technologies || [];
+      return Array.isArray(techs) ? techs.map((t) => String(t)) : [];
+    }
   },
 
   Skill: {
