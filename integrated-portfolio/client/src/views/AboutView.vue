@@ -49,7 +49,7 @@
                 <i class="fas fa-arrow-right"></i>
               </router-link>
               <a 
-                  href="/John_Che_Larracuente-Updated_Resume-2025.pdf" 
+                  href="/John_Che_Larracuente-Hybrid_Resume-2025.pdf" 
                   target="_blank" 
                   class="btn btn-outline hover-target"
                 >

@@ -490,10 +490,6 @@ export default {
   font-size: 0.9rem;
   user-select: none;
   pointer-events: none; // ensure clicks go to the logo
-
-  @media (max-width: 770px) {
-    display: none;
-  }
 }
 
 .hint-arrow {

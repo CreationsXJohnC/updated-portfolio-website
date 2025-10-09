@@ -88,7 +88,7 @@ async function startServer() {
   const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
       ? [CORS_ORIGIN] 
-      : [FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'],
+      : [FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:4173'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']

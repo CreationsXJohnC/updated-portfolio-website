@@ -147,34 +147,42 @@ export default {
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 2rem 2rem;
+  padding: 1rem 1.5rem 0.5rem;
 
   @include mobile {
-    padding: 3rem 1rem 2rem;
+    padding: 1rem 1rem 0.5rem;
   }
 }
 
 .footer-main {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
-  margin-bottom: 3rem;
+  flex-direction: row;
+  margin-bottom: 1rem;
   text-align: center;
+  padding-top: 3rem;
+  gap: 16rem;
 
   @include tablet {
-    gap: 2rem;
+    gap: 4rem;
   }
 
   @include mobile {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
     text-align: center;
+    padding-top: 1rem;
   }
 }
 
 .footer-brand {
   text-align: center;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -244,7 +252,7 @@ export default {
 .footer-section-title {
   font-size: 2rem;
   font-weight: 700;
-  margin-top: -15px;
+  margin-top: 0;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
   text-align: center;
@@ -254,10 +262,12 @@ export default {
 .footer-social {
   text-align: center;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15px;
+  margin-top: 0;
 
   @include mobile {
     margin-left: 0;
@@ -321,7 +331,7 @@ export default {
 }
 
 .footer-bottom {
-  padding-top: 2rem;
+  padding-top: 0.25rem;
 }
 
 .footer-bottom-content {
@@ -329,10 +339,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   @include mobile {
-    gap: 1.5rem;
+    gap: 0.75rem;
     text-align: center;
     padding: 0 1rem;
   }
@@ -341,10 +351,10 @@ export default {
 .footer-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
 
   @include mobile {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.125rem;
   }
 }
 
@@ -364,13 +374,13 @@ export default {
 // Extremely specific selectors to override any external CSS
 .footer-bottom .footer-logo .footer-logo-link .footer-logo-img,
 .footer-logo-img {
-  height: 100px !important;
+  height: 64px !important;
   width: auto !important;
-  max-height: 100px !important;
-  min-height: 100px !important;
+  max-height: 64px !important;
+  min-height: 64px !important;
   max-width: none !important;
   min-width: auto !important;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
@@ -389,18 +399,18 @@ export default {
     transform: none !important;
     scale: none !important;
     zoom: 1 !important;
-    height: 100px !important;
+    height: 64px !important;
     width: auto !important;
-    max-height: 100px !important;
-    min-height: 100px !important;
+    max-height: 64px !important;
+    min-height: 64px !important;
   }
 
   @include mobile {
-    height: 80px !important;
+    height: 56px !important;
     width: auto !important;
-    max-height: 80px !important;
-    min-height: 80px !important;
-    padding-bottom: 0.375rem;
+    max-height: 56px !important;
+    min-height: 56px !important;
+    padding-bottom: 0.2rem;
 
     &:hover,
     &:focus,
@@ -409,10 +419,10 @@ export default {
       transform: none !important;
       scale: none !important;
       zoom: 1 !important;
-      height: 80px !important;
+      height: 56px !important;
       width: auto !important;
-      max-height: 80px !important;
-      min-height: 80px !important;
+      max-height: 56px !important;
+      min-height: 56px !important;
     }
   }
 }
@@ -439,8 +449,8 @@ export default {
 
 .brand-new-logo-element {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 64px;
+  height: 64px;
   transform: scale(var(--logo-scale, 1));
   opacity: var(--logo-opacity, 1);
   transition: transform 0.2s ease, opacity 0.2s ease;
