@@ -34,7 +34,7 @@
             </div>
             
             <h1 class="project-title">{{ project.title }}</h1>
-            <p class="project-description">{{ project.description }}</p>
+            <p class="project-description">{{ heroDescription }}</p>
             
             <div class="project-actions">
               <a 
@@ -170,6 +170,28 @@ export default {
 
     const project = computed(() => projectResult.value?.project)
 
+    const heroDescription = computed(() => {
+      const id = project.value?.id
+      const title = project.value?.title
+
+      const overridesByTitle = {
+        'Skinstric AI': 'I worked on a React interface that made complex AI skin analysis feel simple and approachable. JavaScript, HTML, and CSS carried the UI, while Webpack and Babel kept builds quick and the codebase modern. I wrote maintainable tests in Jest and enforced clean standards with ESLint for long-term reliability. My focus was translating real-time signals into clear visuals so users could understand results at a glance. I collaborated closely with designers to balance accuracy with a calm, focused layout. Performance tuning helped the app stay responsive even during heavy processing. The end result was a confident, friendly experience for a health-tech audience.',
+        'Netflix Clone': 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.',
+        'Ultraverse NFT World': 'I helped build a marketplace where creators and collectors meet through a clear, lively interface. React and JavaScript formed the core, while dynamic routing created a smooth path through collections and item detail views. I integrated external APIs to surface listings and metadata in real time. Carousels and subtle animations added delight without slowing the page. Jest tests kept key flows safe, and Git workflows (branching, merging, pull requests) made collaboration smooth. Webpack and Babel ensured the bundle stayed modern and efficient. The outcome was a usable, visually engaging marketplace that respected both speed and storytelling.',
+        'Summarist Audio Library': 'I developed an audio-first web app that lets users explore and purchase book summaries with confidence. Next.js and TypeScript power a responsive, maintainable frontend, styled with Tailwind CSS/PostCSS for speed and consistency. On the backend, Node.js API routes run on Vercel, while Firebase supports client-side data needs. Stripe handles secure payments so the checkout feels seamless and trustworthy. I focused on clear information design so users can scan, sample, and decide quickly. React components keep the experience cohesive and easy to extend. Together, these choices deliver a fast, modern product that feels polished from homepage to receipt.',
+        'Movie Entertainment': 'I built a searchable movie library that turns curiosity into quick discovery. React with JavaScript/HTML/CSS powers a responsive interface that feels natural across desktop and mobile. The OMDB API supplies rich data, while my frontend-backend connections keep results flowing effortlessly. Webpack and Babel support an efficient dev cycle and a lean production build. Jest tests gave me confidence to refactor and add features without regressions. I designed the UI to minimize friction—clear inputs, thoughtful empty states, and readable detail pages. It’s a practical showcase of API integration, performance, and user-first design.',
+        'E-Commerce Book Library': 'I created an online bookstore experience that emphasizes speed, clarity, and trust. Built with React and JavaScript/HTML/CSS, the app uses dynamic routing to keep navigation fluid and predictable. API integration pulls fresh catalog data while caching and request patterns keep things responsive. Skeleton loading states reduce perceived wait time and set expectations during fetches. Jest testing helps ensure carts, filters, and checkout flows remain stable as features grow. Webpack and Babel provide a modern toolchain for fast builds and clean code. The result is a friendly, high-performing shopping journey from browse to buy.',
+        'Ori Company': 'Ori Company was founded in Washington, DC as a licensed medical cannabis cultivation and retail operation. Leadership focused on building digital platforms and ecommerce integrations that made discovery and purchasing simple. Compliance systems and customer engagement tools were implemented, increasing operational efficiency by thirty percent while maintaining regulatory alignment. A corporate website and online store were built and maintained to expand patient access. Improvements to navigation, content, and promotions drove a twenty percent lift in online sales. Investor pitch decks and presentations were developed to support an ongoing raise of five to ten million dollars. Stakeholder relationships were cultivated to advance growth and protect brand integrity. The company was positioned to serve more than seven million annual visitors and seven hundred thousand residents in the District. A clear vision for a vertically integrated model targets more than eighty million dollars in annual revenue. The mission centers on quality, community impact, and sustainable growth.',
+        'Creations X Platform': 'Creations X was launched to deliver creative media for clients across the United States and the Caribbean. The studio produces photography, videography, drone footage, live streaming, and digital campaigns. More than one hundred projects have been completed for brands and influencers throughout the DMV region. Client visibility on web and social channels grew through clear strategy and consistent execution. Data informed content plans improved reach and engagement by forty percent. End to end planning, production, and delivery kept creative work aligned with goals, budgets, and timelines. Adobe Creative Suite and Figma supported strong storytelling and polished visual design. Modern web experiences were built by integrating React, Tailwind, Node.js, and Firebase. Collaboration translated ideas into compelling assets that convert and endure. The approach balances empathy, craft, and accountability to build lasting partnerships.'
+      }
+
+      const overridesById = {
+        '8': 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.'
+      }
+
+      return overridesByTitle[title] ?? overridesById[id] ?? project.value?.description ?? ''
+    })
+
     const formatDate = (dateString) => {
       if (!dateString) return 'N/A'
       const date = new Date(dateString)
@@ -184,7 +206,8 @@ export default {
       project,
       loading,
       error,
-      formatDate
+      formatDate,
+      heroDescription
     }
   }
 }
@@ -243,7 +266,13 @@ export default {
 
 .project-hero {
   background: #000000;
-  padding: 4rem 0;
+  padding: 4rem 0 8rem;
+}
+
+/* Increase hero title size and add spacing from Back to Projects */
+.project-hero .project-title {
+  font-size: 2rem;
+  margin-top: 1rem;
 }
 
 .hero-container {
@@ -705,6 +734,17 @@ export default {
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
   line-height: 1.5;
+}
+
+/* Back to Projects link hover behavior in hero */
+.project-meta .back-link {
+  color: #999999; /* default gray */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-meta .back-link:hover {
+  color: #ffffff; /* white on hover */
 }
 
 .project-tech {
