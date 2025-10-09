@@ -2,9 +2,15 @@
   <nav class="app-navigation" :class="{ 'is-scrolled': isScrolled, 'menu-open': isMenuOpen }">
     <div class="nav-container">
       <!-- Logo/Brand -->
-      <a href="https://johnccreations.com/creationsx" target="_blank" rel="noopener noreferrer" class="nav-brand">
-        <img src="/src/assets/images/logos/Creation X Logo Updated.svg" alt="David Bragg Portfolio" class="brand-logo" />
-      </a>
+      <div class="brand-group">
+        <a href="https://johnccreations.com/creationsx" target="_blank" rel="noopener noreferrer" class="nav-brand">
+          <img src="/src/assets/images/logos/Creation X Logo Updated.svg" alt="David Bragg Portfolio" class="brand-logo" />
+        </a>
+        <div class="logo-hint" aria-hidden="false">
+          <span class="hint-arrow" aria-hidden="true"></span>
+          <span class="hint-text">Click Me</span>
+        </div>
+      </div>
 
       <!-- Desktop Navigation -->
       <ul class="nav-menu desktop-menu">
@@ -467,5 +473,45 @@ export default {
       }
     }
   }
+}
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; // a little bit more spacing between logo and hint
+}
+
+.logo-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px; // increase spacing between arrow and text only
+  margin-left: 0; // flush next to the logo; spacing controlled by brand-group
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  user-select: none;
+  pointer-events: none; // ensure clicks go to the logo
+
+  @media (max-width: 770px) {
+    display: none;
+  }
+}
+
+.hint-arrow {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 10px solid #000000; // arrow pointing toward the logo on the left
+  animation: nudge 1.8s ease-in-out infinite;
+}
+
+.hint-text {
+  text-transform: none; // ensure exact casing "Click Me"
+  letter-spacing: 0.5px;
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
 }
 </style>

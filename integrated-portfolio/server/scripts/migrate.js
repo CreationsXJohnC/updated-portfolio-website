@@ -137,6 +137,18 @@ const seedData = {
       category: 'blockchain'
     },
     {
+      title: 'Summarist Audio Library',
+      description: 'A full-stack audio library featuring Next.js, TypeScript, React, and TailwindCSS for responsive, fast-loading perfromance. Listen to a variety of titles that will grab your attention & capture your imagination.',
+      technologies: ['Next.js', 'TailwindCSS', 'Node.js'],
+      githubUrl: null,
+      liveUrl: null,
+      imageUrl: '/projects/Summarist - website screenshot.png',
+      featured: false,
+      order: 4,
+      status: 'published',
+      category: 'web-app'
+    },
+    {
       title: 'Movie Entertainment',
       description: 'A dynamic movie discovery platform with advanced filtering, ratings, and personalized recommendations. Features a sleek interface for browsing and discovering new films.',
       shortDescription: 'Movie discovery and entertainment platform',
@@ -145,7 +157,7 @@ const seedData = {
       liveUrl: 'https://movie-entertainment-online-library.vercel.app/',
       imageUrl: '/projects/Movie Entertainment - website screenshot.png',
       featured: false,
-      order: 4,
+      order: 5,
       status: 'published',
       category: 'entertainment'
     },
@@ -158,7 +170,7 @@ const seedData = {
       liveUrl: 'https://e-commerce-book-library.vercel.app/',
       imageUrl: '/projects/E-Commerce Book Library - website screenshot.png',
       featured: false,
-      order: 5,
+      order: 6,
       status: 'published',
       category: 'e-commerce'
     },
@@ -171,7 +183,7 @@ const seedData = {
       liveUrl: 'https://oricompanydc.com/',
       imageUrl: '/projects/Ori Company - website screenshot.png',
       featured: false,
-      order: 6,
+      order: 7,
       status: 'published',
       category: 'corporate'
     },
@@ -184,7 +196,7 @@ const seedData = {
       liveUrl: 'https://www.johnccreations.com/creationsx',
       imageUrl: '/projects/Creations X Platform - website screenshot.png',
       featured: false,
-      order: 7,
+      order: 8,
       status: 'published',
       category: 'platform'
     }

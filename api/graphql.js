@@ -75,6 +75,19 @@ module.exports = function(req, res) {
             category: "blockchain"
           },
           {
+            id: "8",
+            title: "Summarist Audio Library",
+            description: "A full-stack audio library featuring Next.js, TypeScript, React, and TailwindCSS for responsive, fast-loading perfromance. Listen to a variety of titles that will grab your attention & capture your imagination.",
+            technologies: ["Next.js", "TailwindCSS", "Node.js"],
+            imageUrl: "/projects/Summarist - website screenshot.png",
+            liveUrl: null,
+            githubUrl: null,
+            featured: false,
+            order: 4,
+            status: "published",
+            category: "web-app"
+          },
+          {
             id: "4",
             title: "Movie Entertainment",
             description: "A dynamic movie discovery platform with advanced filtering, ratings, and personalized recommendations. Features a sleek interface for browsing and discovering new films.",
@@ -84,7 +97,7 @@ module.exports = function(req, res) {
             liveUrl: "https://movie-entertainment-online-library.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/movie-entertainment-online-library",
             featured: false,
-            order: 4,
+            order: 5,
             status: "published",
             category: "entertainment"
           },
@@ -98,7 +111,7 @@ module.exports = function(req, res) {
             liveUrl: "https://e-commerce-book-library.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/e-commerce-book-library",
             featured: false,
-            order: 5,
+            order: 6,
             status: "published",
             category: "e-commerce"
           },
@@ -112,7 +125,7 @@ module.exports = function(req, res) {
             liveUrl: "https://oricompanydc.com/",
             githubUrl: null,
             featured: false,
-            order: 6,
+            order: 7,
             status: "published",
             category: "corporate"
           },
@@ -126,7 +139,7 @@ module.exports = function(req, res) {
             liveUrl: "https://www.johnccreations.com/creationsx",
             githubUrl: null,
             featured: false,
-            order: 7,
+            order: 8,
             status: "published",
             category: "platform"
           }
