@@ -48,14 +48,14 @@
                 Get In Touch
                 <i class="fas fa-arrow-right"></i>
               </router-link>
-              <a 
-                  href="/John_Che_Larracuente-Hybrid_Resume-2025.pdf" 
-                  target="_blank" 
+              <a
+                  href="/John_Che_Larracuente-TechResume.pdf"
+                  target="_blank"
                   class="btn btn-outline hover-target"
-                >
+              >
                   Download Resume
                   <i class="fas fa-download"></i>
-                </a>
+              </a>
             </div>
           </div>
         </div>
