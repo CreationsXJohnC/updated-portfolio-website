@@ -151,7 +151,7 @@ export const mockProfile = {
   phone: null,
   location: "Remote",
   avatarUrl: "/DSCF8979.jpg",
-  resumeUrl: "/John_Che_Larracuente-Hybrid_Resume-2025.pdf",
+  resumeUrl: "/John_Che_Larracuente-TechResume.pdf",
   socialLinks: {
     github: "https://github.com/CreationsXJohnC",
     linkedin: "https://linkedin.com/in/john-che-larracuente"
