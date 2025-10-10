@@ -31,17 +31,6 @@ const authLink = setContext((_, { headers }) => {
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_URI || 'http://localhost:4000/graphql',
   credentials: 'include',
-  // Enable batching for better performance
-  fetch: (uri, options) => {
-    return fetch(uri, {
-      ...options,
-      // Add compression support
-      headers: {
-        ...options.headers,
-        'Accept-Encoding': 'gzip, deflate, br',
-      },
-    })
-  },
 })
 
 // Optimized cache implementation
