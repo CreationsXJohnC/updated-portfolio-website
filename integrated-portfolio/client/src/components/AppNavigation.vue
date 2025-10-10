@@ -213,6 +213,8 @@ export default {
   gap: 2rem;
   padding-top: 1rem;
   margin-top: 0.5rem;
+  list-style: none; /* remove bullets */
+  padding-left: 0; /* ensure no left indentation */
 
   @media (max-width: 770px) {
     display: none;
