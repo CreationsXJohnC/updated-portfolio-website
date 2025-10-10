@@ -257,6 +257,49 @@ module.exports = function(req, res) {
           
           contactReq.write(contactData);
           contactReq.end();
+        } else if (query && query.indexOf('project') !== -1 && query.indexOf('projects') === -1) {
+          // Handle single project detail query: project(id: "<ID>")
+          var variables = data.variables || {};
+          var id = variables.id || null;
+
+          if (!id) {
+            // Try to parse inline id from the query string
+            var inlineMatch = query.match(/project\s*\(\s*id:\s*\"?([A-Za-z0-9_-]+)\"?\s*\)/);
+            if (inlineMatch && inlineMatch[1] && inlineMatch[1].charAt(0) !== '$') {
+              id = inlineMatch[1];
+            }
+          }
+
+          var found = null;
+          if (id) {
+            found = mockProjects.find(function(p) { return String(p.id) === String(id); });
+          }
+
+          if (found) {
+            // Ensure optional fields exist for client expectations
+            var enriched = Object.assign({}, found);
+            if (!('year' in enriched)) enriched.year = null;
+            if (!('type' in enriched)) enriched.type = null;
+            if (!('features' in enriched)) enriched.features = null;
+            if (!('createdAt' in enriched)) enriched.createdAt = null;
+            if (!('updatedAt' in enriched)) enriched.updatedAt = null;
+            if (!('technologies' in enriched)) enriched.technologies = [];
+
+            res.status(200);
+            res.end(JSON.stringify({
+              data: {
+                project: enriched
+              }
+            }));
+          } else {
+            // Return null project if not found
+            res.status(200);
+            res.end(JSON.stringify({
+              data: {
+                project: null
+              }
+            }));
+          }
         } else if (query && query.indexOf('projects') !== -1) {
           var projects = mockProjects;
           
