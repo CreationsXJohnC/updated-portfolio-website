@@ -6,8 +6,11 @@ module.exports = function(req, res) {
     'http://localhost:5174',
     'http://localhost:4173',
     'http://localhost:3000',
-    'https://www.johnccreations.design'
+    'https://www.johnccreations.design',
+    'https://johnccreations.design',
+    'https://updated-portfolio-website.vercel.app'
   ];
+  res.setHeader('Vary', 'Origin');
   if (origin && allowedOrigins.indexOf(origin) !== -1) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -15,19 +18,19 @@ module.exports = function(req, res) {
     // Fallback for non-browser or non-listed origins
     res.setHeader('Access-Control-Allow-Origin', '*');
   }
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
   res.setHeader('Content-Type', 'application/json');
 
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    res.status(200);
+    res.status(204);
     res.end();
     return;
   }
 
-  // Only allow POST requests
-  if (req.method !== 'POST') {
+  // Only allow POST and GET requests
+  if (req.method !== 'POST' && req.method !== 'GET') {
     res.status(405);
     res.end(JSON.stringify({ error: 'Method not allowed' }));
     return;
@@ -41,7 +44,7 @@ module.exports = function(req, res) {
     
     req.on('end', function() {
       try {
-        var data = JSON.parse(body);
+        var data = body ? JSON.parse(body) : {};
         var query = data.query;
         
         // Mock data - Complete project list from migration
