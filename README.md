@@ -250,6 +250,38 @@ npm run test:all
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🛠 Production Updates Workflow
+
+To quickly add or reorder projects on the live site without changing any UI code, use the JSON-driven setup under `api/`.
+
+- Source of truth: `api/projects-config.json`
+- Serverless GraphQL: `api/graphql.js` loads this JSON and serves projects to the client
+- Deploy target: Vercel rewrites `/graphql` to `/api/graphql` per `vercel.json`
+
+### Add or Update a Project
+- Edit `api/projects-config.json` and add/update a project object with:
+  - `title`, `shortDescription`, `description`, `technologies`, `imageUrl`, `liveUrl`, `githubUrl`
+  - `featured` (`true` for Home Featured), `order` (integer display order), `status` (`published`), `category`
+- Place the screenshot in `integrated-portfolio/client/public/projects` and reference it via `imageUrl` like `/projects/<filename>.png`.
+- Keep `order` values unique and sequential (1 is highest priority).
+
+### Reorder and Feature
+- To change Home Featured order, adjust `order` and set `featured: true` for projects you want featured.
+- To unfeature, set `featured: false` (they remain visible on the Projects page).
+
+### Verify Locally
+- Development client: `cd integrated-portfolio/client && npm run dev` (or `./node_modules/.bin/vite`).
+- Local GraphQL server for integrated stack: `cd integrated-portfolio/server && node index.js` (optional). The dev client is configured to use `http://localhost:4000/graphql`.
+- For production behavior, the client will use `/graphql` which Vercel proxies to `api/graphql.js`.
+
+### Deploy
+- Commit and push changes to GitHub (`master`). Vercel will build and deploy automatically.
+- No UI code changes are required for data-only updates.
+
+### Troubleshooting
+- If an image doesn’t appear, ensure the file exists under `integrated-portfolio/client/public/projects` and the `imageUrl` path matches.
+- Featured projects are filtered by the GraphQL endpoint; ordering is defined by the `order` values in the JSON/config list.
+
 ## 👨‍💻 Author
 
 **Creations Studio**
