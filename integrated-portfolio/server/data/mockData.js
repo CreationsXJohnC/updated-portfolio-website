@@ -1,6 +1,22 @@
 // Mock data for when database is not available
 export const mockProjects = [
   {
+    id: "6",
+    title: "JVE Capital Investments",
+    description: "JVE Capital Website",
+    shortDescription: "JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.",
+    category: "corporate",
+    technologies: ["React", "TypeScript", "TailwindCSS"],
+    githubUrl: "https://github.com/CreationsXJohnC/jve-capital-investments-website",
+    liveUrl: "https://jve-capital-investments-website.vercel.app/",
+    imageUrl: "/projects/JVE Capital - website screenshot.png",
+    featured: true,
+    order: 1,
+    status: "published",
+    createdAt: new Date("2024-06-01"),
+    updatedAt: new Date("2024-06-01")
+  },
+  {
     id: "1",
     title: "Skinstric AI",
     description: "A.I. personalized skincare routine platform with advanced machine learning algorithms for skin analysis and product recommendations.",
@@ -11,7 +27,7 @@ export const mockProjects = [
     liveUrl: "https://skinstric-ai-internship-gold.vercel.app/",
     imageUrl: "/projects/skinstric-ai.jpg",
     featured: true,
-    order: 1,
+    order: 2,
     status: "published",
     createdAt: new Date("2024-01-15"),
     updatedAt: new Date("2024-01-15")
@@ -26,8 +42,8 @@ export const mockProjects = [
     githubUrl: "https://github.com/CreationsXJohnC/netflix-clone",
     liveUrl: "https://netflix-clone-demo.vercel.app/",
     imageUrl: "/projects/netflix-clone.jpg",
-    featured: true,
-    order: 2,
+    featured: false,
+    order: 3,
     status: "published",
     createdAt: new Date("2024-02-10"),
     updatedAt: new Date("2024-02-10")
@@ -63,6 +79,23 @@ export const mockProjects = [
     status: "published",
     createdAt: new Date("2024-04-20"),
     updatedAt: new Date("2024-04-20")
+  }
+  ,
+  {
+    id: "5",
+    title: "E-Commerce Book Library",
+    description: "A modern e-commerce web app for browsing and purchasing books with secure checkout and responsive UI.",
+    shortDescription: "Online bookstore web app",
+    category: "web-app",
+    technologies: ["React", "Vite", "Firebase", "TailwindCSS"],
+    githubUrl: null,
+    liveUrl: null,
+    imageUrl: "/projects/E-Commerce Book Library - website screenshot.png",
+    featured: true,
+    order: 5,
+    status: "published",
+    createdAt: new Date("2024-05-10"),
+    updatedAt: new Date("2024-05-10")
   }
 ];
 

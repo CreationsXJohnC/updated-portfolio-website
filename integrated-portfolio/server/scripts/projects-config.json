@@ -1,0 +1,25 @@
+{
+  "endpoint": "https://www.johnccreations.design/api/graphql",
+  "projects": [
+    {
+      "title": "JVE Capital Investments",
+      "shortDescription": "Sophisticated corporate site with polished UI and accessibility.",
+      "category": "Web Application",
+      "status": "PUBLISHED",
+      "technologies": ["React", "TypeScript", "TailwindCSS"],
+      "imageUrl": "/projects/JVE Capital - website screenshot.png",
+      "liveUrl": "https://jvecapitalinvestments.com/",
+      "githubUrl": "",
+      "featured": true,
+      "order": 1
+    },
+    { "title": "Skinstric AI", "featured": true, "order": 2 },
+    { "title": "Netflix Clone", "featured": false, "order": 3 },
+    { "title": "Ultraverse NFT World", "featured": true, "order": 4 },
+    { "title": "Summarist Audio Library", "featured": false, "order": 5 },
+    { "title": "Movie Entertainment", "featured": false, "order": 6 },
+    { "title": "E-Commerce Book Library", "featured": false, "order": 7 },
+    { "title": "Ori Company", "featured": false, "order": 8 },
+    { "title": "Creations X Platform", "featured": false, "order": 9 }
+  ]
+}

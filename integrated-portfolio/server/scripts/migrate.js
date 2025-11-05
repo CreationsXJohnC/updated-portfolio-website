@@ -98,6 +98,19 @@ const seedData = {
 
   projects: [
     {
+      title: 'JVE Capital Investments',
+      description: 'JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.',
+      shortDescription: 'JVE Capital Investments, Commercial, Residential, & Restoration.',
+      technologies: ['React', 'TypeScript', 'TailwindCSS'],
+      githubUrl: 'https://github.com/CreationsXJohnC/jve-capital-investments-website',
+      liveUrl: 'https://jve-capital-investments-website.vercel.app/',
+      imageUrl: '/projects/JVE Capital - website screenshot.png',
+      featured: true,
+      order: 1,
+      status: 'published',
+      category: 'corporate'
+    },
+    {
       title: 'Skinstric AI',
       description: 'An AI-powered skincare analysis platform that provides personalized skincare recommendations. Uses machine learning to analyze skin conditions and suggest appropriate treatments and products.',
       shortDescription: 'AI-powered skincare analysis and recommendations',
@@ -106,7 +119,7 @@ const seedData = {
       liveUrl: 'https://skinstric-ai-internship-gold.vercel.app/',
       imageUrl: '/projects/Skinstric AI - website screenshot.png',
       featured: true,
-      order: 1,
+      order: 2,
       status: 'published',
       category: 'ai'
     },
@@ -118,8 +131,8 @@ const seedData = {
       githubUrl: 'https://github.com/CreationsXJohnC/netflix-clone-website',
       liveUrl: 'https://netflix-clone-website-creationsx.vercel.app/',
       imageUrl: '/projects/Netfilx Clone - website screenshot.png',
-      featured: true,
-      order: 2,
+      featured: false,
+      order: 3,
       status: 'published',
       category: 'web-app'
     },
@@ -132,7 +145,7 @@ const seedData = {
       liveUrl: 'https://nft-marketplace-internship-creationsx.vercel.app/',
       imageUrl: '/projects/Ultraverse NFT World - website screenshot.png',
       featured: true,
-      order: 3,
+      order: 4,
       status: 'published',
       category: 'blockchain'
     },
@@ -144,7 +157,7 @@ const seedData = {
       liveUrl: 'https://summarist-internship-tau.vercel.app/',
       imageUrl: '/projects/Summarist - website screenshot.png',
       featured: false,
-      order: 4,
+      order: 5,
       status: 'published',
       category: 'web-app'
     },
@@ -157,7 +170,7 @@ const seedData = {
       liveUrl: 'https://movie-entertainment-online-library.vercel.app/',
       imageUrl: '/projects/Movie Entertainment - website screenshot.png',
       featured: false,
-      order: 5,
+      order: 6,
       status: 'published',
       category: 'entertainment'
     },
@@ -170,7 +183,7 @@ const seedData = {
       liveUrl: 'https://e-commerce-book-library.vercel.app/',
       imageUrl: '/projects/E-Commerce Book Library - website screenshot.png',
       featured: false,
-      order: 6,
+      order: 7,
       status: 'published',
       category: 'e-commerce'
     },
@@ -183,7 +196,7 @@ const seedData = {
       liveUrl: 'https://oricompanydc.com/',
       imageUrl: '/projects/Ori Company - website screenshot.png',
       featured: false,
-      order: 7,
+      order: 8,
       status: 'published',
       category: 'corporate'
     },
@@ -196,7 +209,7 @@ const seedData = {
       liveUrl: 'https://www.johnccreations.com/creationsx',
       imageUrl: '/projects/Creations X Platform - website screenshot.png',
       featured: false,
-      order: 8,
+      order: 9,
       status: 'published',
       category: 'platform'
     }

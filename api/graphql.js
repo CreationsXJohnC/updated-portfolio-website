@@ -1,4 +1,6 @@
 module.exports = function(req, res) {
+  var fs = require('fs');
+  var path = require('path');
   // Set CORS headers with dynamic origin and credentials support
   var origin = req.headers.origin;
   var allowedOrigins = [
@@ -50,7 +52,22 @@ module.exports = function(req, res) {
         var query = data.query;
         
         // Mock data - Complete project list from migration
-        var mockProjects = [
+        // Try to load projects from config for maintainability
+        var configProjects = null;
+        try {
+          var cfgPath = path.join(__dirname, 'projects-config.json');
+          if (fs.existsSync(cfgPath)) {
+            var cfgRaw = fs.readFileSync(cfgPath, 'utf-8');
+            var cfg = JSON.parse(cfgRaw);
+            if (cfg && Array.isArray(cfg.projects)) {
+              configProjects = cfg.projects;
+            }
+          }
+        } catch (e) {
+          // Fallback to embedded list below on parse or read errors
+        }
+
+        var mockProjects = configProjects || [
           {
             id: "1",
             title: "Skinstric AI",
@@ -61,7 +78,7 @@ module.exports = function(req, res) {
             liveUrl: "https://skinstric-ai-internship-gold.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/skinstric-ai-internship",
             featured: true,
-            order: 1,
+            order: 2,
             status: "published",
             category: "ai"
           },
@@ -74,8 +91,8 @@ module.exports = function(req, res) {
             imageUrl: "/projects/Netfilx Clone - website screenshot.png",
             liveUrl: "https://netflix-clone-website-creationsx.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/netflix-clone-website",
-            featured: true,
-            order: 2,
+            featured: false,
+            order: 3,
             status: "published",
             category: "web-app"
           },
@@ -89,7 +106,7 @@ module.exports = function(req, res) {
             liveUrl: "https://nft-marketplace-internship-creationsx.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/nft-marketplace-internship",
             featured: true,
-            order: 3,
+            order: 4,
             status: "published",
             category: "blockchain"
           },
@@ -102,7 +119,7 @@ module.exports = function(req, res) {
             liveUrl: "https://summarist-internship-tau.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/summarist-internship",
             featured: false,
-            order: 4,
+            order: 5,
             status: "published",
             category: "web-app"
           },
@@ -116,7 +133,7 @@ module.exports = function(req, res) {
             liveUrl: "https://movie-entertainment-online-library.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/movie-entertainment-online-library",
             featured: false,
-            order: 5,
+            order: 6,
             status: "published",
             category: "entertainment"
           },
@@ -130,7 +147,7 @@ module.exports = function(req, res) {
             liveUrl: "https://e-commerce-book-library.vercel.app/",
             githubUrl: "https://github.com/CreationsXJohnC/e-commerce-book-library",
             featured: false,
-            order: 6,
+            order: 7,
             status: "published",
             category: "e-commerce"
           },
@@ -144,7 +161,7 @@ module.exports = function(req, res) {
             liveUrl: "https://oricompanydc.com/",
             githubUrl: null,
             featured: false,
-            order: 7,
+            order: 8,
             status: "published",
             category: "corporate"
           },
@@ -158,9 +175,23 @@ module.exports = function(req, res) {
             liveUrl: "https://www.johnccreations.com/creationsx",
             githubUrl: null,
             featured: false,
-            order: 8,
+            order: 9,
             status: "published",
             category: "platform"
+          },
+          {
+            id: "9",
+            title: "JVE Capital Investments",
+            description: "A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.",
+            shortDescription: "Corporate site with polished UI and accessibility",
+            technologies: ["React", "TypeScript", "TailwindCSS"],
+            imageUrl: "/projects/JVE Capital - website screenshot.png",
+            liveUrl: "https://jvecapitalinvestments.com/",
+            githubUrl: "",
+            featured: true,
+            order: 1,
+            status: "published",
+            category: "web-app"
           }
         ];
 
