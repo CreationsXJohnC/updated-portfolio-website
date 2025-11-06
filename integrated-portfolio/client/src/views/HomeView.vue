@@ -331,7 +331,7 @@ export default {
     const router = useRouter()
     
     // Fetch featured projects from API
-    const { result, loading, error } = useQuery(GET_FEATURED_PROJECTS)
+    const { result, loading, error } = useQuery(GET_FEATURED_PROJECTS, undefined, { fetchPolicy: 'cache-and-network' })
     
     const featuredProjects = computed(() => {
       return result.value?.projects || []

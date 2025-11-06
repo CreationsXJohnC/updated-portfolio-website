@@ -166,7 +166,7 @@ export default {
     const { result: projectResult, loading, error } = useQuery(
       GET_PROJECT_DETAIL,
       () => ({ id: projectId.value }),
-      () => ({ enabled: !!projectId.value })
+      () => ({ enabled: !!projectId.value, fetchPolicy: 'cache-and-network' })
     )
 
     const project = computed(() => projectResult.value?.project)
@@ -176,6 +176,7 @@ export default {
       const title = project.value?.title
 
       const overridesByTitle = {
+        'JVE Capital Investments': 'JVE Capital Investments LLC specializes in commercial & residential contracting projects. From general contracting & construction, to project design and management JVE Capital is a trusted partner in the construction industry. They have a proven track record of delivering projects on time and within budget. JVE Capital is currently located in the nations capitol of Washington, D.C.',
         'Skinstric AI': 'I worked on a React interface that made complex AI skin analysis feel simple and approachable. JavaScript, HTML, and CSS carried the UI, while Webpack and Babel kept builds quick and the codebase modern. I wrote maintainable tests in Jest and enforced clean standards with ESLint for long-term reliability. My focus was translating real-time signals into clear visuals so users could understand results at a glance. I collaborated closely with designers to balance accuracy with a calm, focused layout. Performance tuning helped the app stay responsive even during heavy processing. The end result was a confident, friendly experience for a health-tech audience.',
         'Netflix Clone': 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.',
         'Ultraverse NFT World': 'I helped build a marketplace where creators and collectors meet through a clear, lively interface. React and JavaScript formed the core, while dynamic routing created a smooth path through collections and item detail views. I integrated external APIs to surface listings and metadata in real time. Carousels and subtle animations added delight without slowing the page. Jest tests kept key flows safe, and Git workflows (branching, merging, pull requests) made collaboration smooth. Webpack and Babel ensured the bundle stayed modern and efficient. The outcome was a usable, visually engaging marketplace that respected both speed and storytelling.',

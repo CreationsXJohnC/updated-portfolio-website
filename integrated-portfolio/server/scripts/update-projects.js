@@ -67,7 +67,7 @@ const UPDATE_PROJECT = `
 function buildInputFromConfig(cfgItem) {
   const input = {};
   // Only include fields that exist to avoid overwriting unintentionally
-  const keys = ['title','shortDescription','category','status','technologies','imageUrl','liveUrl','githubUrl','featured','order'];
+  const keys = ['title','description','shortDescription','category','status','technologies','imageUrl','liveUrl','githubUrl','featured','order'];
   for (const k of keys) {
     if (cfgItem[k] !== undefined) input[k] = cfgItem[k];
   }

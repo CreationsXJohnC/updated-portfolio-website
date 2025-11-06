@@ -4,11 +4,10 @@
   "description": "Vue.js frontend for portfolio website",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "npx vite --open",
     "build": "npx vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "postinstall": "npx vite --version"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@apollo/client": "^3.8.8",

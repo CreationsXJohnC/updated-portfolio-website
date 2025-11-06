@@ -29,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_URI || '/api/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URI || '/graphql',
   credentials: 'include',
 })
 
@@ -110,12 +110,12 @@ export const apolloClient = new ApolloClient({
   defaultOptions: {
     watchQuery: {
       errorPolicy: 'all',
-      fetchPolicy: 'cache-first', // Use cache first for better performance
-      nextFetchPolicy: 'cache-first',
+      fetchPolicy: 'cache-and-network',
+      nextFetchPolicy: 'cache-and-network',
     },
     query: {
       errorPolicy: 'all',
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'cache-and-network',
     },
     mutate: {
       errorPolicy: 'all',

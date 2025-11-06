@@ -136,7 +136,7 @@ export default {
     const selectedCategory = ref('all')
     const selectedTechnology = ref('all')
 
-    const { result, loading, error } = useQuery(GET_PROJECTS)
+    const { result, loading, error } = useQuery(GET_PROJECTS, undefined, { fetchPolicy: 'cache-and-network' })
 
     const projects = computed(() => {
       return result.value?.projects || []

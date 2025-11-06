@@ -99,7 +99,7 @@ const seedData = {
   projects: [
     {
       title: 'JVE Capital Investments',
-      description: 'JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.',
+      description: 'JVE Capital Investments LLC specializes in commercial & residential contracting projects. From general contracting & construction, to project design and management JVE Capital is a trusted partner in the construction industry. They have a proven track record of delivering projects on time and within budget. JVE Capital is currently located in the nations capitol of Washington, D.C.',
       shortDescription: 'A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.',
       technologies: ['React', 'TypeScript', 'TailwindCSS'],
       githubUrl: 'https://github.com/CreationsXJohnC/jve-capital-investments-website',
@@ -112,7 +112,7 @@ const seedData = {
     },
     {
       title: 'Skinstric AI',
-      description: 'An AI-powered skincare analysis platform that provides personalized skincare recommendations. Uses machine learning to analyze skin conditions and suggest appropriate treatments and products.',
+      description: 'I worked on a React interface that made complex AI skin analysis feel simple and approachable. JavaScript, HTML, and CSS carried the UI, while Webpack and Babel kept builds quick and the codebase modern. I wrote maintainable tests in Jest and enforced clean standards with ESLint for long-term reliability. My focus was translating real-time signals into clear visuals so users could understand results at a glance. I collaborated closely with designers to balance accuracy with a calm, focused layout. Performance tuning helped the app stay responsive even during heavy processing. The end result was a confident, friendly experience for a health-tech audience.',
       shortDescription: 'AI-powered skincare analysis and recommendations',
       technologies: ['ES6+', 'Next.js', 'TailwindCSS'],
       githubUrl: 'https://github.com/CreationsXJohnC/skinstric-ai-internship',
@@ -125,7 +125,7 @@ const seedData = {
     },
     {
       title: 'Netflix Clone',
-      description: 'A fully functional Netflix clone built with modern web technologies. Features user authentication, movie browsing, search functionality, and responsive design that mimics the original Netflix interface.',
+      description: 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.',
       shortDescription: 'Netflix clone with streaming interface',
       technologies: ['React', 'Vite', 'Firebase'],
       githubUrl: 'https://github.com/CreationsXJohnC/netflix-clone-website',
@@ -138,7 +138,7 @@ const seedData = {
     },
     {
       title: 'Ultraverse NFT World',
-      description: 'A cutting-edge NFT marketplace and virtual world platform that combines blockchain technology with immersive 3D experiences. Features NFT trading, virtual galleries, and interactive metaverse environments.',
+      description: 'I helped build a marketplace where creators and collectors meet through a clear, lively interface. React and JavaScript formed the core, while dynamic routing created a smooth path through collections and item detail views. I integrated external APIs to surface listings and metadata in real time. Carousels and subtle animations added delight without slowing the page. Jest tests kept key flows safe, and Git workflows (branching, merging, pull requests) made collaboration smooth. Webpack and Babel ensured the bundle stayed modern and efficient. The outcome was a usable, visually engaging marketplace that respected both speed and storytelling.',
       shortDescription: 'NFT marketplace and virtual world platform',
       technologies: ['JavaScript', 'CSS3', 'Node.js'],
       githubUrl: 'https://github.com/CreationsXJohnC/nft-marketplace-internship',
@@ -151,7 +151,7 @@ const seedData = {
     },
     {
       title: 'Summarist Audio Library',
-      description: 'A full-stack audio library featuring Next.js, TypeScript, React, and TailwindCSS for responsive, fast-loading perfromance. Listen to a variety of titles that will grab your attention & capture your imagination.',
+      description: 'I developed an audio-first web app that lets users explore and purchase book summaries with confidence. Next.js and TypeScript power a responsive, maintainable frontend, styled with Tailwind CSS/PostCSS for speed and consistency. On the backend, Node.js API routes run on Vercel, while Firebase supports client-side data needs. Stripe handles secure payments so the checkout feels seamless and trustworthy. I focused on clear information design so users can scan, sample, and decide quickly. React components keep the experience cohesive and easy to extend. Together, these choices deliver a fast, modern product that feels polished from homepage to receipt.',
       technologies: ['Next.js', 'TailwindCSS', 'Node.js'],
       githubUrl: 'https://github.com/CreationsXJohnC/summarist-internship',
       liveUrl: 'https://summarist-internship-tau.vercel.app/',
@@ -163,7 +163,7 @@ const seedData = {
     },
     {
       title: 'Movie Entertainment',
-      description: 'A dynamic movie discovery platform with advanced filtering, ratings, and personalized recommendations. Features a sleek interface for browsing and discovering new films.',
+      description: 'I built a searchable movie library that turns curiosity into quick discovery. React with JavaScript/HTML/CSS powers a responsive interface that feels natural across desktop and mobile. The OMDB API supplies rich data, while my frontend-backend connections keep results flowing effortlessly. Webpack and Babel support an efficient dev cycle and a lean production build. Jest tests gave me confidence to refactor and add features without regressions. I designed the UI to minimize friction—clear inputs, thoughtful empty states, and readable detail pages. It’s a practical showcase of API integration, performance, and user-first design.',
       shortDescription: 'Movie discovery and entertainment platform',
       technologies: ['TypeScript', 'React', 'OMDb API'],
       githubUrl: 'https://github.com/CreationsXJohnC/movie-entertainment-online-library',
@@ -176,7 +176,7 @@ const seedData = {
     },
     {
       title: 'E-Commerce Book Library',
-      description: 'A comprehensive e-commerce platform for book lovers featuring advanced search, user reviews, and secure payment processing. Built with modern web technologies and optimized for performance.',
+      description: 'I created an online bookstore experience that emphasizes speed, clarity, and trust. Built with React and JavaScript/HTML/CSS, the app uses dynamic routing to keep navigation fluid and predictable. API integration pulls fresh catalog data while caching and request patterns keep things responsive. Skeleton loading states reduce perceived wait time and set expectations during fetches. Jest testing helps ensure carts, filters, and checkout flows remain stable as features grow. Webpack and Babel provide a modern toolchain for fast builds and clean code. The result is a friendly, high-performing shopping journey from browse to buy.',
       shortDescription: 'E-commerce platform for book enthusiasts',
       technologies: ['HTML5', 'CSS', 'Babel'],
       githubUrl: 'https://github.com/CreationsXJohnC/e-commerce-book-library',
@@ -189,7 +189,7 @@ const seedData = {
     },
     {
       title: 'Ori Company',
-      description: 'A professional corporate website showcasing business services and company portfolio. Features modern design, responsive layout, and integrated contact management system.',
+      description: 'Ori Company was founded in Washington, DC as a licensed medical cannabis cultivation and retail operation. Leadership focused on building digital platforms and ecommerce integrations that made discovery and purchasing simple. Compliance systems and customer engagement tools were implemented, increasing operational efficiency by thirty percent while maintaining regulatory alignment. A corporate website and online store were built and maintained to expand patient access. Improvements to navigation, content, and promotions drove a twenty percent lift in online sales. Investor pitch decks and presentations were developed to support an ongoing raise of five to ten million dollars. Stakeholder relationships were cultivated to advance growth and protect brand integrity. The company was positioned to serve more than seven million annual visitors and seven hundred thousand residents in the District. A clear vision for a vertically integrated model targets more than eighty million dollars in annual revenue. The mission centers on quality, community impact, and sustainable growth.',
       shortDescription: 'Corporate website with service showcase',
       technologies: ['HTML', 'CSS', 'JavaScript'],
       githubUrl: null,
@@ -202,7 +202,7 @@ const seedData = {
     },
     {
       title: 'Creations X Platform',
-      description: 'A comprehensive creative platform showcasing innovative digital solutions and design services. Features portfolio management, client collaboration tools, and project showcase capabilities built with modern web technologies.',
+      description: 'Creations X was launched to deliver creative media for clients across the United States and the Caribbean. The studio produces photography, videography, drone footage, live streaming, and digital campaigns. More than one hundred projects have been completed for brands and influencers throughout the DMV region. Client visibility on web and social channels grew through clear strategy and consistent execution. Data informed content plans improved reach and engagement by forty percent. End to end planning, production, and delivery kept creative work aligned with goals, budgets, and timelines. Adobe Creative Suite and Figma supported strong storytelling and polished visual design. Modern web experiences were built by integrating React, Tailwind, Node.js, and Firebase. Collaboration translated ideas into compelling assets that convert and endure. The approach balances empathy, craft, and accountability to build lasting partnerships.',
       shortDescription: 'Creative platform for digital solutions and design services',
       technologies: ['Canva', 'HTML', 'CSS'],
       githubUrl: null,
