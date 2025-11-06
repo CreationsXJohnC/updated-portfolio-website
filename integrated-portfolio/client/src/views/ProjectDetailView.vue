@@ -136,6 +136,7 @@ const GET_PROJECT_DETAIL = gql`
       id
       title
       description
+      shortDescription
       imageUrl
       liveUrl
       githubUrl

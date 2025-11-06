@@ -100,7 +100,7 @@ const seedData = {
     {
       title: 'JVE Capital Investments',
       description: 'JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.',
-      shortDescription: 'JVE Capital Investments, Commercial, Residential, & Restoration.',
+      shortDescription: 'A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.',
       technologies: ['React', 'TypeScript', 'TailwindCSS'],
       githubUrl: 'https://github.com/CreationsXJohnC/jve-capital-investments-website',
       liveUrl: 'https://jve-capital-investments-website.vercel.app/',

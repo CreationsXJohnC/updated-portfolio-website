@@ -62,7 +62,7 @@
               </div>
               <h3 class="project-title">{{ project.title }}</h3>
 
-              <p class="project-description">{{ project.description }}</p>
+              <p class="project-description">{{ project.shortDescription }}</p>
               <div class="project-tech">
                 <span 
                   v-for="tech in project.technologies.slice(0, 3)" 
@@ -113,6 +113,7 @@ const GET_PROJECTS = gql`
       id
       title
       description
+      shortDescription
       imageUrl
       category
       technologies

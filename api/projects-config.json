@@ -3,8 +3,8 @@
     {
       "id": "9",
       "title": "JVE Capital Investments",
-      "description": "A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.",
-      "shortDescription": "JVE Capital Investments, Commercial, Residential, & Restoration.",
+      "description": "JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.",
+      "shortDescription": "A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.",
       "technologies": ["React", "TypeScript", "TailwindCSS"],
       "imageUrl": "/projects/JVE Capital - website screenshot.png",
       "liveUrl": "https://jve-capital-investments-website.vercel.app/",
