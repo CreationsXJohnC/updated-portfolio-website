@@ -1,14 +1,21 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "integrated-portfolio/client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "integrated-portfolio/client/dist" }
+    }
+  ],
   "rewrites": [
     { "source": "/graphql", "destination": "/api/graphql" },
     { "source": "/health", "destination": "/api/health" },
     { "source": "/api/contact", "destination": "/api/contact" },
-    { "source": "/projects", "destination": "/index.html" },
-    { "source": "/projects/:id", "destination": "/index.html" },
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/projects", "destination": "/integrated-portfolio/client/dist/index.html" },
+    { "source": "/projects/:id", "destination": "/integrated-portfolio/client/dist/index.html" },
+    { "source": "/about", "destination": "/integrated-portfolio/client/dist/index.html" },
+    { "source": "/contact", "destination": "/integrated-portfolio/client/dist/index.html" },
+    { "source": "/", "destination": "/integrated-portfolio/client/dist/index.html" }
   ],
   "functions": {
     "api/graphql.js": { "maxDuration": 30, "memory": 1024 },
