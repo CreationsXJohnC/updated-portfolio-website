@@ -87,7 +87,7 @@
             </div>
           </div>
           <p class="copyright">
-            Copyright © 2025 John C Creations LLC
+            Copyright © {{ currentYear }} John C Creations LLC
           </p>
         </div>
       </div>

@@ -61,7 +61,8 @@ export const resolvers = {
 
     project: async (_, { id }, { dbConnected }) => {
       if (!dbConnected) {
-        return mockProjects.find(p => p.id === parseInt(id)) || null;
+        // Ensure ID comparison works with mock data string IDs
+        return mockProjects.find(p => String(p.id) === String(id)) || null;
       }
       return await Project.findByPk(id);
     },

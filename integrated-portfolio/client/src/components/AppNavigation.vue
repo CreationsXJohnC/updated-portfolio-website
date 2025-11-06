@@ -4,7 +4,7 @@
       <!-- Logo/Brand -->
       <div class="brand-group">
         <a href="https://johnccreations.com/creationsx" target="_blank" rel="noopener noreferrer" class="nav-brand">
-          <img src="/src/assets/images/logos/Creation X Logo Updated.svg" alt="David Bragg Portfolio" class="brand-logo" />
+          <img src="/src/assets/images/logos/Creation X Logo Updated.svg" alt="Creations X Portfolio" class="brand-logo" />
         </a>
         <div class="logo-hint" aria-hidden="false">
           <span class="hint-arrow" aria-hidden="true"></span>
