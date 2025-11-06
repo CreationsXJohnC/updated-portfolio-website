@@ -11,6 +11,16 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
   }
   if (networkError) {
     console.error(`Network error: ${networkError}`)
+    const statusCode = networkError.statusCode
+    const message = networkError.message || ''
+    const ctx = operation.getContext() || {}
+    // Retry once by switching between /graphql and /api/graphql when 404/NOT_FOUND occurs
+    if (!ctx.__retried && (statusCode === 404 || message.includes('NOT_FOUND'))) {
+      const currentUri = ctx.uri || (import.meta.env.VITE_GRAPHQL_URI || '/api/graphql')
+      const fallbackUri = currentUri.includes('/api/graphql') ? '/graphql' : '/api/graphql'
+      operation.setContext({ ...ctx, uri: fallbackUri, __retried: true })
+      return forward(operation)
+    }
   }
 })
 
@@ -29,7 +39,7 @@ const authLink = setContext((_, { headers }) => {
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_URI || '/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URI || '/api/graphql',
   credentials: 'include',
 })
 
