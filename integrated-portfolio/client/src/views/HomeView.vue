@@ -321,6 +321,8 @@ const GET_FEATURED_PROJECTS = gql`
       technologies
       liveUrl
       githubUrl
+      featured
+      order
     }
   }
 `
@@ -334,7 +336,12 @@ export default {
     const { result, loading, error } = useQuery(GET_FEATURED_PROJECTS, undefined, { fetchPolicy: 'cache-and-network' })
     
     const featuredProjects = computed(() => {
-      return result.value?.projects || []
+      const list = result.value?.projects || []
+      // Extra safety: filter by featured flag, sort by order, cap to 3
+      return list
+        .filter(p => p && p.featured === true)
+        .sort((a, b) => (a?.order ?? 999) - (b?.order ?? 999))
+        .slice(0, 3)
     })
 
     const navigateToProject = (projectId) => {

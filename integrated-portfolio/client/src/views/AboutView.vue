@@ -49,8 +49,9 @@
                 <i class="fas fa-arrow-right"></i>
               </router-link>
               <a
-                  href="/John_Che_Larracuente-TechResume.pdf"
+                  href="/John_Che_Larracuente-TechResume3.pdf"
                   target="_blank"
+                  download="John_Che_Larracuente-TechResume3.pdf"
                   class="btn btn-outline hover-target"
               >
                   Download Resume

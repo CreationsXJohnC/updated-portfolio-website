@@ -41,10 +41,12 @@ const cache = new InMemoryCache({
     Query: {
       fields: {
         projects: {
+          // Distinguish cache entries by arguments
+          keyArgs: ['featured', 'category', 'filter'],
           // Cache projects with better merge strategy
           merge(existing = [], incoming, { args, readField }) {
             // If it's a filtered query, don't merge with existing
-            if (args?.filter || args?.category) {
+            if (args?.featured === true || args?.filter || args?.category) {
               return incoming
             }
             // For regular queries, merge intelligently
