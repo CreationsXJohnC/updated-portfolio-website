@@ -10,7 +10,7 @@
     "build": "cd client && npx vite build",
     "build:client": "cd client && npx vite build",
     "start": "cd server && npm start",
-    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "install:all": "npm install && cd client && npm install",
     "vercel-build": "cd client && npx vite build"
   },
   "keywords": ["portfolio", "vue", "graphql", "apollo", "postgresql"],
