@@ -3,13 +3,13 @@
   "projects": [
     {
       "title": "JVE Capital Investments",
-      "shortDescription": "Sophisticated corporate site with polished UI and accessibility.",
+      "shortDescription": "A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.",
       "category": "Web Application",
       "status": "PUBLISHED",
       "technologies": ["React", "TypeScript", "TailwindCSS"],
       "imageUrl": "/projects/JVE Capital - website screenshot.png",
-      "liveUrl": "https://jvecapitalinvestments.com/",
-      "githubUrl": "",
+      "liveUrl": "https://jve-capital-investments-website.vercel.app/",
+      "githubUrl": "https://github.com/CreationsXJohnC/jve-capital-investments-website",
       "featured": true,
       "order": 1
     },
