@@ -50,8 +50,8 @@
               </router-link>
               <a
                   href="/John_Che_Larracuente-TechResume3.pdf"
-                  target="_blank"
-                  download="John_Che_Larracuente-TechResume3.pdf"
+                  @click.prevent="downloadResume"
+                  download
                   class="btn btn-outline hover-target"
               >
                   Download Resume
@@ -273,6 +273,25 @@ export default {
 
     const { result, loading, error } = useQuery(GET_ABOUT_DATA)
 
+    const NEW_RESUME_URL = '/John_Che_Larracuente-TechResume3.pdf'
+    const OLD_RESUME_URL = '/John_Che_Larracuente-TechResume.pdf'
+
+    const downloadResume = async () => {
+      try {
+        const res = await fetch(NEW_RESUME_URL, { method: 'HEAD' })
+        const url = res && res.ok ? NEW_RESUME_URL : OLD_RESUME_URL
+        const a = document.createElement('a')
+        a.href = url
+        a.download = url.split('/').pop()
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+      } catch (e) {
+        // Fallback to old resume if network fails
+        window.location.href = OLD_RESUME_URL
+      }
+    }
+
     const formatDate = (dateString) => {
       if (!dateString) return ''
       const date = new Date(dateString)
@@ -298,7 +317,8 @@ export default {
       loading,
       error,
       formatDate,
-      profileImage
+      profileImage,
+      downloadResume
     }
   }
 }
