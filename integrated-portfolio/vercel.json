@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "client/dist" }
-    }
-  ],
   "installCommand": "npm run install:all",
   "buildCommand": "npm run vercel-build",
   "rewrites": [
