@@ -9,10 +9,13 @@
   ],
   "installCommand": "npm run install:all",
   "buildCommand": "npm run vercel-build",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    { "src": "^/(?!api)(?:[^/]+/)*[^.]+$", "dest": "/index.html" }
+  ],
+  "functions": {
+    "api/graphql.js": { "maxDuration": 30, "memory": 1024 },
+    "api/health.js": { "maxDuration": 10, "memory": 512 },
+    "api/test.js": { "maxDuration": 10, "memory": 512 },
+    "api/contact.js": { "maxDuration": 15, "memory": 512 }
+  }
 }
