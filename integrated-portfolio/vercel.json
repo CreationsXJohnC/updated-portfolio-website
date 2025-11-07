@@ -9,8 +9,8 @@
   ],
   "installCommand": "npm run install:all",
   "buildCommand": "npm run vercel-build",
-  "routes": [
-    { "src": "^/(?!api)(?:[^/]+/)*[^.]+$", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(?!api)(?:[^/]+/)*[^.]+", "destination": "/index.html" }
   ],
   "functions": {
     "api/graphql.js": { "maxDuration": 30, "memory": 1024 },
