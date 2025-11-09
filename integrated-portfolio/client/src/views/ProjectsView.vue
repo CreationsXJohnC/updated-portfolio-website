@@ -207,7 +207,7 @@ export default {
       })
     }
 
-
+    // No fallback loading; rely on GraphQL result
 
     return {
       projects,

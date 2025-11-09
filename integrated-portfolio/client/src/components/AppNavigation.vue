@@ -24,6 +24,9 @@
           <router-link to="/projects" class="nav-link hover-target">Projects</router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/videos" class="nav-link hover-target">Videos</router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/contact" class="nav-link hover-target">Contact</router-link>
         </li>
       </ul>
@@ -56,6 +59,11 @@
         <li class="mobile-nav-item">
           <router-link to="/projects" class="mobile-nav-link" @click="closeMobileMenu">
             <span class="mobile-link-text">Projects</span>
+          </router-link>
+        </li>
+        <li class="mobile-nav-item">
+          <router-link to="/videos" class="mobile-nav-link" @click="closeMobileMenu">
+            <span class="mobile-link-text">Videos</span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
