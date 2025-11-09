@@ -14,8 +14,8 @@ node_modules/
 # Build artifacts
 .next/
 .nuxt/
-dist/
-build/
+# Don't ignore dist or build outputs; needed for deployment
+
 
 # IDE and editor files
 .vscode/
