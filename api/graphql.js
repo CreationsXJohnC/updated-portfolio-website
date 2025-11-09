@@ -198,6 +198,38 @@ module.exports = function(req, res) {
         ];
 
         // Handle GraphQL queries and mutations
+        
+        // Support single project query: project(id: ID!)
+        if (query && query.indexOf('project') !== -1 && query.indexOf('projects') === -1) {
+          // Attempt to read id from variables or inline arguments
+          var variables = data.variables || {};
+          var id = variables.id;
+          if (!id) {
+            var idMatch = query.match(/project\s*\(\s*id\s*:\s*\"?([0-9A-Za-z_-]+)\"?\s*\)/);
+            id = idMatch && idMatch[1];
+          }
+          if (!id) {
+            res.status(400);
+            res.end(JSON.stringify({
+              errors: [{ message: 'Missing required argument: id' }]
+            }));
+            return;
+          }
+          var found = mockProjects.find(function(p) { return String(p.id) === String(id); });
+          if (found) {
+            res.status(200);
+            res.end(JSON.stringify({ data: { project: found } }));
+            return;
+          } else {
+            // GraphQL-compliant not found: data with null and errors
+            res.status(200);
+            res.end(JSON.stringify({
+              data: { project: null },
+              errors: [{ message: 'Project not found', code: 'NOT_FOUND' }]
+            }));
+            return;
+          }
+        }
         if (query.indexOf('mutation') !== -1 && query.indexOf('sendContactMessage') !== -1) {
           // Handle sendContactMessage mutation
           var variables = data.variables || {};

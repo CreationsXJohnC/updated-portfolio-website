@@ -120,6 +120,19 @@
       <!-- Related Projects Section removed per request -->
 
     </div>
+    
+    <!-- Fallback: Show not found when project is null without GraphQL error -->
+    <div v-else class="error-state">
+      <div class="error-container">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h2>Project Not Found</h2>
+        <p>The project you're looking for doesn't exist or has been removed.</p>
+        <router-link to="/projects" class="back-btn hover-target">
+          <i class="fas fa-arrow-left"></i>
+          Back to Projects
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
