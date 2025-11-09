@@ -3,10 +3,12 @@
   "installCommand": "npm run install:all",
   "buildCommand": "npm run vercel-build",
   "rewrites": [
+    { "source": "/", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
     { "source": "/projects", "destination": "/index.html" },
     { "source": "/projects/:id", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" }
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/((?!api).*)", "destination": "/index.html" }
   ],
   "functions": {
     "api/graphql.js": { "maxDuration": 30, "memory": 1024 },
