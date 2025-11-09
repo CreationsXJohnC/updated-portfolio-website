@@ -273,10 +273,72 @@ module.exports = function(req, res) {
           return;
         }
 
-        // Handle projects query
+        // Handle project detail query: project(id: ID!)
+        if (query && query.indexOf('project') !== -1 && query.indexOf('projects') === -1) {
+          var variables = data.variables || {};
+          var id = variables.id;
+
+          // Attempt to parse inline id if not provided in variables
+          if (!id) {
+            // Match patterns like: project(id: "123") or project(id: 123)
+            var inlineMatch = query.match(/project\s*\(\s*id:\s*"?([^"\)]+)"?\s*\)/);
+            if (inlineMatch && inlineMatch[1]) {
+              id = inlineMatch[1];
+            }
+          }
+
+          // Lookup project by id
+          var found = null;
+          if (id) {
+            found = mockProjects.find(function(p) { return String(p.id) === String(id); });
+          }
+
+          if (found) {
+            res.status(200);
+            res.end(JSON.stringify({ data: { project: found } }));
+          } else {
+            // Return GraphQL-compliant errors to signal not found in the client
+            res.status(200);
+            res.end(JSON.stringify({ errors: [{ message: 'Project not found', path: ['project'], extensions: { code: 'NOT_FOUND', id: id || null } }] }));
+          }
+          return;
+        }
+
+        // Handle projects query with basic filtering support
         if (query && query.indexOf('projects') !== -1) {
+          var variables = data.variables || {};
+          var featuredArg = variables.featured;
+          var categoryArg = variables.category;
+
+          // Parse inline arguments if present
+          var featuredInline = null;
+          var featuredMatch = query.match(/projects\s*\(.*featured:\s*(true|false)/);
+          if (featuredMatch && featuredMatch[1]) {
+            featuredInline = featuredMatch[1] === 'true';
+          }
+
+          var categoryInline = null;
+          var categoryMatch = query.match(/projects\s*\(.*category:\s*"([^"]+)"/);
+          if (categoryMatch && categoryMatch[1]) {
+            categoryInline = categoryMatch[1];
+          }
+
+          var list = mockProjects.slice();
+
+          // Apply featured filter if specified
+          var featuredVal = (typeof featuredArg !== 'undefined') ? !!featuredArg : (featuredInline !== null ? featuredInline : null);
+          if (featuredVal !== null) {
+            list = list.filter(function(p) { return !!p.featured === featuredVal; });
+          }
+
+          // Apply category filter if specified
+          var categoryVal = (typeof categoryArg !== 'undefined' && categoryArg !== null) ? String(categoryArg) : (categoryInline !== null ? String(categoryInline) : null);
+          if (categoryVal) {
+            list = list.filter(function(p) { return String(p.category).toLowerCase() === categoryVal.toLowerCase(); });
+          }
+
           res.status(200);
-          res.end(JSON.stringify({ data: { projects: mockProjects } }));
+          res.end(JSON.stringify({ data: { projects: list } }));
           return;
         }
 
