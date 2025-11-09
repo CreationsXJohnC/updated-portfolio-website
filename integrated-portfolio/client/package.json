@@ -4,8 +4,8 @@
   "description": "Vue.js frontend for portfolio website",
   "type": "module",
   "scripts": {
-    "dev": "npx vite --open",
-    "build": "npx vite build",
+    "dev": "vite --open",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },

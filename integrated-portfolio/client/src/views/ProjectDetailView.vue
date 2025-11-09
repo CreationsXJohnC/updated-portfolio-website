@@ -137,7 +137,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
@@ -154,14 +154,28 @@ const GET_PROJECT_DETAIL = gql`
       liveUrl
       githubUrl
       category
-      year
       status
-      type
-      features
       featured
-      createdAt
-      updatedAt
       technologies
+    }
+  }
+`
+
+// Fallback: fetch full projects list and pick by id if project(id) returns null
+const GET_PROJECTS = gql`
+  query GetProjects {
+    projects {
+      id
+      title
+      description
+      shortDescription
+      imageUrl
+      category
+      technologies
+      status
+      liveUrl
+      githubUrl
+      order
     }
   }
 `
@@ -182,7 +196,37 @@ export default {
       () => ({ enabled: !!projectId.value, fetchPolicy: 'cache-and-network' })
     )
 
-    const project = computed(() => projectResult.value?.project)
+    // Fallback list query (cache-first to avoid extra network if cached)
+    const { result: projectsResult } = useQuery(
+      GET_PROJECTS,
+      undefined,
+      () => ({ fetchPolicy: 'cache-first' })
+    )
+
+    // Resolve project: prefer detail query; else find from projects list
+    const project = computed(() => {
+      const primary = projectResult.value?.project
+      if (primary) return primary
+      const list = projectsResult.value?.projects || []
+      return list.find(p => String(p.id) === String(projectId.value))
+    })
+
+    // Debug logging to trace detail view load state
+    if (import.meta.env.DEV) {
+      watch(projectId, (id) => {
+        console.log('[ProjectDetail] route param id:', id)
+      }, { immediate: true })
+
+      watch([projectResult, error, loading, projectsResult], ([res, err, isLoading, listRes]) => {
+        console.log('[ProjectDetail] loading:', isLoading)
+        if (err) {
+          console.log('[ProjectDetail] error:', err)
+        }
+        console.log('[ProjectDetail] result:', res)
+        console.log('[ProjectDetail] project (detail):', res?.project)
+        console.log('[ProjectDetail] fallback list:', listRes?.projects)
+      }, { immediate: true })
+    }
 
     const heroDescription = computed(() => {
       const id = project.value?.id

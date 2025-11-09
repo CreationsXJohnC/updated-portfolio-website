@@ -40,7 +40,8 @@ const authLink = setContext((_, { headers }) => {
 // HTTP connection to the API
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_URI || '/api/graphql',
-  credentials: 'include',
+  // Do not send cookies for cross-origin requests to avoid strict CORS requirements
+  credentials: 'omit',
 })
 
 // Optimized cache implementation
@@ -119,6 +120,8 @@ export const apolloClient = new ApolloClient({
     httpLink
   ]),
   cache,
+  // Ensure __typename is added to all responses for reliable caching
+  addTypename: true,
   defaultOptions: {
     watchQuery: {
       errorPolicy: 'all',
