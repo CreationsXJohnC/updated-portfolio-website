@@ -9,6 +9,10 @@
     { "source": "/projects/:id", "destination": "/integrated-portfolio/client/dist/index.html" },
     { "source": "/contact", "destination": "/integrated-portfolio/client/dist/index.html" }
   ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/integrated-portfolio/client/dist/index.html" }
+  ],
   "functions": {
     "api/graphql.js": { "maxDuration": 30, "memory": 1024 },
     "api/health.js": { "maxDuration": 10, "memory": 512 },
