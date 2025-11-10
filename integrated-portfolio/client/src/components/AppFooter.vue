@@ -68,23 +68,12 @@
       <div class="footer-bottom">
         <div class="footer-bottom-content">
           <div class="footer-logo">
-            <div class="brand-new-logo-container" @click="scrollToTop">
-              <div 
-                class="brand-new-logo-element"
-                :style="{ 
-                  '--logo-scale': logoScale,
-                  '--logo-opacity': logoOpacity 
-                }"
-                @mouseenter="handleLogoHover(true)"
-                @mouseleave="handleLogoHover(false)"
-              >
-                <img 
-                  :src="creationsXLogo" 
-                  alt="CreationsX Logo" 
-                  draggable="false"
-                />
-              </div>
-            </div>
+            <img 
+              :src="jccWhiteLogo" 
+              alt="John C Creations Logo" 
+              class="footer-logo-img"
+              draggable="false"
+            />
           </div>
           <p class="copyright">
             Copyright © {{ currentYear }} John C Creations LLC
@@ -97,39 +86,16 @@
 
 <script>
 import { computed } from 'vue'
-import creationsXLogo from '@/assets/images/logos/CreationsX Emoji Sticker logo(no background).png'
+import jccWhiteLogo from '@/assets/images/logos/JCC - White.png'
 
 export default {
   name: 'AppFooter',
-  data() {
-    return {
-      logoScale: '1',
-      logoOpacity: '1'
-    };
-  },
-  methods: {
-    scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
-    handleLogoHover(isHovering) {
-      if (isHovering) {
-        this.logoScale = '1.2';
-        this.logoOpacity = '0.85';
-      } else {
-        this.logoScale = '1';
-        this.logoOpacity = '1';
-      }
-    }
-  },
   setup() {
     const currentYear = computed(() => new Date().getFullYear())
 
     return {
       currentYear,
-      creationsXLogo
+      jccWhiteLogo
     }
   }
 }
@@ -331,7 +297,7 @@ export default {
 }
 
 .footer-bottom {
-  padding-top: 0.25rem;
+  padding-top: 0; /* remove extra top padding in footer bottom */
 }
 
 .footer-bottom-content {
@@ -339,10 +305,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0; /* no space between logo and copyright */
 
   @include mobile {
-    gap: 0.75rem;
+    gap: 0; /* no space on mobile */
     text-align: center;
     padding: 0 1rem;
   }
@@ -351,10 +317,11 @@ export default {
 .footer-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0; /* remove extra space below logo */
+  line-height: 0; /* eliminate any line box space around the logo */
 
   @include mobile {
-    margin-bottom: 0.125rem;
+    margin-bottom: 0; /* remove extra space below logo on mobile */
   }
 }
 
@@ -380,50 +347,27 @@ export default {
   min-height: 64px !important;
   max-width: none !important;
   min-width: auto !important;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0; /* remove padding under logo image */
+  display: block !important; /* eliminate inline image baseline whitespace */
+  margin-bottom: 0 !important; /* ensure no extra spacing below the image */
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-  transition: opacity 0.2s ease !important;
+  transition: none !important;
   transform: none !important;
   transform-origin: center !important;
   scale: none !important;
   zoom: 1 !important;
 
-  &:hover,
-  &:focus,
-  &:active {
-    opacity: 0.8 !important;
-    transform: none !important;
-    scale: none !important;
-    zoom: 1 !important;
-    height: 64px !important;
-    width: auto !important;
-    max-height: 64px !important;
-    min-height: 64px !important;
-  }
 
   @include mobile {
     height: 56px !important;
     width: auto !important;
     max-height: 56px !important;
     min-height: 56px !important;
-    padding-bottom: 0.2rem;
-
-    &:hover,
-    &:focus,
-    &:active {
-      opacity: 0.8 !important;
-      transform: none !important;
-      scale: none !important;
-      zoom: 1 !important;
-      height: 56px !important;
-      width: auto !important;
-      max-height: 56px !important;
-      min-height: 56px !important;
-    }
+    padding-bottom: 0; /* remove padding under logo image on mobile */
   }
 }
 
@@ -431,39 +375,20 @@ export default {
   color: var(--text-secondary);
   font-size: 0.9rem;
   text-align: center;
+  margin-top: -3px; /* stronger upward nudge to minimize gap */
+  line-height: 1.05; /* very tight line height to reduce vertical box */
 
   @include mobile {
     font-size: 0.85rem;
-    line-height: 1.4;
+    line-height: 1.05; /* tighter on mobile as well */
+    margin-top: -2px; /* slightly stronger upward nudge on mobile */
     max-width: 280px;
     margin: 0 auto;
   }
 }
 
 // Brand new logo container - completely isolated
-.brand-new-logo-container {
-  cursor: pointer;
-  display: inline-block;
-  padding: 0;
-}
-
-.brand-new-logo-element {
-  display: block;
-  width: 64px;
-  height: 64px;
-  transform: scale(var(--logo-scale, 1));
-  opacity: var(--logo-opacity, 1);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  transform-origin: center;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    pointer-events: none;
-  }
-}
+/* Removed interactive logo container and hover effects to keep footer logo static */
 
 // Desktop styles
 @media (min-width: 769px) {
@@ -474,22 +399,9 @@ export default {
     transform: none !important;
     scale: none !important;
     zoom: 1 !important;
-    transition: opacity 0.2s ease !important;
+    transition: none !important;
     max-height: 100px !important;
     min-height: 100px !important;
-    
-    &:hover,
-    &:focus,
-    &:active {
-      transform: none !important;
-      scale: none !important;
-      zoom: 1 !important;
-      opacity: 0.8 !important;
-      height: 100px !important;
-      width: auto !important;
-      max-height: 100px !important;
-      min-height: 100px !important;
-    }
   }
 }
 

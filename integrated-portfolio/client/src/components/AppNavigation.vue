@@ -8,7 +8,7 @@
         </a>
         <div class="logo-hint" aria-hidden="false">
           <span class="hint-arrow" aria-hidden="true"></span>
-          <span class="hint-text">Click Me</span>
+          <span class="hint-text">Creations X John C</span>
         </div>
       </div>
 
@@ -21,10 +21,32 @@
           <router-link to="/about" class="nav-link hover-target">About</router-link>
         </li>
         <li class="nav-item">
+          <a 
+            href="https://fineartamerica.com/profiles/creationsxjohnc" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="nav-link hover-target"
+            aria-label="Shop (opens in new tab)"
+          >
+            Shop
+          </a>
+        </li>
+        <li class="nav-item">
           <router-link to="/projects" class="nav-link hover-target">Projects</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/CreationsXYouTube" class="nav-link hover-target">YouTube</router-link>
+        </li>
+        <li class="nav-item">
+          <a 
+            href="https://www.fiverr.com/johnccreations" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="nav-link hover-target"
+            aria-label="Hire Me (opens in new tab)"
+          >
+            Hire Me
+          </a>
         </li>
         <li class="nav-item">
           <router-link to="/contact" class="nav-link hover-target">Contact</router-link>
@@ -57,6 +79,18 @@
           </router-link>
         </li>
         <li class="mobile-nav-item">
+          <a 
+            href="https://fineartamerica.com/profiles/creationsxjohnc" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mobile-nav-link" 
+            @click="closeMobileMenu"
+            aria-label="Shop (opens in new tab)"
+          >
+            <span class="mobile-link-text">Shop</span>
+          </a>
+        </li>
+        <li class="mobile-nav-item">
           <router-link to="/projects" class="mobile-nav-link" @click="closeMobileMenu">
             <span class="mobile-link-text">Projects</span>
           </router-link>
@@ -65,6 +99,18 @@
           <router-link to="/CreationsXYouTube" class="mobile-nav-link" @click="closeMobileMenu">
             <span class="mobile-link-text">YouTube</span>
           </router-link>
+        </li>
+        <li class="mobile-nav-item">
+          <a 
+            href="https://www.fiverr.com/johnccreations" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mobile-nav-link" 
+            @click="closeMobileMenu"
+            aria-label="Hire Me (opens in new tab)"
+          >
+            <span class="mobile-link-text">Hire Me</span>
+          </a>
         </li>
         <li class="mobile-nav-item">
           <router-link to="/contact" class="mobile-nav-link" @click="closeMobileMenu">
