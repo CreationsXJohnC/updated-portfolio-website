@@ -252,14 +252,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🛠 Production Updates Workflow
 
-To quickly add or reorder projects on the live site without changing any UI code, use the JSON-driven setup under `api/`.
+To quickly add or reorder projects on the live site without changing any UI code, use the JSON-driven setup under the integrated portfolio app.
 
-- Source of truth: `api/projects-config.json`
-- Serverless GraphQL: `api/graphql.js` loads this JSON and serves projects to the client
-- Deploy target: Vercel rewrites `/graphql` to `/api/graphql` per `vercel.json`
+- Source of truth: `integrated-portfolio/api/projects-config.json`
+- Serverless GraphQL (deployed with the integrated app): `integrated-portfolio/api/graphql.js` loads this JSON and serves projects to the client
+- Client GraphQL endpoint: `/api/graphql` (configured via `integrated-portfolio/client/.env.*`)
+- Deploy target: Vercel uses `integrated-portfolio/vercel.json` for routes and functions
 
 ### Add or Update a Project
-- Edit `api/projects-config.json` and add/update a project object with:
+- Edit `integrated-portfolio/api/projects-config.json` and add/update a project object with:
   - `title`, `shortDescription`, `description`, `technologies`, `imageUrl`, `liveUrl`, `githubUrl`
   - `featured` (`true` for Home Featured), `order` (integer display order), `status` (`published`), `category`
 - Place the screenshot in `integrated-portfolio/client/public/projects` and reference it via `imageUrl` like `/projects/<filename>.png`.
@@ -271,16 +272,18 @@ To quickly add or reorder projects on the live site without changing any UI code
 
 ### Verify Locally
 - Development client: `cd integrated-portfolio/client && npm run dev` (or `./node_modules/.bin/vite`).
-- Local GraphQL server for integrated stack: `cd integrated-portfolio/server && node index.js` (optional). The dev client is configured to use `http://localhost:4000/graphql`.
-- For production behavior, the client will use `/graphql` which Vercel proxies to `api/graphql.js`.
+- Local GraphQL server for integrated stack: `cd integrated-portfolio/server && node index.js` (optional).
+- The client is configured to use `/api/graphql` in development and production via `VITE_GRAPHQL_URI`.
 
 ### Deploy
-- Commit and push changes to GitHub (`master`). Vercel will build and deploy automatically.
+- Commit and push changes to GitHub (`master`). Vercel (with root directory set to `integrated-portfolio`) will build and deploy automatically.
 - No UI code changes are required for data-only updates.
 
 ### Troubleshooting
 - If an image doesn’t appear, ensure the file exists under `integrated-portfolio/client/public/projects` and the `imageUrl` path matches.
 - Featured projects are filtered by the GraphQL endpoint; ordering is defined by the `order` values in the JSON/config list.
+
+> Note: The root-level `api/` folder is not used for the integrated portfolio deployment. Keep all project data changes in `integrated-portfolio/api/projects-config.json` to avoid confusion.
 
 ## 👨‍💻 Author
 
