@@ -16,9 +16,9 @@
               Here's a bit more <router-link to="/about" class="inline-link">about me</router-link>.
             </p>
             <div class="hero-actions">
-              <router-link to="/projects" class="btn btn-primary hover-target">
+              <router-link to="/projects#my-projects" class="btn btn-primary hover-target">
                 View My Work
-                <i class="fas fa-arrow-right"></i>
+                <i class="fas fa-arrow-down"></i>
               </router-link>
               <router-link to="/contact" class="btn btn-secondary hover-target">
                 Get In Touch
