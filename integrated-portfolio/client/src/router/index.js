@@ -27,11 +27,11 @@ const routes = [
     }
   },
   {
-    path: '/videos',
-    name: 'Videos',
+    path: '/CreationsXYouTube',
+    name: 'YouTube',
     component: () => import('@/views/VideosView.vue'),
     meta: {
-      title: 'Videos - Creations X YouTube'
+      title: 'YouTube - Creations X YouTube'
     }
   },
   {

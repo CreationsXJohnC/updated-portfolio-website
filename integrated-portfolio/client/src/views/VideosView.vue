@@ -2,17 +2,20 @@
   <div class="videos-view">
     <section class="hero">
       <div class="container">
-        <h1 class="title">Creations X YouTube</h1>
-        <p class="subtitle">Latest uploads and curated playlists from the YouTube channel.</p>
         <div class="cta-group">
-          <a class="btn primary" :href="channelUrl" target="_blank" rel="noopener">Visit YouTube Channel</a>
-          <a class="btn secondary" :href="featuredUrl" target="_blank" rel="noopener">Featured Page</a>
+          <div class="cta-text">
+            <h1 class="title">Creations X YouTube</h1>
+            <p class="subtitle">Please click the button below and subscirbe to the Creations X YouTube channel!</p>
+          </div>
+          <a class="btn primary" :href="channelUrl" target="_blank" rel="noopener" aria-label="Visit YouTube Channel">
+            <img :src="ytButtonImg" alt="YouTube" class="btn-img" />
+          </a>
         </div>
       </div>
     </section>
 
     <section class="content container">
-      <div class="section-header">
+      <div class="section-header centered">
         <h2>Featured Uploads</h2>
         <p>Automatically updates as new videos are published.</p>
       </div>
@@ -20,18 +23,16 @@
       <div v-if="loadingUploads" class="loading">Loading uploads...</div>
       <div v-else-if="uploadsError" class="error">{{ uploadsError }}</div>
       <div v-else class="grid videos">
-        <article v-for="video in featuredVideos" :key="video.id" class="card video">
-          <a :href="video.url" target="_blank" rel="noopener" class="thumb-wrap">
+        <div v-for="video in featuredVideos" :key="video.id" class="video-item">
+          <a :href="video.url" target="_blank" rel="noopener" class="yt-thumb">
             <img :src="video.thumbnail" :alt="video.title" class="thumb" />
+            <span class="yt-play">▶</span>
           </a>
-          <div class="card-body">
-            <h3 class="card-title">{{ video.title }}</h3>
-            <a :href="video.url" target="_blank" rel="noopener" class="btn small">Watch on YouTube</a>
-          </div>
-        </article>
+          <a :href="video.url" target="_blank" rel="noopener" class="yt-title">{{ video.title }}</a>
+        </div>
       </div>
 
-      <div class="section-header mt">
+      <div class="section-header centered mt">
         <h2>Playlists</h2>
         <p>Curated collections to explore different themes.</p>
       </div>
@@ -40,16 +41,13 @@
       <div v-else-if="playlistsNote" class="note">{{ playlistsNote }}</div>
       <div v-else-if="playlistsError" class="error">{{ playlistsError }}</div>
       <div v-else class="grid playlists">
-        <article v-for="pl in playlists" :key="pl.id" class="card playlist">
-          <a :href="pl.url" target="_blank" rel="noopener" class="thumb-wrap">
+        <div v-for="pl in playlists" :key="pl.id" class="playlist-item">
+          <a :href="pl.url" target="_blank" rel="noopener" class="yt-thumb">
             <img :src="pl.thumbnail" :alt="pl.title" class="thumb" />
+            <span class="yt-count">{{ pl.itemCount }} videos</span>
           </a>
-          <div class="card-body">
-            <h3 class="card-title">{{ pl.title }}</h3>
-            <p class="card-meta">{{ pl.itemCount }} videos</p>
-            <a :href="pl.url" target="_blank" rel="noopener" class="btn small">View on YouTube</a>
-          </div>
-        </article>
+          <a :href="pl.url" target="_blank" rel="noopener" class="yt-title">{{ pl.title }}</a>
+        </div>
       </div>
     </section>
   </div>
@@ -58,12 +56,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import ytButtonImg from '@/assets/images/logos/Creations X YouTube Logo 2017.png';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 const handle = '@Creations_X';
 
 const channelUrl = computed(() => `https://www.youtube.com/${handle}`);
-const featuredUrl = computed(() => `https://www.youtube.com/${handle}/featured`);
 
 // Uploads state
 const uploads = ref([]);
@@ -129,25 +127,64 @@ onMounted(() => {
   padding: 2rem 1rem;
 }
 .hero {
-  background: linear-gradient(135deg, #0d0d0d, #1f1f1f);
+  background: #000;
   color: #fff;
-  padding: 3rem 1rem;
+  padding: 3rem 1rem 2rem;
 }
-.title { font-size: 2rem; font-weight: 700; }
-.subtitle { opacity: 0.8; margin-top: 0.5rem; }
-.cta-group { display: flex; gap: 1rem; margin-top: 1rem; }
-.btn { display: inline-flex; align-items: center; padding: 0.6rem 1rem; border-radius: 8px; text-decoration: none; }
-.btn.primary { background: #ff0033; color: #fff; }
+.title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 0; }
+.subtitle { opacity: 0.8; margin-top: 0.1875rem; }
+.cta-group { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1rem; }
+.cta-text { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.btn { display: inline-flex; align-items: center; padding: 0 1rem; border-radius: 8px; text-decoration: none; }
+.btn.primary { background: #fff; color: #000; }
+.btn-img { height: 112px; display: block; }
+.btn, .btn * { transition: transform 180ms ease-out, filter 180ms ease-out, box-shadow 180ms ease-out; }
+.btn:hover, .btn:focus { 
+  transform: scale(1.10) translateY(-2px) !important; 
+  filter: brightness(1.10); 
+  background: #fff; 
+  box-shadow: 0 12px 28px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(0,0,0,0.18);
+}
+.btn:active { 
+  transform: scale(1.05) !important; 
+  filter: brightness(1.05); 
+  background: #fff; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(0,0,0,0.20);
+}
 .btn.secondary { background: #2a2a2a; color: #fff; }
-.btn.small { font-size: 0.9rem; padding: 0.4rem 0.8rem; }
-.section-header { margin-top: 2rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem; }
-.card { background: #121212; color: #fff; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-.thumb-wrap { display: block; aspect-ratio: 16/9; background: #000; }
-.thumb { width: 100%; height: 100%; object-fit: cover; }
-.card-body { padding: 0.8rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.card-title { font-size: 1rem; font-weight: 600; }
-.card-meta { font-size: 0.85rem; opacity: 0.8; }
+.section-header { margin-top: 0.5rem; }
+.section-header.centered { text-align: center; }
+.section-header h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 0; }
+.section-header p { margin-top: 0.1875rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
+/* Increase bottom spacing before footer while keeping tighter top padding */
+.content.container { padding-top: 0.5rem; padding-bottom: 8rem; }
+
+/* Responsive adjustments for footer spacing */
+@media (max-width: 600px) {
+  .content.container { padding-bottom: 5rem; }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .content.container { padding-bottom: 7rem; }
+}
+/* Force 3 columns for videos section */
+.grid.videos { grid-template-columns: repeat(3, 1fr); }
+/* YouTube-style items: no card frame, just thumbnail + title */
+.video-item, .playlist-item { display: flex; flex-direction: column; gap: 0.5rem; }
+.yt-thumb { position: relative; display: block; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; }
+.thumb { width: 100%; height: 100%; object-fit: cover; transition: none; }
+.yt-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: none; }
+.yt-title:hover, .yt-title:focus, .yt-title:active { text-decoration: none; transform: none !important; }
+.yt-play { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; }
+.yt-count { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; }
+.yt-thumb:hover .thumb,
+.yt-thumb:focus .thumb,
+.yt-thumb:active .thumb,
+.thumb:hover { transform: none !important; filter: none !important; }
+.yt-thumb:hover,
+.yt-thumb:focus,
+.yt-thumb:active { transform: none !important; }
 .loading, .error, .note { margin: 1rem 0; }
-.mt { margin-top: 2rem; }
+.mt { margin-top: 5rem; }
 </style>

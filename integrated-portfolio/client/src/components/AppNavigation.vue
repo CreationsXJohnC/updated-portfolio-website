@@ -24,7 +24,7 @@
           <router-link to="/projects" class="nav-link hover-target">Projects</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/videos" class="nav-link hover-target">Videos</router-link>
+          <router-link to="/CreationsXYouTube" class="nav-link hover-target">YouTube</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/contact" class="nav-link hover-target">Contact</router-link>
@@ -62,8 +62,8 @@
           </router-link>
         </li>
         <li class="mobile-nav-item">
-          <router-link to="/videos" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">Videos</span>
+          <router-link to="/CreationsXYouTube" class="mobile-nav-link" @click="closeMobileMenu">
+            <span class="mobile-link-text">YouTube</span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
