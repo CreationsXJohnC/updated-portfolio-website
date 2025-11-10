@@ -2,7 +2,13 @@
   <div class="home-view">
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="hero-container">
+      <div class="hero-logo">
+        <img :src="jccWhiteLogo" alt="JCC White Logo" class="hero-logo-img" />
+      </div>
+      <div class="hero-tagline" aria-live="polite">
+        <span class="typewriter">{{ typedText }}</span>
+      </div>
+      <div class="hero-container" v-if="false">
         <div class="hero-content">
           <div class="hero-text">
             <h1 class="hero-title">
@@ -220,7 +226,7 @@
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="scroll-indicator" @click="scrollToBottom">
+        <div class="scroll-indicator" v-if="false" @click="scrollToBottom">
           <div class="scroll-mouse">
             <div class="scroll-wheel"></div>
           </div>
@@ -305,10 +311,11 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
+import jccWhiteLogo from '@/assets/images/logos/JCC - White.png'
 
 const GET_FEATURED_PROJECTS = gql`
   query GetFeaturedProjects {
@@ -331,9 +338,23 @@ export default {
   name: 'HomeView',
   setup() {
     const router = useRouter()
+    const typedText = ref('')
+    const fullTagline = 'Think 2 Create & Create 2 Inspire.'
     
     // Fetch featured projects from API
     const { result, loading, error } = useQuery(GET_FEATURED_PROJECTS, undefined, { fetchPolicy: 'cache-and-network' })
+
+    onMounted(() => {
+      let i = 0
+      const speed = 180
+      const timer = setInterval(() => {
+        typedText.value = fullTagline.slice(0, i + 1)
+        i++
+        if (i >= fullTagline.length) {
+          clearInterval(timer)
+        }
+      }, speed)
+    })
     
     const featuredProjects = computed(() => {
       const list = result.value?.projects || []
@@ -358,13 +379,18 @@ export default {
        loading,
        error,
        navigateToProject,
-       scrollToBottom
+       scrollToBottom,
+       jccWhiteLogo,
+       typedText,
      }
    },
    
    mounted() {
-      this.startKeyboardTyping();
-      this.startScreenTyping();
+      const hasTypingUI = document.querySelector('.keyboard-keys') || document.getElementById('dynamic-code');
+      if (hasTypingUI) {
+        this.startKeyboardTyping();
+        this.startScreenTyping();
+      }
     },
    
    methods: {
@@ -772,8 +798,9 @@ export default {
 .hero-section {
   min-height: 100vh;
   @include flex-center;
+  flex-direction: column;
   position: relative;
-  background: #ffffff;
+  background: #000000;
   padding-top: 100px; // Account for fixed navigation bar
   padding-bottom: 6rem; // Ensure space for scroll indicator
   
@@ -784,6 +811,87 @@ export default {
   @media (max-width: 480px) {
     padding-top: 100px;
     padding-bottom: 8rem; // Extra bottom padding for smallest screens
+  }
+}
+
+.hero-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.hero-logo-img {
+  display: block;
+  width: clamp(560px, 54vw, 1120px);
+  height: auto;
+}
+
+.hero-tagline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -4.5rem;
+  color: #ffffff;
+  font-size: clamp(1.1rem, 2.6vw, 2rem);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.0;
+  transform: translateX(0.75rem);
+}
+
+// Responsive tweaks to maintain consistent visual spacing
+@media (max-width: 640px) {
+  .hero-tagline {
+    margin-top: -3rem;
+    transform: translateX(0.3rem);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-tagline {
+    margin-top: -4rem;
+    transform: translateX(0.5rem);
+  }
+}
+
+.typewriter {
+  display: inline-block;
+  position: relative;
+}
+
+.typewriter::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #ffffff;
+  margin-left: 4px;
+  animation: caret-blink 1.2s step-end infinite;
+  vertical-align: -0.15em;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+// Responsive caret blink pacing
+@media (max-width: 640px) {
+  .typewriter::after {
+    animation-duration: 1.0s;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .typewriter::after {
+    animation-duration: 1.15s;
+  }
+}
+
+@media (min-width: 1025px) {
+  .typewriter::after {
+    animation-duration: 1.3s;
   }
 }
 

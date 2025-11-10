@@ -19,6 +19,14 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      // Route all client requests under /api to the backend, removing the /api prefix.
+      // This keeps requests same-origin in development and avoids CORS.
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
   build: {
