@@ -273,7 +273,7 @@
                   <i class="fas fa-external-link-alt"></i>
                 </a>
                 <a 
-                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X John C'" 
                   :href="project.githubUrl" 
                   target="_blank"
                   class="project-action hover-target"

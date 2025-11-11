@@ -130,9 +130,9 @@ export const mockProjects = [
   },
   {
     id: "7",
-    title: "Creations X Platform",
-    description: "A comprehensive creative platform showcasing innovative digital solutions and design services.",
-    shortDescription: "A comprehensive creative platform showcasing innovative digital solutions and design services.",
+    title: "Creations X John C",
+    description: "Founded by John C, Creations X — pronounced \"Creations By\" — embodies the mantra: \"Think 2 Create & Create 2 Inspire.\" It is more than a creative agency; it is John C’s canvas for collaborating & showcasing digital art through motion, sound, and design. From photography and videography to drone visuals, live streaming, and digital experiences, John C transforms ideas into immersive stories that connect art, technology, and emotion.",
+    shortDescription: "A comprehensive content portfolio showcasing John C's digital art through various mediums.",
     technologies: ["Canva", "HTML", "CSS"],
     imageUrl: "/projects/Creations X Platform - website screenshot.png",
     liveUrl: "https://www.johnccreations.com/creationsx",

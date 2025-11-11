@@ -8,6 +8,7 @@ lerna-debug.log*
 
 # Build outputs
 dist/
+**/dist/
 build/
 .output/
 .nuxt/
@@ -20,6 +21,7 @@ out/
 .env.development.local
 .env.test.local
 .env.production.local
+integrated-portfolio/.env.production
 
 # IDE and editor files
 .vscode/

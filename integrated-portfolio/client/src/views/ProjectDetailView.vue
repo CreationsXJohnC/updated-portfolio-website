@@ -33,7 +33,7 @@
               </router-link>
             </div>
             
-            <h1 class="project-title">{{ project.title }}</h1>
+            <h1 class="project-title">{{ displayTitle }}</h1>
             <p class="project-description">{{ heroDescription }}</p>
             
             <div class="project-actions">
@@ -48,7 +48,7 @@
                 Live Demo
               </a>
               <a 
-                v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                v-if="project.githubUrl && displayTitle !== 'Ori Company' && displayTitle !== 'Creations X John C'" 
                 :href="project.githubUrl" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -76,7 +76,7 @@
                     <i class="fas fa-external-link-alt"></i>
                   </a>
                   <a 
-                    v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                    v-if="project.githubUrl && displayTitle !== 'Ori Company' && displayTitle !== 'Creations X John C'" 
                     :href="project.githubUrl" 
                     target="_blank"
                     class="project-action hover-target"
@@ -85,8 +85,8 @@
                     <i class="fab fa-github"></i>
                   </a>
                 </div>
-                <h3 class="project-title">{{ project.title }}</h3>
-                <p class="project-description">{{ project.shortDescription }}</p>
+                <h3 class="project-title">{{ displayTitle }}</h3>
+                <p class="project-description">{{ displayShortDescription }}</p>
                 <div class="project-tech">
                   <span 
                     v-for="tech in project.technologies.slice(0, 3)" 
@@ -241,14 +241,33 @@ export default {
         'Movie Entertainment': 'I built a searchable movie library that turns curiosity into quick discovery. React with JavaScript/HTML/CSS powers a responsive interface that feels natural across desktop and mobile. The OMDB API supplies rich data, while my frontend-backend connections keep results flowing effortlessly. Webpack and Babel support an efficient dev cycle and a lean production build. Jest tests gave me confidence to refactor and add features without regressions. I designed the UI to minimize friction—clear inputs, thoughtful empty states, and readable detail pages. It’s a practical showcase of API integration, performance, and user-first design.',
         'E-Commerce Book Library': 'I created an online bookstore experience that emphasizes speed, clarity, and trust. Built with React and JavaScript/HTML/CSS, the app uses dynamic routing to keep navigation fluid and predictable. API integration pulls fresh catalog data while caching and request patterns keep things responsive. Skeleton loading states reduce perceived wait time and set expectations during fetches. Jest testing helps ensure carts, filters, and checkout flows remain stable as features grow. Webpack and Babel provide a modern toolchain for fast builds and clean code. The result is a friendly, high-performing shopping journey from browse to buy.',
         'Ori Company': 'Ori Company was founded in Washington, DC as a licensed medical cannabis cultivation and retail operation. Leadership focused on building digital platforms and ecommerce integrations that made discovery and purchasing simple. Compliance systems and customer engagement tools were implemented, increasing operational efficiency by thirty percent while maintaining regulatory alignment. A corporate website and online store were built and maintained to expand patient access. Improvements to navigation, content, and promotions drove a twenty percent lift in online sales. Investor pitch decks and presentations were developed to support an ongoing raise of five to ten million dollars. Stakeholder relationships were cultivated to advance growth and protect brand integrity. The company was positioned to serve more than seven million annual visitors and seven hundred thousand residents in the District. A clear vision for a vertically integrated model targets more than eighty million dollars in annual revenue. The mission centers on quality, community impact, and sustainable growth.',
-        'Creations X Platform': 'Creations X was launched to deliver creative media for clients across the United States and the Caribbean. The studio produces photography, videography, drone footage, live streaming, and digital campaigns. More than one hundred projects have been completed for brands and influencers throughout the DMV region. Client visibility on web and social channels grew through clear strategy and consistent execution. Data informed content plans improved reach and engagement by forty percent. End to end planning, production, and delivery kept creative work aligned with goals, budgets, and timelines. Adobe Creative Suite and Figma supported strong storytelling and polished visual design. Modern web experiences were built by integrating React, Tailwind, Node.js, and Firebase. Collaboration translated ideas into compelling assets that convert and endure. The approach balances empathy, craft, and accountability to build lasting partnerships.'
+        'Creations X John C': 'Founded by John C, Creations X — pronounced “Creations By” — embodies the mantra: “Think 2 Create & Create 2 Inspire.” It is more than a creative agency; it is John C’s canvas for collaborating & showcasing digital art through motion, sound, and design. From photography and videography to drone visuals, live streaming, and digital experiences, John C transforms ideas into immersive stories that connect art, technology, and emotion. Every project reflects his belief that creativity is energy — a force that moves people, builds brands, and turns vision into reality. Blending over a decade of experience with tools like Adobe Creative Suite, Figma, Canva, JavaScript, React, and Tailwind CSS, Creations X delivers timeless visuals and digital experiences that inspire and endure.'
       }
 
       const overridesById = {
-        '8': 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.'
+        '8': 'I created a streaming experience that feels familiar and cinematic without sacrificing speed. React drives the UI, with JavaScript/HTML/CSS crafting a clean, responsive layout on any device. Vite and hot module replacement made iteration fast, so features shipped quickly and safely. Firebase powers authentication and data services, keeping the experience real-time and reliable. I paid special attention to navigation and loading states to keep users immersed. ESLint enforced consistent, readable code as the project grew. The project demonstrates how modern tooling and cloud services can deliver a smooth, app-like media experience on the web.',
+        '7': 'Founded by John C, Creations X — pronounced “Creations By” — embodies the mantra: “Think 2 Create & Create 2 Inspire.” It is more than a creative agency; it is John C’s canvas for collaborating & showcasing digital art through motion, sound, and design. From photography and videography to drone visuals, live streaming, and digital experiences, John C transforms ideas into immersive stories that connect art, technology, and emotion. Every project reflects his belief that creativity is energy — a force that moves people, builds brands, and turns vision into reality. Blending over a decade of experience with tools like Adobe Creative Suite, Figma, Canva, JavaScript, React, and Tailwind CSS, Creations X delivers timeless visuals and digital experiences that inspire and endure.'
       }
 
       return overridesByTitle[title] ?? overridesById[id] ?? project.value?.description ?? ''
+    })
+
+    // Display overrides for title and short description
+    const titleOverrideById = {
+      '7': 'Creations X John C'
+    }
+    const shortOverrideById = {
+      '7': 'A comprehensive content portfolio showcasing John C\'s digital art through various mediums.'
+    }
+
+    const displayTitle = computed(() => {
+      const id = project.value?.id
+      return titleOverrideById[id] ?? project.value?.title ?? ''
+    })
+
+    const displayShortDescription = computed(() => {
+      const id = project.value?.id
+      return shortOverrideById[id] ?? project.value?.shortDescription ?? ''
     })
 
     const formatDate = (dateString) => {
@@ -266,7 +285,9 @@ export default {
       loading,
       error,
       formatDate,
-      heroDescription
+      heroDescription,
+      displayTitle,
+      displayShortDescription
     }
   }
 }

@@ -13,10 +13,20 @@
     "install:all": "npm install && cd client && npm install",
     "vercel-build": "cd client && npx vite build"
   },
-  "keywords": ["portfolio", "vue", "graphql", "apollo", "postgresql"],
+  "keywords": [
+    "portfolio",
+    "vue",
+    "graphql",
+    "apollo",
+    "postgresql"
+  ],
   "author": "Creations Studio",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.6"
   }
 }

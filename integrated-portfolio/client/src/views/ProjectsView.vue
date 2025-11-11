@@ -460,7 +460,7 @@
                   <i class="fas fa-external-link-alt"></i>
                 </a>
                 <a 
-                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X Platform'" 
+                  v-if="project.githubUrl && project.title !== 'Ori Company' && project.title !== 'Creations X John C'" 
                   :href="project.githubUrl" 
                   target="_blank"
                   class="project-action hover-target"
@@ -563,6 +563,14 @@ export default {
       return techs.sort()
     })
 
+    // Display overrides for specific projects (by id)
+    const titleOverrideById = {
+      '7': 'Creations X John C'
+    }
+    const shortOverrideById = {
+      '7': "A comprehensive content portfolio showcasing John C's digital art through various mediums."
+    }
+
     const filteredProjects = computed(() => {
       let filtered = [...projects.value] // Create a copy to avoid read-only errors
 
@@ -577,7 +585,7 @@ export default {
       }
 
       // Sort by order field (ascending)
-      return filtered.sort((a, b) => {
+      const sorted = filtered.sort((a, b) => {
         // If both have order, sort by order
         if (a.order && b.order) {
           return a.order - b.order
@@ -588,6 +596,13 @@ export default {
         // If neither has order, sort by creation date (newest first)
         return new Date(b.createdAt) - new Date(a.createdAt)
       })
+
+      // Apply display overrides without mutating original objects
+      return sorted.map(p => ({
+        ...p,
+        title: titleOverrideById[p.id] ?? p.title,
+        shortDescription: shortOverrideById[p.id] ?? p.shortDescription
+      }))
     })
 
     const setCategory = (category) => {

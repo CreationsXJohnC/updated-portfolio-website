@@ -168,9 +168,9 @@ module.exports = function(req, res) {
           },
           {
             id: "7",
-            title: "Creations X Platform",
-            description: "A comprehensive creative platform showcasing innovative digital solutions and design services. Features portfolio management, client collaboration tools, and project showcase capabilities built with modern web technologies.",
-            shortDescription: "A comprehensive creative platform showcasing innovative digital solutions and design services.",
+            title: "Creations X John C",
+            description: "A comprehensive content portfolio showcasing John C's digital art through photography, videography, and droneography.",
+            shortDescription: "A comprehensive content portfolio showcasing John C's digital art through various mediums.",
             technologies: ["Canva", "HTML", "CSS"],
             imageUrl: "/projects/Creations X Platform - website screenshot.png",
             liveUrl: "https://www.johnccreations.com/creationsx",
@@ -230,26 +230,36 @@ module.exports = function(req, res) {
           }
           
           // Call the contact API endpoint to send the email
-          var https = require('https');
           var contactData = JSON.stringify({
             name: input.name,
             email: input.email,
             subject: input.subject || 'No subject',
             message: input.message
           });
-          
+
+          // Determine protocol and host/port from the incoming request
+          var forwardedProto = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+          var isHttps = forwardedProto.indexOf('https') !== -1;
+          var hostHeader = req.headers.host || 'localhost';
+          var hostParts = hostHeader.split(':');
+          var hostname = hostParts[0];
+          var port = hostParts[1] ? parseInt(hostParts[1], 10) : (isHttps ? 443 : 80);
+
+          // Use appropriate Node core module
+          var httpModule = isHttps ? require('https') : require('http');
+
           var options = {
-            hostname: req.headers.host,
-            port: 443,
+            hostname: hostname,
+            port: port,
             path: '/api/contact',
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Content-Length': contactData.length
+              'Content-Length': Buffer.byteLength(contactData)
             }
           };
 
-          var request = https.request(options, function(response) {
+          var request = httpModule.request(options, function(response) {
             var responseData = '';
             response.on('data', function(chunk) { responseData += chunk; });
             response.on('end', function() {
