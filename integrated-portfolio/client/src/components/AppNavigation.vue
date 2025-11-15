@@ -22,7 +22,7 @@
         </li>
         <li class="nav-item">
           <a 
-            href="https://fineartamerica.com/profiles/creationsxjohnc" 
+            href="https://creationsxjohnc.pixels.com" 
             target="_blank" 
             rel="noopener noreferrer" 
             class="nav-link hover-target"
@@ -80,7 +80,7 @@
         </li>
         <li class="mobile-nav-item">
           <a 
-            href="https://fineartamerica.com/profiles/creationsxjohnc" 
+            href="https://creationsxjohnc.pixels.com" 
             target="_blank" 
             rel="noopener noreferrer" 
             class="mobile-nav-link" 

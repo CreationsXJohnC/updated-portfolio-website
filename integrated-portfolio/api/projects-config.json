@@ -114,9 +114,9 @@
     },
     {
       "id": "7",
-      "title": "Creations X Platform",
-      "description": "A comprehensive creative platform showcasing innovative digital solutions and design services.",
-      "shortDescription": "A comprehensive creative platform showcasing innovative digital solutions and design services.",
+      "title": "Creations X John C",
+      "description": "A comprehensive content portfolio showcasing John C's digital art through photography, videography, and droneography.",
+      "shortDescription": "A comprehensive content portfolio showcasing John C's digital art through various mediums.",
       "technologies": ["Canva", "HTML", "CSS"],
       "imageUrl": "/projects/Creations X Platform - website screenshot.png",
       "liveUrl": "https://www.johnccreations.com/creationsx",
