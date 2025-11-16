@@ -1077,7 +1077,7 @@ export default {
 
 .screen-content {
   padding: 14px 14px 60px 14px;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: var(--font-primary);
   font-size: 12px;
   line-height: 1.4;
   color: #fff;
@@ -1425,7 +1425,7 @@ export default {
 
 .floating-code {
   position: absolute;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: var(--font-primary);
   font-weight: bold;
   color: #666;
   font-size: 18px;

@@ -5,13 +5,20 @@
   "main": "index.js",
   "scripts": {
     "build": "echo 'Build completed'",
-    "dev": "echo 'Development server'",
+    "dev": "./node_modules/.bin/concurrently -n server,client -c \"green.bold\",\"blue.bold\" \"cd integrated-portfolio/server && USE_MOCK_DATA=true FRONTEND_URL=http://localhost:5173 npm start\" \"cd integrated-portfolio/client && ./node_modules/.bin/vite --open --port 5173\"",
     "start": "echo 'Server started'"
   },
-  "keywords": ["portfolio", "serverless", "vercel"],
+  "keywords": [
+    "portfolio",
+    "serverless",
+    "vercel"
+  ],
   "author": "John Che Larracuente",
   "license": "MIT",
   "dependencies": {
     "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

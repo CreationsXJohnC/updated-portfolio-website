@@ -79,6 +79,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "@/styles/main.scss";
+
 // Page transitions
 .page-enter-active,
 .page-leave-active {

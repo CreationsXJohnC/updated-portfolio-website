@@ -25,8 +25,12 @@ $dark-text-muted: #999999;
 $dark-border-color: #404040;
 
 // Typography
-$font-primary: 'adidasfont', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'Noto Sans', sans-serif;
-$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+// Clean system font stacks (no custom webfonts)
+$font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+$font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  'Liberation Mono', 'Courier New', monospace;
 
 // Font Weights
 $font-light: 300;
@@ -101,54 +105,3 @@ $z-tooltip: 1070;
 $transition-fast: 0.15s ease-in-out;
 $transition-base: 0.3s ease-in-out;
 $transition-slow: 0.5s ease-in-out;
-
-// CSS Custom Properties (CSS Variables)
-:root {
-  // Colors
-  --primary-color: #{$primary-color};
-  --secondary-color: #{$secondary-color};
-  --accent-primary: #{$accent-color};
-  --accent-secondary: #{$secondary-color};
-  --success-color: #{$success-color};
-  --warning-color: #{$warning-color};
-  --error-color: #{$error-color};
-
-  // RGB values for alpha transparency
-  --primary-color-rgb: 0, 0, 0;
-  --accent-primary-rgb: 102, 102, 102;
-  --bg-primary-rgb: 255, 255, 255;
-  --text-primary-rgb: 0, 0, 0;
-
-  // Light theme (default)
-  --bg-primary: #{$light-bg-primary};
-  --bg-secondary: #{$light-bg-secondary};
-  --bg-tertiary: #{$light-bg-tertiary};
-  --text-primary: #{$light-text-primary};
-  --text-secondary: #{$light-text-secondary};
-  --text-muted: #{$light-text-muted};
-  --border-color: #{$light-border-color};
-
-  // Typography
-  --font-primary: #{$font-primary};
-  --font-mono: #{$font-mono};
-
-  // Layout
-  --container-max-width: #{$container-max-width};
-  --container-padding: #{$container-padding};
-  --section-padding: #{$section-padding};
-
-  // Border radius
-  --border-radius: #{$border-radius};
-  --border-radius-lg: #{$border-radius-lg};
-  --border-radius-full: #{$border-radius-full};
-
-  // Shadows
-  --shadow: #{$shadow};
-  --shadow-md: #{$shadow-md};
-  --shadow-lg: #{$shadow-lg};
-
-  // Transitions
-  --transition-fast: #{$transition-fast};
-  --transition-base: #{$transition-base};
-  --transition-slow: #{$transition-slow};
-}

@@ -1124,7 +1124,7 @@ export default {
       inset 0 0 8px rgba(255, 255, 255, 0.05);
   }
 }
-.screen-content { padding: 14px 14px 60px 14px; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 12px; line-height: 1.4; color: #fff; height: 100%; overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; }
+.screen-content { padding: 14px 14px 60px 14px; font-family: var(--font-primary); font-size: 12px; line-height: 1.4; color: #fff; height: 100%; overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; }
 .screen-content {
   /* Hide scrollbar but keep functionality */
   scrollbar-width: none; /* Firefox */
@@ -1270,7 +1270,7 @@ export default {
 .arrow { width: 10px !important; font-size: 5px !important; }
 
 .floating-elements { position: absolute; width: 100%; height: 100%; pointer-events: none; }
-.floating-code { position: absolute; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-weight: bold; color: #666; font-size: 18px; animation: float 4s ease-in-out infinite; opacity: 0.6; }
+.floating-code { position: absolute; font-family: var(--font-primary); font-weight: bold; color: #666; font-size: 18px; animation: float 4s ease-in-out infinite; opacity: 0.6; }
 
 .code-1 { top: 10%; left: 10%; animation-delay: 0s; color: #ff6b6b; }
 .code-2 { top: 20%; right: 15%; animation-delay: 0.5s; color: #4ecdc4; }

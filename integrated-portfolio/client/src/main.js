@@ -8,6 +8,8 @@ import { performanceMonitor, logBundleInfo, checkPerformanceBudget } from './uti
 
 // Styles
 import './styles/main.scss'
+// Ensure font-face rules are bundled regardless of Sass module behavior
+import './styles/fonts.scss'
 
 // Initialize performance monitoring
 if (process.env.NODE_ENV === 'development') {
