@@ -15,10 +15,18 @@
       <!-- Desktop Navigation -->
       <ul class="nav-menu desktop-menu">
         <li class="nav-item">
-          <router-link to="/" class="nav-link hover-target">Home</router-link>
+          <router-link to="/" class="nav-link hover-target" aria-label="Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/about" class="nav-link hover-target">About</router-link>
+          <router-link to="/about" class="nav-link hover-target" aria-label="About">
+            <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+            </svg>
+          </router-link>
         </li>
         <li class="nav-item">
           <a 
@@ -28,14 +36,31 @@
             class="nav-link hover-target"
             aria-label="Shop (opens in new tab)"
           >
-            Shop
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.16 14h9.68c.75 0 1.41-.41 1.76-1.05l3.24-6.14c.23-.44.07-.98-.36-1.23-.14-.08-.3-.12-.46-.12H6.21L5.27 3H2v2h2l3.6 7.59-1.35 2.44C5.52 16.37 6.48 18 8 18h12v-2H8l1.1-2z"/>
+            </svg>
           </a>
         </li>
         <li class="nav-item">
-          <router-link to="/projects" class="nav-link hover-target">Projects</router-link>
+          <router-link to="/projects" class="nav-link hover-target" aria-label="Projects">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+            </svg>
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/CreationsXYouTube" class="nav-link hover-target">YouTube</router-link>
+          <router-link to="/CreationsXYouTube" class="nav-link hover-target" aria-label="YouTube">
+            <svg class="youtube-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M19.6 7.2c-.2-1.4-1.4-2.4-2.8-2.6C15 4.4 12 4.4 12 4.4s-3 0-4.8.2c-1.4.2-2.6 1.2-2.8 2.6C4.2 9 4.2 12 4.2 12s0 3 .2 4.8c.2 1.4 1.4 2.4 2.8 2.6 1.8.2 4.8.2 4.8.2s3 0 4.8-.2c1.4-.2 2.6-1.2 2.8-2.6.2-1.8.2-4.8.2-4.8s0-3-.2-4.8zM10 15.5V8.5l6 3.5-6 3.5z"/>
+            </svg>
+          </router-link>
         </li>
         <li class="nav-item">
           <a 
@@ -45,11 +70,18 @@
             class="nav-link hover-target"
             aria-label="Hire Me (opens in new tab)"
           >
-            Hire Me
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <!-- Contract/clipboard with check icon -->
+              <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1h-2c0-.55.45-1 1-1zm-1 15-4-4 1.41-1.41L11 15.17l6.59-6.59L19 10l-8 8z"/>
+            </svg>
           </a>
         </li>
         <li class="nav-item">
-          <router-link to="/contact" class="nav-link hover-target">Contact</router-link>
+          <router-link to="/contact" class="nav-link hover-target" aria-label="Contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </router-link>
         </li>
       </ul>
 
@@ -69,13 +101,21 @@
     <div class="mobile-menu-overlay" :class="{ 'active': isMenuOpen }" @click="closeMobileMenu">
       <ul class="mobile-menu">
         <li class="mobile-nav-item">
-          <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">Home</span>
+          <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu" aria-label="Home">
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+            </span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
-          <router-link to="/about" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">About</span>
+          <router-link to="/about" class="mobile-nav-link" @click="closeMobileMenu" aria-label="About">
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+              </svg>
+            </span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
@@ -87,17 +127,35 @@
             @click="closeMobileMenu"
             aria-label="Shop (opens in new tab)"
           >
-            <span class="mobile-link-text">Shop</span>
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.16 14h9.68c.75 0 1.41-.41 1.76-1.05l3.24-6.14c.23-.44.07-.98-.36-1.23-.14-.08-.3-.12-.46-.12H6.21L5.27 3H2v2h2l3.6 7.59-1.35 2.44C5.52 16.37 6.48 18 8 18h12v-2H8l1.1-2z"/>
+              </svg>
+            </span>
           </a>
         </li>
         <li class="mobile-nav-item">
-          <router-link to="/projects" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">Projects</span>
+          <router-link to="/projects" class="mobile-nav-link" @click="closeMobileMenu" aria-label="Projects">
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="24" height="24" fill="currentColor">
+                <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+              </svg>
+            </span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
-          <router-link to="/CreationsXYouTube" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">YouTube</span>
+          <router-link to="/CreationsXYouTube" class="mobile-nav-link" @click="closeMobileMenu" aria-label="YouTube">
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg class="youtube-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M19.6 7.2c-.2-1.4-1.4-2.4-2.8-2.6C15 4.4 12 4.4 12 4.4s-3 0-4.8.2c-1.4.2-2.6 1.2-2.8 2.6C4.2 9 4.2 12 4.2 12s0 3 .2 4.8c.2 1.4 1.4 2.4 2.8 2.6 1.8.2 4.8.2 4.8.2s3 0 4.8-.2c1.4-.2 2.6-1.2 2.8-2.6.2-1.8.2-4.8.2-4.8s0-3-.2-4.8zM10 15.5V8.5l6 3.5-6 3.5z"/>
+              </svg>
+            </span>
           </router-link>
         </li>
         <li class="mobile-nav-item">
@@ -109,12 +167,21 @@
             @click="closeMobileMenu"
             aria-label="Hire Me (opens in new tab)"
           >
-            <span class="mobile-link-text">Hire Me</span>
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <!-- Contract/clipboard with check icon -->
+                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1h-2c0-.55.45-1 1-1zm-1 15-4-4 1.41-1.41L11 15.17l6.59-6.59L19 10l-8 8z"/>
+              </svg>
+            </span>
           </a>
         </li>
         <li class="mobile-nav-item">
-          <router-link to="/contact" class="mobile-nav-link" @click="closeMobileMenu">
-            <span class="mobile-link-text">Contact</span>
+          <router-link to="/contact" class="mobile-nav-link" @click="closeMobileMenu" aria-label="Contact">
+            <span class="mobile-link-text" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </span>
           </router-link>
         </li>
       </ul>
@@ -345,6 +412,25 @@ export default {
       width: 100%;
     }
   }
+}
+
+/* Increase icon sizes for improved legibility */
+.app-navigation .nav-link svg,
+.app-navigation .mobile-link-text svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Slightly larger About icon to visually match others */
+.app-navigation svg.about-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Slightly larger YouTube icon to visually match others */
+.app-navigation svg.youtube-icon {
+  width: 30px;
+  height: 30px;
 }
 
 .mobile-menu-toggle {

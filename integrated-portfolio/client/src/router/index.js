@@ -35,6 +35,9 @@ const routes = [
     }
   },
   {
+    /* Cart demo route removed per request */
+  },
+  {
     path: '/projects/:id',
     name: 'ProjectDetail',
     component: () => import('@/views/ProjectDetailView.vue'),
