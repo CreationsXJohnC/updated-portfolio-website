@@ -1,5 +1,14 @@
 <template>
   <div class="home-view">
+    <ThreeBackground 
+      variant="starField" 
+      :enableMouse="true" 
+      :starDensityNear="6500"
+      :starDensityFar="12000"
+      :starSizeNear="0.12"
+      :starSizeFar="0.09"
+      textureSrc="/sparkle-png-24.png"
+    />
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-logo">
@@ -316,6 +325,7 @@ import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import jccWhiteLogo from '@/assets/images/logos/JCC - White.png'
+import ThreeBackground from '@/components/ThreeBackground.vue'
 
 const GET_FEATURED_PROJECTS = gql`
   query GetFeaturedProjects {
@@ -336,6 +346,7 @@ const GET_FEATURED_PROJECTS = gql`
 
 export default {
   name: 'HomeView',
+  components: { ThreeBackground },
   setup() {
     const router = useRouter()
     const typedText = ref('')
@@ -793,6 +804,7 @@ export default {
 
 .home-view {
   min-height: 100vh;
+  position: relative;
 }
 
 .hero-section {
@@ -800,7 +812,7 @@ export default {
   @include flex-center;
   flex-direction: column;
   position: relative;
-  background: #000000;
+  background: transparent;
   padding-top: 100px; // Account for fixed navigation bar
   padding-bottom: 6rem; // Ensure space for scroll indicator
   

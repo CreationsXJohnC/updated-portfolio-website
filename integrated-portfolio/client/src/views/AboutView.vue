@@ -328,7 +328,8 @@ export default {
 @import "@/styles/mixins.scss";
 
 .about-view {
-  padding-top: 80px; // Account for fixed navigation
+  padding-top: 80px;
+  background: #ffffff;
 }
 
 .about-hero {

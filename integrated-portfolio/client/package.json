@@ -16,6 +16,7 @@
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "locomotive-scroll": "^5.0.0-beta.11",
+    "three": "^0.160.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"

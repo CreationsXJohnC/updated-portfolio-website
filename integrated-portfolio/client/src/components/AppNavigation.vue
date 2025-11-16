@@ -1,16 +1,8 @@
 <template>
-  <nav class="app-navigation" :class="{ 'is-scrolled': isScrolled, 'menu-open': isMenuOpen }">
+  <nav class="app-navigation" :class="{ 'is-scrolled': isScrolled, 'menu-open': isMenuOpen, 'invert-icons': isInvertIcons, 'is-scrolling': isScrolling && !isMenuOpen }">
     <div class="nav-container">
       <!-- Logo/Brand -->
-      <div class="brand-group">
-        <a href="https://johnccreations.com/creationsx" target="_blank" rel="noopener noreferrer" class="nav-brand">
-          <img src="/src/assets/images/logos/Creation X Logo Updated.svg" alt="Creations X Portfolio" class="brand-logo" />
-        </a>
-        <div class="logo-hint" aria-hidden="false">
-          <span class="hint-arrow" aria-hidden="true"></span>
-          <span class="hint-text">Creations X John C</span>
-        </div>
-      </div>
+      
 
       <!-- Desktop Navigation -->
       <ul class="nav-menu desktop-menu">
@@ -83,6 +75,17 @@
             </svg>
           </router-link>
         </li>
+        <li class="nav-item">
+          <a 
+            href="https://johnccreations.com/creationsx" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="nav-link hover-target logo-item"
+            aria-label="Creations X"
+          >
+            <img src="/src/assets/images/logos/CreationsX Emoji Sticker logo(no background).png" alt="Creations X" class="nav-icon-image" />
+          </a>
+        </li>
       </ul>
 
       <!-- Mobile Menu Toggle -->
@@ -100,6 +103,20 @@
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-menu-overlay" :class="{ 'active': isMenuOpen }" @click="closeMobileMenu">
       <ul class="mobile-menu">
+        <li class="mobile-nav-item">
+          <a 
+            href="https://johnccreations.com/creationsx" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mobile-nav-link" 
+            @click="closeMobileMenu"
+            aria-label="Creations X"
+          >
+            <span class="mobile-link-text" aria-hidden="true">
+              <img src="/src/assets/images/logos/CreationsX Emoji Sticker logo(no background).png" alt="Creations X" class="nav-icon-image" />
+            </span>
+          </a>
+        </li>
         <li class="mobile-nav-item">
           <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu" aria-label="Home">
             <span class="mobile-link-text" aria-hidden="true">
@@ -190,22 +207,40 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'AppNavigation',
   setup() {
     const isScrolled = ref(false)
     const isMenuOpen = ref(false)
+    const isScrolling = ref(false)
+    let scrollTimeout = null
+    const route = useRoute()
+    const isInvertIcons = computed(() => {
+      const p = (route.path || '').toLowerCase()
+      return p === '/about' || p === '/projects' || p === '/contact'
+    })
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 50
+      if (window.innerWidth > 770 && !isMenuOpen.value) {
+        isScrolling.value = true
+        if (scrollTimeout) clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(() => {
+          isScrolling.value = false
+        }, 300)
+      }
     }
 
     const handleResize = () => {
       // Close mobile menu when screen size is larger than mobile breakpoint
       if (window.innerWidth > 770 && isMenuOpen.value) {
         closeMobileMenu()
+      }
+      if (window.innerWidth <= 770) {
+        isScrolling.value = false
       }
     }
 
@@ -217,6 +252,10 @@ export default {
     const closeMobileMenu = () => {
       isMenuOpen.value = false
       document.body.style.overflow = ''
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout)
+        scrollTimeout = null
+      }
     }
 
     onMounted(() => {
@@ -233,6 +272,8 @@ export default {
     return {
       isScrolled,
       isMenuOpen,
+      isInvertIcons,
+      isScrolling,
       toggleMobileMenu,
       closeMobileMenu
     }
@@ -265,31 +306,97 @@ export default {
   }
 }
 
+.app-navigation.invert-icons .nav-link svg {
+  fill: #000000 !important;
+  opacity: 1 !important;
+}
+.app-navigation.invert-icons .nav-link:hover svg,
+.app-navigation.invert-icons .nav-link.router-link-active svg {
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) brightness(1.05);
+}
+.app-navigation.invert-icons .nav-link.logo-item:hover .nav-icon-image,
+.app-navigation.invert-icons .nav-link.logo-item.router-link-active .nav-icon-image {
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) brightness(1.05);
+}
+
 .app-navigation {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #ffffff;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background-image: radial-gradient(ellipse at 20% -40%, rgba(255,255,255,0.15), transparent 60%), radial-gradient(ellipse at 80% -40%, rgba(255,255,255,0.08), transparent 60%);
 
   &.is-scrolled {
-    background: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: rgba(0,0,0,0.45);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@media (max-width: 770px) {
+  .app-navigation,
+  .app-navigation.is-scrolled,
+  .app-navigation.invert-icons,
+  .app-navigation.menu-open,
+  .app-navigation.invert-icons.is-scrolled,
+  .app-navigation.menu-open.invert-icons {
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-image: none !important;
+  }
+  .nav-container { background: transparent !important; }
+
+  /* Invert icon colors on light pages (About, Projects, Contact) */
+  .app-navigation.invert-icons .nav-link svg,
+  .app-navigation.invert-icons .mobile-link-text svg {
+    fill: #000000 !important;
+    opacity: 1 !important;
+  }
+  .app-navigation.invert-icons .nav-link:hover svg,
+  .app-navigation.invert-icons .nav-link.router-link-active svg {
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) brightness(1.05);
+  }
+  .app-navigation.invert-icons .mobile-link-text svg,
+  .app-navigation.invert-icons .mobile-link-text img {
+    filter: none;
+  }
+  .app-navigation.invert-icons .mobile-nav-link:hover .mobile-link-text svg,
+  .app-navigation.invert-icons .mobile-nav-link:hover .mobile-link-text img,
+  .app-navigation.invert-icons .mobile-nav-link.router-link-active .mobile-link-text svg,
+  .app-navigation.invert-icons .mobile-nav-link.router-link-active .mobile-link-text img {
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)) brightness(1.05);
+  }
+  .app-navigation.invert-icons .mobile-menu-toggle .hamburger-line,
+  .app-navigation.invert-icons .mobile-menu-toggle .hamburger-line.active {
+    background: #000000 !important;
+  }
+}
+
+@media (min-width: 771px) {
+  .app-navigation { will-change: transform, opacity; }
+  .app-navigation.is-scrolling {
+    transform: translateY(-110%);
+    opacity: 0;
   }
 }
 
 .nav-container {
-  @include flex-between;
+  @include flex-center;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1rem;
+  position: relative;
 
   @include mobile {
-    padding: 1rem;
+    padding: 0.75rem 0.75rem;
   }
 }
 
@@ -331,15 +438,49 @@ export default {
 
 .desktop-menu {
   @include flex-center;
-  gap: 2rem;
+  gap: clamp(2rem, 6vw, 8rem);
   padding-top: 1rem;
   margin-top: 0.5rem;
   list-style: none; /* remove bullets */
   padding-left: 0; /* ensure no left indentation */
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: navReveal 600ms ease forwards 200ms;
 
   @media (max-width: 770px) {
     display: none;
   }
+}
+.desktop-menu { position: relative; }
+.desktop-menu .nav-item { position: relative; }
+.desktop-menu .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 6px;
+  height: 6px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%);
+  opacity: 0.4;
+  transition: opacity 200ms ease, transform 200ms ease;
+  pointer-events: none;
+}
+.desktop-menu .nav-item:hover::after { opacity: 0.9; transform: translateX(-50%) scale(1.25); }
+.desktop-menu .nav-item:has(.nav-link.router-link-active)::after {
+  background: url('/sparkle-png-24.png') no-repeat center/contain;
+  width: 14px;
+  height: 14px;
+  opacity: 1;
+}
+
+.app-navigation.invert-icons .desktop-menu .nav-item::after {
+  background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 70%);
+}
+.app-navigation.invert-icons .desktop-menu .nav-item:has(.nav-link.router-link-active)::after {
+  background: url('/sparkle-png-24.png') no-repeat center/contain;
+  filter: invert(1) drop-shadow(0 0 6px rgba(0,0,0,0.35)) brightness(1.05);
 }
 
 .nav-item {
@@ -347,6 +488,9 @@ export default {
   border: none;
   background: none;
   box-shadow: none !important;
+  opacity: 0;
+  transform: translateY(-6px);
+  animation: itemReveal 500ms ease forwards;
 
   &:focus,
   &:focus-within,
@@ -360,7 +504,7 @@ export default {
 }
 
 .nav-link {
-  color: #333333;
+  color: #ffffff;
   font-weight: 700;
   font-size: 1.1rem;
   position: relative;
@@ -384,42 +528,35 @@ export default {
     text-decoration: none !important;
   }
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    height: 3px;
-    width: 0;
-    right: 0;
-    background-color: #000000;
-    transition: all 300ms ease;
-  }
+  &::after { content: none; }
 
-  &:hover {
-    color: #000000;
+  &:hover { color: #ffffff; }
 
-    &::after {
-      left: 0;
-      width: 100%;
-    }
-  }
+  &.router-link-active { color: #ffffff; }
 
-  &.router-link-active {
-    color: #000000;
-
-    &::after {
-      left: 0;
-      width: 100%;
-    }
-  }
+  &::before { content: none; }
 }
 
 /* Increase icon sizes for improved legibility */
-.app-navigation .nav-link svg,
-.app-navigation .mobile-link-text svg {
+.app-navigation .nav-link svg {
   width: 28px;
   height: 28px;
+  opacity: 1;
+  fill: #ffffff !important;
 }
+.app-navigation .mobile-link-text svg {
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  fill: #ffffff !important;
+}
+.app-navigation .nav-link:hover svg,
+.app-navigation .nav-link.router-link-active svg { filter: drop-shadow(0 0 6px rgba(255,255,255,0.9)) brightness(1.2); }
+.nav-link.logo-item:hover .nav-icon-image,
+.nav-link.logo-item.router-link-active .nav-icon-image { filter: drop-shadow(0 0 6px rgba(255,255,255,0.9)) brightness(1.2); }
+
+.nav-link.logo-item::before { content: none; }
+.nav-icon-image { width: 30px; height: 30px; object-fit: contain; display: inline-block; }
 
 /* Slightly larger About icon to visually match others */
 .app-navigation svg.about-icon {
@@ -444,7 +581,10 @@ export default {
   padding: 12px;
   cursor: pointer;
   z-index: 1001;
-  position: relative;
+  position: absolute;
+  left: 16px;
+  right: auto;
+  top: 18px;
   transition: all 0.3s ease;
 
   @media (max-width: 770px) {
@@ -458,20 +598,20 @@ export default {
   .hamburger-line {
     width: 24px;
     height: 2px;
-    background: #000000;
+    background: #ffffff;
     transition: all 0.3s ease;
     transform-origin: center;
     border-radius: 1px;
 
     &.active {
-      background: #000000;
+      background: #ffffff;
     }
 
     &:nth-child(1).active {
-      transform: rotate(45deg);
+      transform: translate(-50%, -50%) rotate(45deg);
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 50%;
       transform-origin: center;
     }
 
@@ -481,10 +621,10 @@ export default {
     }
 
     &:nth-child(3).active {
-      transform: rotate(-45deg);
+      transform: translate(-50%, -50%) rotate(-45deg);
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 50%;
       transform-origin: center;
     }
   }
@@ -493,11 +633,15 @@ export default {
 .mobile-menu-overlay {
   position: absolute;
   top: 100%;
-  right: 0;
-  width: 200px;
-  background: #ffffff;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  left: 0;
+  right: auto;
+  width: 75px;
+  margin-top: 20px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  box-shadow: none;
   border: none;
   border-top: none;
   opacity: 0;
@@ -505,6 +649,7 @@ export default {
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1000;
+  padding-left: 12px;
 
   // Hide completely on desktop screens
   @media (min-width: 771px) {
@@ -532,9 +677,16 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  gap: 0;
-  padding: 0.5rem 0;
+  gap: 8px;
+  padding: 0.75rem 0;
   list-style: none;
+}
+.mobile-menu .mobile-nav-item:first-child { margin-top: 16px; }
+.mobile-menu .mobile-nav-item:first-child .mobile-nav-link { padding-right: 0 !important; margin-right: 0 !important; }
+/* Increase left spacing for all dropdown icons except the logo (first item) */
+.mobile-menu .mobile-nav-item:not(:first-child) .mobile-nav-link {
+  padding-left: 1.25rem !important;
+  margin-left: 0.5rem !important;
 }
 
 .mobile-nav-item {
@@ -542,7 +694,7 @@ export default {
 }
 
 .mobile-nav-link {
-  color: #333333;
+  color: #ffffff;
   font-weight: 700;
   font-size: 1.1rem;
   position: relative;
@@ -552,9 +704,11 @@ export default {
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  padding: 0.75rem 1rem;
-  display: block;
-  margin: 0 0.5rem;
+  padding: 0.75rem 0.5rem 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.1rem 0 0.35rem;
   text-align: center;
 
   &:focus,
@@ -577,44 +731,25 @@ export default {
     position: relative;
     transition: all 300ms ease;
     text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &::after {
-      content: "";
-      position: absolute;
-      bottom: -3px;
-      height: 3px;
-      width: 0;
-      right: 0;
-      background-color: #000000;
-      transition: all 300ms ease;
+      content: none;
     }
   }
+.mobile-link-text img { width: 40px !important; height: 40px !important; display: inline-block; vertical-align: middle; }
 
-  &:hover {
-    color: #000000;
-    
-    .mobile-link-text {
-      color: #000000;
+  .mobile-link-text svg, .mobile-link-text img { filter: none; }
+  &:hover .mobile-link-text svg,
+  &:hover .mobile-link-text img { filter: drop-shadow(0 0 6px rgba(255,255,255,0.9)) brightness(1.2); }
+  &.router-link-active .mobile-link-text svg,
+  &.router-link-active .mobile-link-text img { filter: drop-shadow(0 0 6px rgba(255,255,255,0.9)) brightness(1.2); }
 
-      &::after {
-        left: 0;
-        width: 100%;
-      }
-    }
-  }
+  &:hover { color: #ffffff; }
 
-  &.router-link-active {
-    color: #000000;
-    
-    .mobile-link-text {
-      color: #000000;
-
-      &::after {
-        left: 0;
-        width: 100%;
-      }
-    }
-  }
+  &.router-link-active { color: #ffffff; }
 }
 .brand-group {
   display: flex;
@@ -627,7 +762,7 @@ export default {
   align-items: center;
   gap: 6px; // increase spacing between arrow and text only
   margin-left: 0; // flush next to the logo; spacing controlled by brand-group
-  color: #000000;
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
   user-select: none;
@@ -639,7 +774,7 @@ export default {
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-right: 10px solid #000000; // arrow pointing toward the logo on the left
+  border-right: 10px solid #ffffff; // arrow pointing toward the logo on the left
   animation: nudge 1.8s ease-in-out infinite;
 }
 
@@ -652,4 +787,6 @@ export default {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(2px); }
 }
+@keyframes navReveal { to { opacity: 1; transform: translateY(0); } }
+@keyframes itemReveal { to { opacity: 1; transform: translateY(0); } }
 </style>

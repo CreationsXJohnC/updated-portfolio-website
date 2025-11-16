@@ -236,8 +236,12 @@ export default {
   margin-top: 0;
 
   @include mobile {
-    margin-left: 0;
-    padding-right: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
   }
 
   @include tablet {
@@ -262,8 +266,11 @@ export default {
   @include mobile {
     gap: 1.5rem;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
   }
 }
 

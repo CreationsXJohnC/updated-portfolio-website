@@ -48,6 +48,7 @@ export default defineConfig({
           'apollo-vendor': ['@apollo/client', '@vue/apollo-composable', 'graphql', 'graphql-tag'],
           // Utilities
           'utils-vendor': ['@vueuse/core'],
+          'three-vendor': ['three'],
         },
         // Optimize chunk file names
         chunkFileNames: 'js/[name]-[hash].js',
@@ -95,7 +96,8 @@ export default defineConfig({
       '@vue/apollo-composable',
       'graphql',
       'graphql-tag',
-      '@vueuse/core'
+      '@vueuse/core',
+      'three'
     ],
   },
 })

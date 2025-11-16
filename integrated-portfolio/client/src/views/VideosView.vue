@@ -1,5 +1,14 @@
 <template>
   <div class="videos-view">
+    <ThreeBackground 
+      variant="starField" 
+      :enableMouse="true" 
+      :starDensityNear="4200"
+      :starDensityFar="8000"
+      :starSizeNear="0.12"
+      :starSizeFar="0.09"
+      textureSrc="/sparkle-png-24.png"
+    />
     <section class="hero">
       <div class="container">
         <div class="cta-group">
@@ -56,6 +65,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import ThreeBackground from '@/components/ThreeBackground.vue';
 import ytButtonImg from '@/assets/images/logos/Creations X YouTube Logo 2017.png';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
@@ -120,6 +130,7 @@ onMounted(() => {
   flex-direction: column;
   /* Add offset for fixed navbar */
   margin-top: 90px;
+  position: relative;
 }
 .container {
   max-width: 1100px;
