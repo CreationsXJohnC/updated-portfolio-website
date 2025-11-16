@@ -10,8 +10,8 @@
     "build": "cd client && ./node_modules/.bin/vite build",
     "build:client": "cd client && ./node_modules/.bin/vite build",
     "start": "cd server && npm start",
-    "install:all": "npm install && cd client && npm install",
-    "vercel-build": "cd client && ( [ -x ./node_modules/.bin/vite ] || npm ci ) && ./node_modules/.bin/vite build"
+    "install:all": "npm install && cd client && npm install --include=dev",
+    "vercel-build": "cd client && ( [ -x ./node_modules/.bin/vite ] || npm install --include=dev ) && ./node_modules/.bin/vite build"
   },
   "keywords": [
     "portfolio",
