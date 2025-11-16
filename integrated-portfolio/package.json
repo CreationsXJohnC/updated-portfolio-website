@@ -7,11 +7,11 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "build": "cd client && npx vite build",
-    "build:client": "cd client && npx vite build",
+    "build": "cd client && ./node_modules/.bin/vite build",
+    "build:client": "cd client && ./node_modules/.bin/vite build",
     "start": "cd server && npm start",
     "install:all": "npm install && cd client && npm install",
-    "vercel-build": "cd client && npx vite build"
+    "vercel-build": "cd client && ./node_modules/.bin/vite build"
   },
   "keywords": [
     "portfolio",
