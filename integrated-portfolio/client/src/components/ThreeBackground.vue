@@ -48,6 +48,11 @@ export default {
       type: Number,
       default: 0.025
     }
+    ,
+    blendingMode: {
+      type: String,
+      default: 'additive'
+    }
   },
   setup(props) {
     const container = ref(null)
@@ -85,11 +90,13 @@ export default {
       renderer.domElement.style.height = '100%'
       container.value.appendChild(renderer.domElement)
 
-      const ambient = new THREE.AmbientLight(props.colorPrimary, props.intensity * 0.3)
-      const dir = new THREE.DirectionalLight(props.colorPrimary, props.intensity)
-      dir.position.set(3, 2, 3)
-      scene.add(ambient)
-      scene.add(dir)
+      if (props.variant !== 'starField') {
+        const ambient = new THREE.AmbientLight(props.colorPrimary, props.intensity * 0.3)
+        const dir = new THREE.DirectionalLight(props.colorPrimary, props.intensity)
+        dir.position.set(3, 2, 3)
+        scene.add(ambient)
+        scene.add(dir)
+      }
 
       if (props.gltfSrc) {
         const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
@@ -198,7 +205,7 @@ export default {
                 gl_FragColor = col;
               }
             `,
-            blending: THREE.AdditiveBlending,
+            blending: props.blendingMode === 'normal' ? THREE.NormalBlending : THREE.AdditiveBlending,
             transparent: true,
             depthWrite: false,
           })

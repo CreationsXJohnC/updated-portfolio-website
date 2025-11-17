@@ -3,10 +3,10 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="6500"
-      :starDensityFar="12000"
-      :starSizeNear="0.12"
-      :starSizeFar="0.09"
+      :starDensityNear="42000"
+      :starDensityFar="84000"
+      :starSizeNear="0.09"
+      :starSizeFar="0.07"
       textureSrc="/sparkle-png-24.png"
     />
     <!-- Hero Section -->

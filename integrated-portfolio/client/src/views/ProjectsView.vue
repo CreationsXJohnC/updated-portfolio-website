@@ -1,5 +1,16 @@
 <template>
   <div class="projects-view">
+    <ThreeBackground 
+      variant="starField"
+      :enableMouse="true"
+      :starDensityNear="130000"
+      :starDensityFar="260000"
+      :starSizeNear="0.09"
+      :starSizeFar="0.07"
+      colorPrimary="#000000"
+      blendingMode="normal"
+      textureSrc="/sparkle-png-24.png"
+    />
     <!-- Transferred Home Hero Section -->
     <section class="hero-section">
       <div class="hero-container">
@@ -515,6 +526,7 @@ import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
+import ThreeBackground from '@/components/ThreeBackground.vue'
 
 const GET_PROJECTS = gql`
   query GetProjects {
@@ -538,7 +550,8 @@ const GET_PROJECTS = gql`
 export default {
   name: 'ProjectsView',
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    ThreeBackground
   },
   setup() {
     const router = useRouter()
@@ -1021,7 +1034,7 @@ export default {
   min-height: 100vh;
   @include flex-center;
   position: relative;
-  background: #ffffff;
+  background: transparent;
   padding-top: 100px;
   padding-bottom: 6rem;
   
@@ -1270,7 +1283,7 @@ export default {
 .arrow { width: 10px !important; font-size: 5px !important; }
 
 .floating-elements { position: absolute; width: 100%; height: 100%; pointer-events: none; }
-.floating-code { position: absolute; font-family: var(--font-primary); font-weight: bold; color: #666; font-size: 18px; animation: float 4s ease-in-out infinite; opacity: 0.6; }
+.floating-code { position: absolute; font-family: var(--font-primary); font-weight: bold; color: #666; font-size: 18px; animation: float 4s ease-in-out infinite; opacity: 0.9; text-shadow: 0 0 6px rgba(0,0,0,0.18), 0 2px 10px rgba(0,0,0,0.12); }
 
 .code-1 { top: 10%; left: 10%; animation-delay: 0s; color: #ff6b6b; }
 .code-2 { top: 20%; right: 15%; animation-delay: 0.5s; color: #4ecdc4; }
@@ -1500,10 +1513,12 @@ export default {
 
 .projects-view {
   padding-top: 0; // Avoid double offset; hero-section already accounts for nav
+  position: relative;
+  background: #ffffff;
 }
 
 .projects-hero {
-  background: #ffffff;
+  background: transparent;
   padding: 8rem 0 1px 0; // Increase top spacing above "My Projects"
   text-align: center;
 }
@@ -1611,7 +1626,14 @@ export default {
 
 .projects-section {
   padding: 2rem 0 4rem 0;
-  background: #ffffff;
+  background: transparent;
+}
+
+.hero-section,
+.projects-hero,
+.projects-section {
+  position: relative;
+  z-index: 1;
 }
 
 .projects-header {

@@ -325,16 +325,16 @@ export default {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   transition: all 0.4s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  background-image: radial-gradient(ellipse at 20% -40%, rgba(255,255,255,0.15), transparent 60%), radial-gradient(ellipse at 80% -40%, rgba(255,255,255,0.08), transparent 60%);
+  box-shadow: none;
+  background-image: none;
 
   &.is-scrolled {
-    background: rgba(0,0,0,0.45);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    background: transparent;
+    box-shadow: none;
   }
 }
 

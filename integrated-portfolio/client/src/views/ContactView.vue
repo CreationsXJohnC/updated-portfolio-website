@@ -1,5 +1,16 @@
 <template>
   <div class="contact-view">
+    <ThreeBackground 
+      variant="starField"
+      :enableMouse="true"
+      :starDensityNear="7000"
+      :starDensityFar="14000"
+      :starSizeNear="0.10"
+      :starSizeFar="0.08"
+      colorPrimary="#000000"
+      blendingMode="normal"
+      textureSrc="/sparkle-png-24.png"
+    />
     <!-- Hero Section -->
     <section class="contact-hero">
       <div class="hero-container">
@@ -174,6 +185,7 @@
 
 <script>
 import { ref, reactive } from 'vue'
+import ThreeBackground from '@/components/ThreeBackground.vue'
 import { useMutation } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 
@@ -196,6 +208,7 @@ const SEND_CONTACT_MESSAGE = gql`
 
 export default {
   name: 'ContactView',
+  components: { ThreeBackground },
   setup() {
     const form = reactive({
       firstName: '',
@@ -321,10 +334,11 @@ export default {
 .contact-view {
   padding-top: 80px;
   background: #ffffff;
+  position: relative;
 }
 
 .contact-hero {
-  background: #ffffff;
+  background: transparent;
   padding: 4rem 0;
   text-align: center;
 }
@@ -344,14 +358,14 @@ export default {
 
 .page-subtitle {
   font-size: 1.2rem;
-  color: #666666;
+  color: #000000;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .contact-section {
   padding: 0.6rem 0 6rem 0;
-  background: #ffffff;
+  background: transparent;
 }
 
 .section-container {
@@ -381,7 +395,7 @@ export default {
   }
 
   .info-description {
-    color: #666666;
+    color: #000000;
     line-height: 1.6;
     margin-bottom: 3rem;
     font-size: 1.1rem;
@@ -422,7 +436,7 @@ export default {
   }
 
   .method-link {
-    color: #666666;
+    color: #000000;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 1.3rem;
@@ -433,7 +447,7 @@ export default {
   }
 
   .method-text {
-    color: #666666;
+    color: #000000;
     font-size: 1.3rem;
   }
 }
@@ -848,3 +862,8 @@ export default {
   }
 }
 </style>
+.contact-hero,
+.contact-section {
+  position: relative;
+  z-index: 1;
+}

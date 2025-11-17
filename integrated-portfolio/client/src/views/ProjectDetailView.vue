@@ -1,5 +1,14 @@
 <template>
   <div class="project-detail-view">
+    <ThreeBackground 
+      variant="starField" 
+      :enableMouse="true" 
+      :starDensityNear="14000"
+      :starDensityFar="28000"
+      :starSizeNear="0.09"
+      :starSizeFar="0.07"
+      textureSrc="/sparkle-png-24.png"
+    />
 
     <LoadingOverlay v-if="loading" />
     
@@ -142,6 +151,7 @@ import { useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
+import ThreeBackground from '@/components/ThreeBackground.vue'
 
 const GET_PROJECT_DETAIL = gql`
   query GetProjectDetail($id: ID!) {
@@ -183,7 +193,8 @@ const GET_PROJECTS = gql`
 export default {
   name: 'ProjectDetailView',
   components: {
-    LoadingOverlay
+    LoadingOverlay,
+    ThreeBackground
   },
   setup() {
     const route = useRoute()
@@ -302,6 +313,7 @@ export default {
 
 .project-detail-view {
   padding-top: 80px; // Account for fixed navigation
+  position: relative;
 }
 
 
@@ -345,8 +357,10 @@ export default {
 }
 
 .project-hero {
-  background: #000000;
+  background: transparent;
   padding: 4rem 0 8rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Increase hero title size and add spacing from Back to Projects */
@@ -634,8 +648,10 @@ export default {
 }
 
 .related-projects {
-  background: #000000;
+  background: transparent;
   padding: 6rem 0;
+  position: relative;
+  z-index: 1;
 }
 
 .related-container {
@@ -712,7 +728,9 @@ export default {
 
 .project-preview {
   padding: 0 0 4rem;
-  background: #000000;
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .preview-container {

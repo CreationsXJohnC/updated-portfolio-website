@@ -3,6 +3,43 @@
 @use './mixins.scss' as *;
 // No custom webfont imports; use system stacks from variables.scss
 
+// Custom font faces
+@font-face {
+  font-family: 'Brand Sans';
+  src: url('/fonts/brand-sans-regular.woff2') format('woff2'),
+       url('/fonts/brand-sans-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brand Sans';
+  src: url('/fonts/brand-sans-italic.woff2') format('woff2'),
+       url('/fonts/brand-sans-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brand Sans';
+  src: url('/fonts/brand-sans-bold.woff2') format('woff2'),
+       url('/fonts/brand-sans-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brand Sans';
+  src: url('/fonts/brand-sans-bolditalic.woff2') format('woff2'),
+       url('/fonts/brand-sans-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 // Global CSS variables (unscoped)
 :root {
   // Colors
@@ -30,8 +67,8 @@
   --border-color: #{$light-border-color};
 
   // Typography
-  --font-primary: #{$font-primary};
-  --font-secondary: #{$font-primary};
+  --font-primary: 'Brand Sans', #{$font-primary};
+  --font-secondary: 'Brand Sans', #{$font-primary};
   --font-mono: #{$font-mono};
 
   // Layout

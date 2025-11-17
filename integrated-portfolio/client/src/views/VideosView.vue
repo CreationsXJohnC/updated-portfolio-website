@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="4200"
-      :starDensityFar="8000"
+      :starDensityNear="12000"
+      :starDensityFar="24000"
       :starSizeNear="0.12"
       :starSizeFar="0.09"
       textureSrc="/sparkle-png-24.png"

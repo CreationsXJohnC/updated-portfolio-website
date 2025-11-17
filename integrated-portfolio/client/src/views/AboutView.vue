@@ -1,5 +1,17 @@
 <template>
   <div class="about-view">
+    <ThreeBackground 
+      variant="starField" 
+      :enableMouse="true" 
+      :starDensityNear="26000"
+      :starDensityFar="52000"
+      :starSizeNear="0.10"
+      :starSizeFar="0.08"
+      colorPrimary="#000000"
+      blendingMode="normal"
+      textureSrc="/sparkle-png-24.png"
+    />
+
     <!-- Hero Section -->
     <section class="about-hero">
       <div class="hero-container">
@@ -60,6 +72,8 @@
             </div>
           </div>
         </div>
+
+        
       </div>
     </section>
 
@@ -120,26 +134,28 @@
         <div class="logos-grid">
           <div class="logo-item">
             <img 
-              src="/src/assets/images/logos/Ori-Badge01.png" 
+              :src="oriBadge" 
               alt="Ori Company Logo" 
               class="company-logo"
             />
           </div>
           <div class="logo-item">
             <img 
-              src="/src/assets/images/logos/SkinstricAI logo.png" 
+              :src="skinstricLogo" 
               alt="SkinstricAI Logo" 
               class="company-logo"
             />
           </div>
           <div class="logo-item">
             <img 
-              src="/src/assets/images/logos/Watermark with Slogan GREY.png" 
+              :src="watermarkLogo" 
               alt="Watermark with Slogan" 
               class="company-logo"
             />
           </div>
         </div>
+        
+        <!-- Company logos removed in favor of orbital timeline -->
 
 
       </div>
@@ -239,6 +255,11 @@ import { ref, computed, watch } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import profileImage from '@/assets/images/profile/DSCF8979.jpg'
+import ThreeBackground from '@/components/ThreeBackground.vue'
+import oriBadgeImport from '@/assets/images/logos/Ori-Badge01.png'
+import skinstricLogoImport from '@/assets/images/logos/SkinstricAI logo.png'
+import watermarkLogoImport from '@/assets/images/logos/Watermark with Slogan GREY.png'
+// imports restored above
 
 const GET_ABOUT_DATA = gql`
   query GetAboutData {
@@ -266,6 +287,7 @@ const GET_ABOUT_DATA = gql`
 
 export default {
   name: 'AboutView',
+  components: { ThreeBackground },
   setup() {
     const profile = ref(null)
     const experiences = ref([])
@@ -310,6 +332,8 @@ export default {
       }
     }, { immediate: true })
 
+    const bioHtml = computed(() => (profile.value && profile.value.bio) || 'I am a Full Stack Developer and Creative Technologist with expertise in JavaScript, React, Vue.js, and responsive design. Founder of Creations X (media agency) and Ori Company (consulting business), bringing 10+ years of experience in digital content, project management, and entrepreneurship. I am very passionate about building user-friendly web applications and leveraging creativity, as well as critical thinking skills to drive innovation in Technology.')
+
     return {
       profile,
       experiences,
@@ -318,7 +342,13 @@ export default {
       error,
       formatDate,
       profileImage,
-      downloadResume
+      downloadResume,
+      bioHtml,
+      NEW_RESUME_URL,
+      OLD_RESUME_URL,
+      oriBadge: oriBadgeImport,
+      skinstricLogo: skinstricLogoImport,
+      watermarkLogo: watermarkLogoImport
     }
   }
 }
@@ -330,10 +360,11 @@ export default {
 .about-view {
   padding-top: 80px;
   background: #ffffff;
+  position: relative;
 }
 
 .about-hero {
-  background: #ffffff;
+  background: transparent;
   padding: 4rem 0 1rem 0;
   text-align: center;
 }
@@ -348,19 +379,19 @@ export default {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #000000;
+  color: #111111;
 }
 
 .page-subtitle {
   font-size: 1.2rem;
-  color: #666666;
+  color: #555555;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .personal-section {
   padding: 3rem 0 3rem 0;
-  background: #ffffff;
+  background: transparent;
 }
 
 .section-container {
@@ -419,12 +450,12 @@ export default {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #000000;
+  color: #111111;
 }
 
 .role-title {
   font-size: 1.3rem;
-  color: #666666;
+  color: #333333;
   margin-bottom: 1.5rem;
   font-weight: 500;
 }
@@ -460,7 +491,7 @@ export default {
 .stat-number {
   font-size: 2rem;
   font-weight: 700;
-  color: #000000;
+  color: #111111;
   text-align: center;
 }
 
@@ -486,17 +517,17 @@ export default {
 
 .skills-section {
   padding: 4rem 0 4rem 0;
-  background: #ffffff;
+  background: transparent;
 }
 
 .interests-section {
   padding: 0.5rem 0 6rem 0;
-  background: #ffffff;
+  background: transparent;
 }
 
 .experience-section {
   padding: 3rem 0 2rem 0;
-  background: #ffffff;
+  background: transparent;
 }
 
 .section-header {
@@ -506,7 +537,7 @@ export default {
 
 .section-description {
   font-size: 1.1rem;
-  color: #666666;
+  color: #555555;
   max-width: 600px;
   margin: 1rem auto 0;
 }
@@ -1360,4 +1391,17 @@ export default {
     display: none;
   }
 }
+/* Removed interactive scene toggle */
+.about-view { position: relative; }
+/* removed starfield full-page background */
+.personal-section, .skills-section, .experience-section { position: relative; z-index: 1; }
+/* removed hologram styles */
 </style>
+.about-hero,
+.personal-section,
+.skills-section,
+.experience-section,
+.interests-section {
+  position: relative;
+  z-index: 1;
+}
