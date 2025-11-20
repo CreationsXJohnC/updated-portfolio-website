@@ -7,12 +7,13 @@
       :starDensityFar="84000"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-logo">
-        <img :src="jccWhiteLogo" alt="JCC White Logo" class="hero-logo-img" />
+        <img :src="jccLogo" alt="JCC Logo" class="hero-logo-img" />
       </div>
       <div class="hero-tagline" aria-live="polite">
         <span class="typewriter">{{ typedText }}</span>
@@ -320,11 +321,12 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import jccWhiteLogo from '@/assets/images/logos/JCC - White.png'
+import jccGreyLogo from '@/assets/images/logos/JCC - Grey.png'
 import ThreeBackground from '@/components/ThreeBackground.vue'
 
 const GET_FEATURED_PROJECTS = gql`
@@ -350,6 +352,7 @@ export default {
   setup() {
     const router = useRouter()
     const typedText = ref('')
+    const themeRef = inject('theme', ref('light'))
     const fullTagline = 'Think 2 Create & Create 2 Inspire.'
     
     // Fetch featured projects from API
@@ -385,16 +388,18 @@ export default {
       window.scrollTo(0, targetPosition)
     }
 
+    const jccLogo = computed(() => (themeRef.value === 'light' ? jccGreyLogo : jccWhiteLogo))
+
     return {
        featuredProjects,
        loading,
        error,
        navigateToProject,
        scrollToBottom,
-       jccWhiteLogo,
+       jccLogo,
        typedText,
      }
-   },
+  },
    
    mounted() {
       const hasTypingUI = document.querySelector('.keyboard-keys') || document.getElementById('dynamic-code');
@@ -845,7 +850,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: -4.5rem;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: clamp(1.1rem, 2.6vw, 2rem);
   font-weight: 600;
   text-align: center;
@@ -878,7 +883,7 @@ export default {
   display: inline-block;
   width: 2px;
   height: 1em;
-  background: #ffffff;
+  background: var(--text-primary);
   margin-left: 4px;
   animation: caret-blink 1.2s step-end infinite;
   vertical-align: -0.15em;

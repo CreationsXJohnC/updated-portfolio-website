@@ -92,6 +92,27 @@
   --transition-slow: #{$transition-slow};
 }
 
+// Explicit theme overrides via data-theme attribute
+:root[data-theme="light"] {
+  --bg-primary: #{$light-bg-primary};
+  --bg-secondary: #{$light-bg-secondary};
+  --bg-tertiary: #{$light-bg-tertiary};
+  --text-primary: #{$light-text-primary};
+  --text-secondary: #{$light-text-secondary};
+  --text-muted: #{$light-text-muted};
+  --border-color: #{$light-border-color};
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #{$dark-bg-primary};
+  --bg-secondary: #{$dark-bg-secondary};
+  --bg-tertiary: #{$dark-bg-tertiary};
+  --text-primary: #{$dark-text-primary};
+  --text-secondary: #{$dark-text-secondary};
+  --text-muted: #{$dark-text-muted};
+  --border-color: #{$dark-border-color};
+}
+
 // Reset and normalize
 *,
 *::before,

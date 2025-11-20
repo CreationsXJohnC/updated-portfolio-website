@@ -9,6 +9,7 @@
       :starSizeFar="0.08"
       colorPrimary="#000000"
       blendingMode="normal"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
     <!-- Hero Section -->
@@ -67,7 +68,8 @@
                   <div class="arrow-container">
                     <img src="@/assets/images/animations/AnimationArrow.png" 
                          alt="Animation Arrow" 
-                         class="animation-arrow-image" />
+                         class="animation-arrow-image"
+                         :style="arrowStyle" />
                   </div>
                 </div>
               </div>
@@ -184,7 +186,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed, inject } from 'vue'
 import ThreeBackground from '@/components/ThreeBackground.vue'
 import { useMutation } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
@@ -210,6 +212,8 @@ export default {
   name: 'ContactView',
   components: { ThreeBackground },
   setup() {
+    const themeRef = inject('theme', ref('light'))
+    const arrowStyle = computed(() => ({ filter: themeRef.value === 'dark' ? 'invert(1) brightness(1.1)' : 'none' }))
     const form = reactive({
       firstName: '',
       lastName: '',
@@ -322,7 +326,8 @@ export default {
       errors,
       isSubmitting,
       submitStatus,
-      submitForm
+      submitForm,
+      arrowStyle
     }
   }
 }
@@ -333,7 +338,7 @@ export default {
 
 .contact-view {
   padding-top: 80px;
-  background: #ffffff;
+  background: var(--bg-primary);
   position: relative;
 }
 
@@ -353,12 +358,12 @@ export default {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #000000;
+  color: var(--text-primary);
 }
 
 .page-subtitle {
   font-size: 1.2rem;
-  color: #000000;
+  color: var(--text-primary);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -391,11 +396,11 @@ export default {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #000000;
+    color: var(--text-primary);
   }
 
   .info-description {
-    color: #000000;
+    color: var(--text-primary);
     line-height: 1.6;
     margin-bottom: 3rem;
     font-size: 1.1rem;
@@ -431,23 +436,23 @@ export default {
   .method-title {
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #000000;
+    color: var(--text-primary);
     font-size: 1.5rem;
   }
 
   .method-link {
-    color: #000000;
+    color: var(--text-primary);
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 1.3rem;
 
     &:hover {
-      color: #000000;
+      color: var(--text-primary);
     }
   }
 
   .method-text {
-    color: #000000;
+    color: var(--text-primary);
     font-size: 1.3rem;
   }
 }
@@ -456,7 +461,7 @@ export default {
   .social-title {
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #000000;
+    color: var(--text-primary);
   }
 }
 
@@ -664,7 +669,7 @@ export default {
 
 .encouragement-text {
   font-size: 1.5rem;
-  color: #000000;
+  color: var(--text-primary);
   font-weight: 700;
   margin: 0;
 }

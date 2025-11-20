@@ -69,7 +69,7 @@
         <div class="footer-bottom-content">
           <div class="footer-logo">
             <img 
-              :src="jccWhiteLogo" 
+              :src="jccLogo" 
               alt="John C Creations Logo" 
               class="footer-logo-img"
               draggable="false"
@@ -85,17 +85,20 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, inject, ref } from 'vue'
 import jccWhiteLogo from '@/assets/images/logos/JCC - White.png'
+import jccGreyLogo from '@/assets/images/logos/JCC - Grey.png'
 
 export default {
   name: 'AppFooter',
   setup() {
     const currentYear = computed(() => new Date().getFullYear())
+    const themeRef = inject('theme', ref('light'))
+    const jccLogo = computed(() => (themeRef.value === 'light' ? jccGreyLogo : jccWhiteLogo))
 
     return {
       currentYear,
-      jccWhiteLogo
+      jccLogo
     }
   }
 }

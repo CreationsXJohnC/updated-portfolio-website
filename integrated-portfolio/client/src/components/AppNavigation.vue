@@ -88,6 +88,28 @@
         </li>
       </ul>
 
+      <!-- Theme Toggle -->
+      <button 
+        class="theme-toggle hover-target" 
+        @click="toggleTheme()" 
+        :aria-pressed="themeValue === 'dark'"
+        aria-label="Toggle light/dark theme"
+        :style="toggleStyle"
+      >
+        <span class="toggle-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none">
+            <rect x="4" y="2" width="16" height="20" rx="3" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08"/>
+            <circle cx="8" cy="5" r="1" fill="currentColor"/>
+            <circle cx="16" cy="5" r="1" fill="currentColor"/>
+            <circle cx="8" cy="19" r="1" fill="currentColor"/>
+            <circle cx="16" cy="19" r="1" fill="currentColor"/>
+            <rect x="9" :y="themeValue === 'dark' ? 12 : 8" width="6" height="4" rx="1" fill="currentColor"/>
+            <rect x="11" :y="themeValue === 'dark' ? 12.8 : 8.8" width="2" height="1.4" rx="0.3" fill="currentColor" fill-opacity="0.3"/>
+          </svg>
+        </span>
+        <span class="toggle-text">{{ themeValue === 'dark' ? 'Dark' : 'Light' }}</span>
+      </button>
+
       <!-- Mobile Menu Toggle -->
       <button 
         class="mobile-menu-toggle hover-target"
@@ -207,7 +229,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, inject } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default {
@@ -218,10 +240,14 @@ export default {
     const isScrolling = ref(false)
     let scrollTimeout = null
     const route = useRoute()
-    const isInvertIcons = computed(() => {
-      const p = (route.path || '').toLowerCase()
-      return p === '/about' || p === '/projects' || p === '/contact'
-    })
+    const themeRef = inject('theme', ref('light'))
+    const toggleTheme = inject('toggleTheme', () => {})
+    const themeValue = computed(() => themeRef?.value || 'light')
+    const toggleStyle = computed(() => themeValue.value === 'light'
+      ? { color: '#000000', background: 'rgba(0,0,0,0.06)' }
+      : { color: '#ffffff', background: 'rgba(255,255,255,0.08)' }
+    )
+    const isInvertIcons = computed(() => themeValue.value === 'light')
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 50
@@ -275,7 +301,10 @@ export default {
       isInvertIcons,
       isScrolling,
       toggleMobileMenu,
-      closeMobileMenu
+      closeMobileMenu,
+      toggleTheme,
+      themeValue,
+      toggleStyle
     }
   }
 }
@@ -399,6 +428,23 @@ export default {
     padding: 0.75rem 0.75rem;
   }
 }
+
+.theme-toggle {
+  display: none !important;
+}
+
+:global([data-theme="light"]) .theme-toggle {
+  color: #000000 !important;
+  background: rgba(0,0,0,0.06) !important;
+}
+
+:global([data-theme="dark"]) .theme-toggle {
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+
+.toggle-icon svg { display: block; width: 32px; height: 32px; }
+.toggle-text { font-size: 0.85rem; line-height: 1; }
 
 .nav-brand {
   padding-top: 0;

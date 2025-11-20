@@ -3,12 +3,11 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="26000"
-      :starDensityFar="52000"
-      :starSizeNear="0.10"
-      :starSizeFar="0.08"
-      colorPrimary="#000000"
-      blendingMode="normal"
+      :starDensityNear="42000"
+      :starDensityFar="84000"
+      :starSizeNear="0.09"
+      :starSizeFar="0.07"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
 
@@ -113,7 +112,7 @@
           <img src="/skills-icons/GraphQL.png" alt="GraphQL" class="skill-icon float-delay-23 float-pattern-23" />
           <img src="/skills-icons/fastapi.svg" alt="FastAPI" class="skill-icon float-delay-24 float-pattern-24" />
           <img src="/skills-icons/Java.png" alt="Java" class="skill-icon float-delay-25 float-pattern-25" />
-          <img src="/skills-icons/NextJs.png" alt="Next.js" class="skill-icon float-delay-26 float-pattern-26" />
+          <img src="/skills-icons/NextJs.png" alt="Next.js" class="skill-icon nextjs-icon float-delay-26 float-pattern-26" :style="nextJsStyle" />
           <img src="/skills-icons/ES6.svg" alt="ES6" class="skill-icon float-delay-27 float-pattern-27" />
           <img src="/skills-icons/Photoshop.png" alt="Photoshop" class="skill-icon float-delay-28 float-pattern-28" />
         </div>
@@ -251,14 +250,16 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, inject } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import profileImage from '@/assets/images/profile/DSCF8979.jpg'
 import ThreeBackground from '@/components/ThreeBackground.vue'
 import oriBadgeImport from '@/assets/images/logos/Ori-Badge01.png'
+import oriBadgeDarkImport from '@/assets/images/logos/Ori-Badge04.png'
 import skinstricLogoImport from '@/assets/images/logos/SkinstricAI logo.png'
 import watermarkLogoImport from '@/assets/images/logos/Watermark with Slogan GREY.png'
+import watermarkLogoDarkImport from '@/assets/images/logos/JCC with Slogan WHITE.png'
 // imports restored above
 
 const GET_ABOUT_DATA = gql`
@@ -334,6 +335,11 @@ export default {
 
     const bioHtml = computed(() => (profile.value && profile.value.bio) || 'I am a Full Stack Developer and Creative Technologist with expertise in JavaScript, React, Vue.js, and responsive design. Founder of Creations X (media agency) and Ori Company (consulting business), bringing 10+ years of experience in digital content, project management, and entrepreneurship. I am very passionate about building user-friendly web applications and leveraging creativity, as well as critical thinking skills to drive innovation in Technology.')
 
+    const themeRef = inject('theme', ref('light'))
+    const oriBadgeComputed = computed(() => (themeRef.value === 'dark' ? oriBadgeDarkImport : oriBadgeImport))
+    const nextJsStyle = computed(() => (themeRef.value === 'dark' ? { filter: 'invert(1) brightness(1.1)' } : {}))
+    const watermarkLogoComputed = computed(() => (themeRef.value === 'dark' ? watermarkLogoDarkImport : watermarkLogoImport))
+
     return {
       profile,
       experiences,
@@ -346,9 +352,10 @@ export default {
       bioHtml,
       NEW_RESUME_URL,
       OLD_RESUME_URL,
-      oriBadge: oriBadgeImport,
+      oriBadge: oriBadgeComputed,
       skinstricLogo: skinstricLogoImport,
-      watermarkLogo: watermarkLogoImport
+      watermarkLogo: watermarkLogoComputed,
+      nextJsStyle
     }
   }
 }
@@ -359,7 +366,7 @@ export default {
 
 .about-view {
   padding-top: 80px;
-  background: #ffffff;
+  background: var(--bg-primary);
   position: relative;
 }
 
@@ -379,12 +386,12 @@ export default {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #111111;
+  color: var(--text-primary);
 }
 
 .page-subtitle {
   font-size: 1.2rem;
-  color: #555555;
+  color: var(--text-primary);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -450,18 +457,18 @@ export default {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #111111;
+  color: var(--text-primary);
 }
 
 .role-title {
   font-size: 1.3rem;
-  color: #333333;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
   font-weight: 500;
 }
 
 .bio-content {
-  color: #333333;
+  color: var(--text-primary);
   line-height: 1.6;
   margin-bottom: 2rem;
   font-size: 1rem;
@@ -491,13 +498,13 @@ export default {
 .stat-number {
   font-size: 2rem;
   font-weight: 700;
-  color: #111111;
+  color: var(--text-primary);
   text-align: center;
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: #666666;
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -537,7 +544,7 @@ export default {
 
 .section-description {
   font-size: 1.1rem;
-  color: #555555;
+  color: var(--text-primary);
   max-width: 600px;
   margin: 1rem auto 0;
 }
@@ -1052,19 +1059,19 @@ export default {
 }
 
 .experience-company {
-  color: #666666;
+  color: var(--text-primary);
   font-weight: 500;
   display: block;
   margin-bottom: 0.5rem;
 }
 
 .experience-period {
-  color: #999999;
+  color: var(--text-primary);
   font-size: 0.9rem;
 }
 
 .experience-description {
-  color: #333333;
+  color: var(--text-primary);
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -1103,7 +1110,7 @@ export default {
 
 .interest-icon {
   font-size: 3rem;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
@@ -1111,11 +1118,11 @@ export default {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .interest-description {
-  color: #ffffff;
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
@@ -1404,4 +1411,23 @@ export default {
 .interests-section {
   position: relative;
   z-index: 1;
+}
+
+/* Dark mode: switch Next.js icon to white */
+:global([data-theme="dark"]) .skills-section .nextjs-icon {
+  filter: invert(1) brightness(1.1);
+}
+.about-hero,
+.personal-section,
+.skills-section,
+.experience-section,
+.interests-section {
+  position: relative;
+  z-index: 1;
+}
+/* Light mode: set Beyond Code frame text to black */
+:global([data-theme="light"]) .interests-section .interest-icon,
+:global([data-theme="light"]) .interests-section .interest-title,
+:global([data-theme="light"]) .interests-section .interest-description {
+  color: #000000 !important;
 }

@@ -53,6 +53,16 @@ export default {
       type: String,
       default: 'additive'
     }
+    ,
+    useTheme: {
+      type: Boolean,
+      default: true
+    }
+    ,
+    motionScale: {
+      type: Number,
+      default: 1
+    }
   },
   setup(props) {
     const container = ref(null)
@@ -67,6 +77,8 @@ export default {
     let mouseX = 0
     let mouseY = 0
     let mouseActive = false
+    let smoothX = 0.5
+    let smoothY = 0.5
     
 
     const prefersReducedMotion = () => {
@@ -167,9 +179,12 @@ export default {
           geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
           geo.setAttribute('angle', new THREE.BufferAttribute(angles, 1))
           const pixelRatio = Math.min(2, window.devicePixelRatio || 1)
+          const isDark = (document.documentElement.getAttribute('data-theme') || '').toLowerCase() === 'dark'
+          const themedColor = isDark ? '#ffffff' : '#000000'
+          const themedBlending = isDark ? THREE.AdditiveBlending : THREE.NormalBlending
           const mat = new THREE.ShaderMaterial({
             uniforms: {
-              uColor: { value: new THREE.Color(props.colorPrimary) },
+              uColor: { value: new THREE.Color(props.useTheme ? themedColor : props.colorPrimary) },
               uMap: { value: starTexture },
               uOpacity: { value: 0.9 },
               uSize: { value: size * 600.0 },
@@ -205,7 +220,7 @@ export default {
                 gl_FragColor = col;
               }
             `,
-            blending: props.blendingMode === 'normal' ? THREE.NormalBlending : THREE.AdditiveBlending,
+            blending: props.useTheme ? themedBlending : (props.blendingMode === 'normal' ? THREE.NormalBlending : THREE.AdditiveBlending),
             transparent: true,
             depthWrite: false,
           })
@@ -218,6 +233,27 @@ export default {
         scene.add(far)
         scene.add(near)
         obj = { near, far }
+
+        const updateTheme = () => {
+          if (!props.useTheme || !obj || !obj.near || !obj.far) return
+          const nowDark = (document.documentElement.getAttribute('data-theme') || '').toLowerCase() === 'dark'
+          const desiredColor = new THREE.Color(nowDark ? '#ffffff' : '#000000')
+          const desiredBlend = nowDark ? THREE.AdditiveBlending : THREE.NormalBlending
+          const mats = [obj.near.material, obj.far.material]
+          for (const m of mats) {
+            if (m.uniforms && m.uniforms.uColor && !m.uniforms.uColor.value.equals(desiredColor)) {
+              m.uniforms.uColor.value = desiredColor
+              m.needsUpdate = true
+            }
+            if (m.blending !== desiredBlend) {
+              m.blending = desiredBlend
+              m.needsUpdate = true
+            }
+          }
+        }
+        const themeObserver = new MutationObserver(updateTheme)
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+        updateTheme()
       } else if (props.variant === 'particleField') {
         const count = 800
         const positions = new Float32Array(count * 3)
@@ -259,15 +295,22 @@ export default {
         return
       }
       if (obj) {
-        const baseY = 0.0006
-        const baseX = 0.0004
-        const mouseFactorY = mouseActive ? (mouseX - 0.5) * 0.002 : 0
-        const mouseFactorX = mouseActive ? (mouseY - 0.5) * 0.0015 : 0
+        const baseY = 0.00035 * (props.motionScale || 1)
+        const baseX = 0.00025 * (props.motionScale || 1)
+        // Ease cursor movement with simple damping toward target
+        const targetX = mouseActive ? mouseX : 0.5
+        const targetY = mouseActive ? mouseY : 0.5
+        smoothX += (targetX - smoothX) * 0.06
+        smoothY += (targetY - smoothY) * 0.06
+        const mouseFactorY = (smoothX - 0.5) * 0.0004 * (props.motionScale || 1)
+        const mouseFactorX = (smoothY - 0.5) * 0.0002 * (props.motionScale || 1)
         if (obj.near && obj.far) {
-          obj.near.rotation.y += baseY + mouseFactorY
-          obj.near.rotation.x += baseX + mouseFactorX
-          obj.far.rotation.y += baseY * 0.6 + mouseFactorY * 0.5
-          obj.far.rotation.x += baseX * 0.6 + mouseFactorX * 0.5
+          // Near layer: more responsive to pointer (same direction as far)
+          obj.near.rotation.y += baseY + mouseFactorY * 2.0
+          obj.near.rotation.x += baseX + mouseFactorX * 2.0
+          // Far layer: almost static but follows the same direction slightly
+          obj.far.rotation.y += baseY * 0.01 + mouseFactorY * 0.005
+          obj.far.rotation.x += baseX * 0.01 + mouseFactorX * 0.003
           const t = (time || 0) * 0.001
           const nearMat = obj.near.material
           const farMat = obj.far.material
@@ -316,10 +359,14 @@ export default {
           mouseX = e.clientX / window.innerWidth
           mouseY = e.clientY / window.innerHeight
         }
-        const onLeave = () => { mouseActive = false }
+        const onLeave = () => { mouseActive = false; mouseX = 0.5; mouseY = 0.5 }
+        document.addEventListener('pointermove', onMove)
+        document.addEventListener('pointerleave', onLeave)
         document.addEventListener('mousemove', onMove)
         document.addEventListener('mouseleave', onLeave)
         onUnmounted(() => {
+          document.removeEventListener('pointermove', onMove)
+          document.removeEventListener('pointerleave', onLeave)
           document.removeEventListener('mousemove', onMove)
           document.removeEventListener('mouseleave', onLeave)
         })

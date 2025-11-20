@@ -9,6 +9,7 @@
       :starSizeFar="0.07"
       colorPrimary="#000000"
       blendingMode="normal"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
     <!-- Transferred Home Hero Section -->
@@ -1514,7 +1515,7 @@ export default {
 .projects-view {
   padding-top: 0; // Avoid double offset; hero-section already accounts for nav
   position: relative;
-  background: #ffffff;
+  background: var(--bg-primary);
 }
 
 .projects-hero {
@@ -1976,4 +1977,21 @@ export default {
   &.wide { width: 28px; }
   &:nth-child(odd) { animation-delay: 0.5s; }
 }
+
+/* Theme-aware overrides to ensure white text in dark mode */
+.projects-view :deep(.hero-title .title-line),
+.projects-view :deep(.hero-title .title-name),
+.projects-view :deep(.hero-description),
+.projects-view :deep(.hero-description .inline-link),
+.projects-view :deep(.projects-hero .page-title),
+.projects-view :deep(.projects-hero .page-subtitle),
+.projects-view :deep(.section-title),
+.projects-view :deep(.empty-title),
+.projects-view :deep(.empty-description) {
+  color: var(--text-primary) !important;
+}
+
+.projects-view :deep(.scroll-indicator) { color: var(--text-primary) !important; }
+.projects-view :deep(.scroll-mouse) { border-color: var(--text-primary) !important; }
+.projects-view :deep(.scroll-wheel) { background: var(--text-primary) !important; }
 </style>

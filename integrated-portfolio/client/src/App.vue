@@ -5,6 +5,28 @@
     
     <!-- Navigation -->
     <AppNavigation />
+
+    <!-- Global Theme Toggle (always visible) -->
+    <button 
+      class="global-theme-toggle" 
+      @click="toggleTheme()" 
+      :aria-pressed="theme === 'dark'"
+      aria-label="Toggle light/dark theme"
+    >
+      <span class="toggle-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none">
+          <rect x="4" y="2" width="16" height="20" rx="1" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.005"/>
+          <circle cx="8" cy="5" r="1" fill="currentColor"/>
+          <circle cx="16" cy="5" r="1" fill="currentColor"/>
+          <circle cx="8" cy="19" r="1" fill="currentColor"/>
+          <circle cx="16" cy="19" r="1" fill="currentColor"/>
+          <rect x="9" :y="theme === 'dark' ? 12 : 8" width="6" height="4" rx="1" fill="currentColor"/>
+          <rect x="11" :y="theme === 'dark' ? 12.8 : 8.8" width="2" height="1.4" rx="0.3" fill="currentColor" fill-opacity="0.3"/>
+        </svg>
+      </span>
+      <span class="toggle-text">{{ theme === 'dark' ? 'Dark' : 'Light' }}</span>
+    </button>
+
     
     <!-- Main Content -->
     <main class="main-content">
@@ -47,6 +69,26 @@ export default {
   setup() {
     const router = useRouter()
     const isLoading = ref(false)
+    const theme = ref('light')
+
+    const applyTheme = (t) => {
+      theme.value = t
+      const root = document.documentElement
+      root.setAttribute('data-theme', t)
+      try { localStorage.setItem('theme', t) } catch (e) {}
+    }
+
+    const detectSystemTheme = () => {
+      try {
+        const saved = localStorage.getItem('theme')
+        if (saved === 'light' || saved === 'dark') return saved
+      } catch (e) {}
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    const toggleTheme = () => {
+      applyTheme(theme.value === 'dark' ? 'light' : 'dark')
+    }
 
     // Native scrolling - no Locomotive Scroll for maximum responsiveness
     const initNativeScrolling = () => {
@@ -69,11 +111,23 @@ export default {
 
     onMounted(() => {
       initNativeScrolling()
+      applyTheme(detectSystemTheme())
+      try {
+        if (window.matchMedia) {
+          const mq = window.matchMedia('(prefers-color-scheme: dark)')
+          const handler = () => {
+            const saved = localStorage.getItem('theme')
+            if (!saved) applyTheme(mq.matches ? 'dark' : 'light')
+          }
+          mq.addEventListener('change', handler)
+        }
+      } catch (e) {}
     })
 
-    return {
-      isLoading
-    }
+    provide('theme', theme)
+    provide('toggleTheme', toggleTheme)
+
+    return { isLoading, theme, toggleTheme }
   }
 }
 </script>
@@ -112,6 +166,40 @@ export default {
   position: relative;
   z-index: 1;
 }
+
+/* Global always-visible theme toggle */
+.global-theme-toggle {
+  position: fixed;
+  right: 32px;
+  top: 28px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  z-index: 3000;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: none !important;
+}
+
+.global-theme-toggle:hover, .global-theme-toggle:focus { 
+  transform: none !important; 
+  filter: none !important; 
+  box-shadow: none !important; 
+}
+
+:root[data-theme="light"] .global-theme-toggle {
+  color: #000000;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .global-theme-toggle {
+  color: #ffffff;
+  background: transparent;
+}
+
 
 // Native scrolling - no container restrictions
 

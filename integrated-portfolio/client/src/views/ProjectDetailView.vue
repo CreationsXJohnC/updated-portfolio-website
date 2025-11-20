@@ -7,6 +7,7 @@
       :starDensityFar="28000"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
 
@@ -94,8 +95,8 @@
                     <i class="fab fa-github"></i>
                   </a>
                 </div>
-                <h3 class="project-title">{{ displayTitle }}</h3>
-                <p class="project-description">{{ displayShortDescription }}</p>
+                <h3 class="project-title" style="color: #ffffff">{{ displayTitle }}</h3>
+                <p class="project-description" style="color: rgba(255,255,255,0.9)">{{ displayShortDescription }}</p>
                 <div class="project-tech">
                   <span 
                     v-for="tech in project.technologies.slice(0, 3)" 
@@ -310,6 +311,20 @@ export default {
 .section-title.top {
   margin-bottom: 1rem;
 }
+
+:global([data-theme="dark"]) .section-title.top h2 {
+  background-image: linear-gradient(90deg, #ffffff, #bfbfbf);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:global([data-theme="light"]) .section-title.top h2 {
+  background-image: none;
+  color: var(--text-primary) !important;
+}
+
+.project-hero { color: var(--text-primary); }
 
 .project-detail-view {
   padding-top: 80px; // Account for fixed navigation
@@ -817,19 +832,17 @@ export default {
    right: 0;
    padding: 2rem;
    background: linear-gradient(transparent, rgba(0, 0, 0, 1));
-   color: white;
+   color: white !important;
    z-index: 2;
- }
+}
 
 .project-title {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: white;
 }
 
 .project-description {
-  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -866,3 +879,24 @@ export default {
   font-style: italic;
 }
 </style>
+.project-card .project-content .project-title {
+  color: white !important;
+}
+
+.project-card .project-content .project-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.hero-content > .project-title,
+.hero-content > .project-description {
+  color: var(--text-primary);
+}
+.project-hero .hero-content > .project-title,
+.project-hero .hero-content > .project-description {
+  color: var(--text-primary);
+}
+
+:global([data-theme="light"]) .project-hero .hero-content > .project-title,
+:global([data-theme="light"]) .project-hero .hero-content > .project-description {
+  color: var(--text-primary) !important;
+}

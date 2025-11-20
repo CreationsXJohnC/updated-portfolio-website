@@ -7,6 +7,7 @@
       :starDensityFar="24000"
       :starSizeNear="0.12"
       :starSizeFar="0.09"
+      :motionScale="0.08"
       textureSrc="/sparkle-png-24.png"
     />
     <section class="hero">
@@ -129,8 +130,9 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   /* Add offset for fixed navbar */
-  margin-top: 90px;
+  padding-top: 90px;
   position: relative;
+  background: var(--bg-primary);
 }
 .container {
   max-width: 1100px;
@@ -138,9 +140,11 @@ onMounted(() => {
   padding: 2rem 1rem;
 }
 .hero {
-  background: #000;
-  color: #fff;
+  background: transparent;
+  color: var(--text-primary);
   padding: 3rem 1rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 .title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 0; }
 .subtitle { opacity: 0.8; margin-top: 0.1875rem; }
@@ -185,7 +189,7 @@ onMounted(() => {
 .video-item, .playlist-item { display: flex; flex-direction: column; gap: 0.5rem; }
 .yt-thumb { position: relative; display: block; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; }
 .thumb { width: 100%; height: 100%; object-fit: cover; transition: none; }
-.yt-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: none; }
+.yt-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: var(--text-primary); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: none; }
 .yt-title:hover, .yt-title:focus, .yt-title:active { text-decoration: none; transform: none !important; }
 .yt-play { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; }
 .yt-count { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; }
@@ -198,4 +202,11 @@ onMounted(() => {
 .yt-thumb:active { transform: none !important; }
 .loading, .error, .note { margin: 1rem 0; }
 .mt { margin-top: 5rem; }
+
+/* Light mode: enforce black by default and white on hover/focus (scoped-safe) */
+:root[data-theme="light"] :deep(.videos-view .yt-title) { color: var(--text-primary) !important; transition: color 120ms ease-out; }
+:root[data-theme="light"] :deep(.videos-view .yt-title:hover),
+:root[data-theme="light"] :deep(.videos-view .yt-title:focus) { color: #ffffff !important; }
 </style>
+:deep(.videos-view .yt-title:hover),
+:deep(.videos-view .yt-title:focus) { color: #ffffff !important; }
