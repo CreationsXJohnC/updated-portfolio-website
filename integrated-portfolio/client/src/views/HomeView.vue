@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="42000"
-      :starDensityFar="84000"
+      :starDensityNear="5250"
+      :starDensityFar="10500"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
       :motionScale="0.08"
@@ -810,6 +810,7 @@ export default {
 .home-view {
   min-height: 100vh;
   position: relative;
+  background: var(--bg-primary);
 }
 
 .hero-section {

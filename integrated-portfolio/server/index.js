@@ -12,7 +12,10 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import { typeDefs } from './schemas/typeDefs.js';
 import { resolvers } from './resolvers/index.js';
-import { testConnection, initializeModels } from './models/index.js';
+import { sequelize, testConnection } from './config/database.js';
+import { Project } from './models/index.js';
+import { mockProjects } from './data/mockData.js';
+import './models/index.js';
 
 // Load environment variables
 dotenv.config();
@@ -25,13 +28,17 @@ async function startServer() {
   // Allow forcing mock-data mode via env (bypass DB)
   const USE_MOCK = process.env.USE_MOCK_DATA === 'true';
 
-  // Test database connection unless mock mode is enabled
-  const dbConnected = USE_MOCK ? false : await testConnection();
+    // Create tables if they don't exist
+  await sequelize.sync();
 
-  // Initialize database models only if connected
-  if (dbConnected) {
-    await initializeModels();
-  }
+    // Create tables and test connection
+  await sequelize.sync(); 
+
+  await testConnection();
+
+  // Seed database with mock data if empty
+  await seedDatabase();
+
 
   // Create Express app
   const app = express();
@@ -114,7 +121,7 @@ async function startServer() {
         return {
           req,
           res,
-          dbConnected,
+          dbConnected: await testConnection(),
           // Add authentication context here if needed
         };
       },
@@ -385,6 +392,19 @@ async function startServer() {
   console.log(`📊 GraphQL endpoint: http://localhost:${PORT}/graphql`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+}
+
+async function seedDatabase() {
+  try {
+    const projectCount = await Project.count();
+    if (projectCount === 0) {
+      console.log('No projects found in database, seeding with mock data...');
+      await Project.bulkCreate(mockProjects);
+      console.log('Database seeded successfully with mock projects.');
+    }
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  }
 }
 
 // Handle graceful shutdown

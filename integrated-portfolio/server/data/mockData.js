@@ -1,13 +1,29 @@
 // Mock data for when database is not available
 export const mockProjects = [
   {
+  id: "10", // I'll manage the ID, you can leave this as a placeholder
+  title: "DJ DeTroyt",
+  description: "This web application features the multi-talented Artist, Audio Engineer, & Production Specialist DeTroyt. The site is a showcase or digital footprint of the diverse experience and content the DeTroyt has delivered for over a decade.",
+  shortDescription: "Featuring a blend of music production, visual art, and audio engineering, DJ DeTroyt has been a staple in the music industry for over a decade.",
+  technologies: ["TypeScript", "CSS", "JavaScript"],
+  imageUrl: "/projects/DJ Detroyt - website screenshot.png", // Make sure this matches the filename from Step 2
+  liveUrl: "https://de-troyt-website.vercel.app/",
+  githubUrl: "https://github.com/CreationsXJohnC/DeTroyt-Website",
+  featured: true, // Keep true to show on homepage
+  order: 0, // This will place it at the top
+  status: "published",
+  category: "web-app", // e.g., "web-app", "ai", "blockchain"
+  createdAt: new Date("2026-02-20"),
+  updatedAt: new Date("2026-02-20")
+},
+  {
     id: "9",
     title: "JVE Capital Investments",
     description: "JVE Capital Investments LLC, specializing in commercial & residential contracting projects. From general contracting & construction, to project design and management.",
     shortDescription: "A polished corporate website focused on clarity, accessibility, and trust. Clean typography, responsive layout, and performance optimization for a professional experience.",
     technologies: ["React", "TypeScript", "TailwindCSS"],
-    imageUrl: "/projects/JVE Capital - website screenshot.png",
-    liveUrl: "https://jve-capital-investments-website.vercel.app/",
+    imageUrl: "/projects/JVE Capital - website updated screenshot.png",
+    liveUrl: "https://www.jvecapitalinvestments.com/",
     githubUrl: "https://github.com/CreationsXJohnC/jve-capital-investments-website",
     featured: true,
     order: 1,

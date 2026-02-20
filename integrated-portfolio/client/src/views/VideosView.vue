@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="12000"
-      :starDensityFar="24000"
+      :starDensityNear="2625"
+      :starDensityFar="5250"
       :starSizeNear="0.12"
       :starSizeFar="0.09"
       :motionScale="0.08"
