@@ -21,8 +21,7 @@ import './models/index.js';
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
-const CORS_ORIGIN = process.env.CORS_ORIGIN || FRONTEND_URL;
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173').split(',');
 
 async function startServer() {
   // Allow forcing mock-data mode via env (bypass DB)
@@ -97,9 +96,13 @@ async function startServer() {
 
   // Configure CORS
   const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' 
-      ? [CORS_ORIGIN] 
-      : [FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:4173'],
+    origin: (origin, callback) => {
+      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
