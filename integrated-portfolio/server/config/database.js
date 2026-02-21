@@ -3,19 +3,29 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL || {
-  dialect: process.env.DB_DIALECT || 'sqlite',
-  storage: process.env.NODE_ENV === 'production' 
-    ? '/tmp/database.sqlite' 
-    : (process.env.DB_STORAGE || './database.sqlite'),
-  logging: process.env.NODE_ENV === 'development' ? console.log : false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }
-});
+let sequelize; 
+
+if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
+  // Production environment (Vercel)
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // Vercel Postgres requires this
+      }
+    },
+    logging: false,
+  });
+} else {
+  // Development environment (local)
+  sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './database.sqlite',
+    logging: console.log,
+  });
+}
 
 // Test the connection
 export const testConnection = async () => {
