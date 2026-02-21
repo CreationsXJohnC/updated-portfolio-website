@@ -2,22 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.js",
-      "use": "@vercel/node"
+      "src": "server/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["../.env.example"]
+      }
     },
     {
-      "src": "client/vite.config.js",
-      "use": "@vercel/vite"
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { 
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/graphql",
-      "dest": "server/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "client/index.html"
-    }
+    { "src": "/graphql", "dest": "/server/index.js" },
+    { "src": "/(.*)", "dest": "/client/$1" }
   ]
 }
