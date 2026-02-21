@@ -27,16 +27,17 @@ async function startServer() {
   // Allow forcing mock-data mode via env (bypass DB)
   const USE_MOCK = process.env.USE_MOCK_DATA === 'true';
 
-    // Create tables if they don't exist
-  await sequelize.sync();
-
-    // Create tables and test connection
-  await sequelize.sync(); 
-
-  await testConnection();
-
-  // Seed database with mock data if empty
-  await seedDatabase();
+  // Initialize database separately to handle serverless environments
+  try {
+    await sequelize.sync({ force: false });
+    await seedDatabase();
+    console.log('Database initialized successfully.');
+  } catch (dbError) {
+    console.error('Could not initialize database:', dbError);
+    // In a serverless environment, we might not want to crash the whole function
+    // if the DB is just one part of the API. For this app, it's critical.
+    // We'll let it continue but expect GraphQL queries to fail if DB is needed.
+  }
 
 
   // Create Express app
