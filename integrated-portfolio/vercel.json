@@ -6,21 +6,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/dist"
-      }
+      "src": "client/vite.config.js",
+      "use": "@vercel/vite"
     }
   ],
   "routes": [
     {
       "src": "/graphql",
-      "dest": "/server/index.js"
+      "dest": "server/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/index.html"
+      "dest": "client/index.html"
     }
   ]
 }
