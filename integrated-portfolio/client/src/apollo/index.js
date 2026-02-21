@@ -39,7 +39,7 @@ const authLink = setContext((_, { headers }) => {
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_URI || '/api/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URI || '/graphql',
   // Do not send cookies for cross-origin requests to avoid strict CORS requirements
   credentials: 'omit',
 })
