@@ -5,7 +5,9 @@ dotenv.config();
 
 const sequelize = new Sequelize(process.env.DATABASE_URL || {
   dialect: process.env.DB_DIALECT || 'sqlite',
-  storage: process.env.DB_STORAGE || './database.sqlite',
+  storage: process.env.NODE_ENV === 'production' 
+    ? '/tmp/database.sqlite' 
+    : (process.env.DB_STORAGE || './database.sqlite'),
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
   pool: {
     max: 5,
