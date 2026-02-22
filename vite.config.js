@@ -9,8 +9,16 @@ export default defineConfig({
     vue(),
   ],
   resolve: {
-      alias: {
+    alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  })
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      }
+    }
+  },
+})

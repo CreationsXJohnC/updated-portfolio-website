@@ -69,7 +69,7 @@ import { ref, computed, onMounted } from 'vue';
 import ThreeBackground from '@/components/ThreeBackground.vue';
 import ytButtonImg from '@/assets/images/logos/Creations X YouTube Logo 2017.png';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || '';
 const handle = '@Creations_X';
 
 const channelUrl = computed(() => `https://www.youtube.com/${handle}`);
@@ -91,7 +91,7 @@ async function fetchUploads() {
   loadingUploads.value = true;
   uploadsError.value = '';
   try {
-    const resp = await fetch(`${API_URL}/youtube/uploads?handle=${encodeURIComponent(handle)}&max=12`);
+    const resp = await fetch(`${API_URL}/api/youtube/uploads?handle=${encodeURIComponent(handle)}&max=12`);
     const data = await resp.json();
     if (data.error) throw new Error(data.error);
     uploads.value = data.items || [];
@@ -107,7 +107,7 @@ async function fetchPlaylists() {
   playlistsError.value = '';
   playlistsNote.value = '';
   try {
-    const resp = await fetch(`${API_URL}/youtube/playlists?handle=${encodeURIComponent(handle)}&max=12`);
+    const resp = await fetch(`${API_URL}/api/youtube/playlists?handle=${encodeURIComponent(handle)}&max=12`);
     const data = await resp.json();
     if (data.note) playlistsNote.value = data.note;
     if (data.error) throw new Error(data.error);

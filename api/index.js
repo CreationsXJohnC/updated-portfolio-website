@@ -10,7 +10,7 @@ import { resolvers } from './resolvers/index.js';
 import youtubeRouter from './youtube.js';
 
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config({ path: '../.env' });
+  dotenv.config(); // loads .env from cwd (project root when run via npm run dev)
 }
 
 const app = express();
