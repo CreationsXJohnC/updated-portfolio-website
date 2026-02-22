@@ -1,24 +1,17 @@
 {
-  "functions": {
-    "api/index.js": {
-      "memory": 1024
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     },
-    "api/youtube.js": {
-      "memory": 1024
-    }
-  },
+    { "src": "api/index.js", "use": "@vercel/node" },
+    { "src": "api/youtube.js", "use": "@vercel/node" }
+  ],
   "routes": [
-    {
-      "src": "/api/graphql",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/api/youtube/uploads",
-      "dest": "/api/youtube.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+    { "src": "/api/graphql", "dest": "/api/index.js" },
+    { "src": "/api/youtube/uploads", "dest": "/api/youtube.js" },
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
