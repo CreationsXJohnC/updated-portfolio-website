@@ -1,17 +1,40 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { expressMiddleware } from '@apollo/server/express4';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
 import { typeDefs } from './schemas/typeDefs.js';
 import { resolvers } from './resolvers/index.js';
+import youtubeRouter from './youtube.js';
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '../.env' });
+}
+
+const app = express();
+const httpServer = http.createServer(app);
+
+// Global Middleware: Applied to ALL incoming requests
+app.use(cors());
+app.use(express.json());
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
-// This is the Vercel serverless function handler
-export default startStandaloneServer(server, {
-    context: async ({ req }) => {
-        // You can add context here if needed, e.g., for authentication
-    },
-    // Vercel handles the listening part, so we don't specify a port
-});
+await server.start();
+
+// Route handlers
+app.use('/graphql', expressMiddleware(server));
+app.use('/api/youtube', youtubeRouter);
+
+if (process.env.NODE_ENV !== 'production') {
+  httpServer.listen({ port: 4000 }, () => {
+    console.log(`🚀 API server ready at http://localhost:4000`);
+  });
+}
+
+export default app;

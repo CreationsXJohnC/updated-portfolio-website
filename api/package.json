@@ -2,9 +2,13 @@
   "name": "api",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "dependencies": {
     "@apollo/server": "^4.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "graphql": "^16.8.1",
     "node-fetch": "^3.3.2",
     "sequelize": "^6.35.2",
