@@ -28,7 +28,7 @@ const server = new ApolloServer({
 await server.start();
 
 // Route handlers
-app.use('/graphql', expressMiddleware(server));
+app.use('/api/graphql', expressMiddleware(server));
 app.use('/api/youtube', youtubeRouter);
 
 if (process.env.NODE_ENV !== 'production') {
