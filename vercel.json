@@ -11,7 +11,9 @@
   "routes": [
     { "src": "/api/graphql", "dest": "/integrated-portfolio/api/index.js" },
     { "src": "/api/youtube/uploads", "dest": "/integrated-portfolio/api/youtube.js" },
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/projects/(.*)", "dest": "/projects/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
