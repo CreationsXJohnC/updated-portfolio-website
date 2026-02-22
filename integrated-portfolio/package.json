@@ -4,14 +4,8 @@
   "description": "Modern portfolio website with Vue.js frontend and Apollo GraphQL backend",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run dev",
-    "build": "cd client && ./node_modules/.bin/vite build",
-    "build:client": "cd client && ./node_modules/.bin/vite build",
-    "start": "cd server && npm start",
-    "install:all": "npm install && cd client && npm install --include=dev",
-    "vercel-build": "cd client && ( [ -x ./node_modules/.bin/vite ] || npm install --include=dev ) && ./node_modules/.bin/vite build"
+    "start": "node dist/server/index.js",
+    "build": "rm -rf dist && cd client && npm install && npm run build && cd .. && mkdir -p dist/client && cp -r client/dist/* dist/client/ && mkdir -p dist/server && cp -r server/* dist/server/ && cp server/.env.example dist/server/"
   },
   "keywords": [
     "portfolio",

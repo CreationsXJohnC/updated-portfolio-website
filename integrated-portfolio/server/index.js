@@ -11,6 +11,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
+import path from 'path';
 import { typeDefs } from './schemas/typeDefs.js';
 import { resolvers } from './resolvers/index.js';
 import { sequelize, testConnection } from './config/database.js';
@@ -377,18 +378,11 @@ async function startServer() {
   });
 
   // Root endpoint
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Portfolio GraphQL API',
-      graphql: '/graphql',
-      youtube: {
-        channel: '/youtube/channel?handle=@Creations_X',
-        uploads: '/youtube/uploads?handle=@Creations_X',
-        playlists: '/youtube/playlists?handle=@Creations_X'
-      },
-      health: '/health'
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
-  });
 
   // Start HTTP server
   await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
