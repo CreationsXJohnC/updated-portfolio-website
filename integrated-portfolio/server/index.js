@@ -18,6 +18,10 @@ import { sequelize, testConnection } from './config/database.js';
 import { Project } from './models/index.js';
 import { mockProjects } from './data/mockData.js';
 import './models/index.js';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
