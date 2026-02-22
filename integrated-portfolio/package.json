@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run dev",
-    "start": "node public/server/index.js",
-    "build": "rm -rf public && cd client && npm install && npm run build && cd .. && mkdir -p public/client && cp -r client/dist/* public/client/ && mkdir -p public/server && cp -r server/* public/server/ && cp server/.env.example public/server/"
+    "dev:client": "cd client && npm run dev"
+
   },
   "keywords": [
     "portfolio",
