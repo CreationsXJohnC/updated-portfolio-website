@@ -1,0 +1,17 @@
+{
+  "builds": [
+    {
+      "src": "integrated-portfolio/client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    { "src": "integrated-portfolio/api/index.js", "use": "@vercel/node" },
+    { "src": "integrated-portfolio/api/youtube.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/graphql", "dest": "/integrated-portfolio/api/index.js" },
+    { "src": "/api/youtube/uploads", "dest": "/integrated-portfolio/api/youtube.js" },
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
