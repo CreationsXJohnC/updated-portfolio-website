@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField"
       :enableMouse="true"
-      :starDensityNear="10500"
-      :starDensityFar="21000"
+      :starDensityNear="35000"
+      :starDensityFar="70000"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
       colorPrimary="#000000"
@@ -601,12 +601,12 @@ export default {
       // Sort by order field (ascending)
       const sorted = filtered.sort((a, b) => {
         // If both have order, sort by order
-        if (a.order && b.order) {
+        if (a.order != null && b.order != null) {
           return a.order - b.order
         }
         // If only one has order, prioritize it
-        if (a.order) return -1
-        if (b.order) return 1
+        if (a.order != null) return -1
+        if (b.order != null) return 1
         // If neither has order, sort by creation date (newest first)
         return new Date(b.createdAt) - new Date(a.createdAt)
       })
