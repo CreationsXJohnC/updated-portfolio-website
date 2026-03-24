@@ -18,11 +18,11 @@
         <div class="hero-content">
           <div class="hero-text">
             <h1 class="hero-title">
-              <span class="title-line">Hey</span>
+              <span class="title-line">Hi,</span>
               <span class="title-name">I'm Che.</span>
             </h1>
             <p class="hero-description">
-              <strong>I'm a Full Stack Software Engineer</strong> driven by the mantra <strong>"Think 2 Create & Create 2 Inspire."</strong> I design intuitive web applications and build businesses that deliver seamless user experiences, inspire audiences, and leave a lasting impact.
+              Driven by the mantra <strong>"Think 2 Create & Create 2 Inspire."</strong> I design intuitive web applications, build AI-powered tools, and launch businesses that deliver seamless user experiences, while blending operational strategy with engineering craft to create products &amp; services that inspire audiences and leave a lasting impact.
             </p>
             <p class="hero-description">
               Here's a bit more <router-link to="/about" class="inline-link">about me</router-link>.
@@ -427,7 +427,7 @@
         <div class="hero-content">
           <h1 class="page-title">My Projects</h1>
           <p class="page-subtitle">
-            I'm a Software Engineer and Creative Technologist specializing in modern JavaScript with HTML5/CSS3 across the full stack. I build performant, responsive interfaces with React 18 and Vue.js 3, and implement secure backends using Node.js, Express, and Apollo GraphQL (JWT/bcryptjs), backed by PostgreSQL or SQLite via Sequelize and, when useful, Firebase. I work comfortably with Vite, Webpack, Babel, and Git; uphold quality with Jest and ESLint; and ship polished, accessible UIs using Tailwind CSS, Sass/SCSS, and robust patterns like state management (Pinia/Vue Router), dynamic routing, skeleton loading states, and progressive web app features. You'll see clear examples of these skills and approaches in the projects showcased below.
+            I am a Full-Stack Engineer and Creative Technologist specializing in TypeScript and modern JavaScript across the entire stack. On the frontend I build performant, accessible, and visually polished interfaces with React 18, Next.js 14, and Vue.js 3, styled with TailwindCSS, ShadCN/UI, Sass/SCSS, and brought to life with GSAP and Lottie animations. On the backend I architect secure, scalable APIs using Node.js, Express, and Apollo GraphQL (JWT/bcryptjs), backed by PostgreSQL or SQLite via Sequelize and Prisma ORM, MongoDB, Firebase, and Supabase where they fit best. I integrate AI directly into my workflow, leveraging the OpenAI API, Claude, and Claude Code for intelligent features, GPT-powered tools, and AI-assisted development that lets me ship faster without sacrificing quality or craft. State management, dynamic routing, skeleton loading states, PWA features, and CI/CD pipelines are part of every build. Tooling and quality are first-class: Vite, Webpack, Babel, Git, Jest, ESLint, and React Testing Library, with WCAG 2.1 accessibility compliance baked in from the start. The projects below are concrete examples of all of it in action.
           </p>
         </div>
       </div>

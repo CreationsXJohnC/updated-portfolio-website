@@ -49,7 +49,7 @@
                 <span class="stat-label">Technologies</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">4+</span>
+                <span class="stat-number">10+</span>
                 <span class="stat-label">Years Experience</span>
               </div>
             </div>
@@ -60,7 +60,7 @@
                 <i class="fas fa-arrow-right"></i>
               </router-link>
               <a
-                  href="/JohnChe_Larracuente_Resume_2026.pdf"
+                  href="/JohnChe_Resume_2026.pdf"
                   @click.prevent="downloadResume"
                   download
                   class="btn btn-outline hover-target"
@@ -296,8 +296,8 @@ export default {
 
     const { result, loading, error } = useQuery(GET_ABOUT_DATA)
 
-    const NEW_RESUME_URL = '/JohnChe_Larracuente_Resume_2026.pdf'
-    const OLD_RESUME_URL = '/JohnChe_Larracuente_Resume_2026.pdf'
+    const NEW_RESUME_URL = '/JohnChe_Resume_2026.pdf'
+    const OLD_RESUME_URL = '/JohnChe_Resume_2026.pdf'
 
     const downloadResume = async () => {
       try {

@@ -259,6 +259,6 @@ export const mockProfile = {
   id: "1",
   name: "John Che Larracuente",
   title: "Full-Stack Engineer & Creative Technologist",
-  bio: "I am a full-stack engineer and creative technologist specializing in modern JavaScript, TypeScript, and the React/Next.js/Vue.js ecosystem. I build performant, accessible, and visually polished interfaces on the frontend, backed by Node.js, Express, GraphQL (Apollo), and PostgreSQL on the backend. I integrate AI APIs, design systems, and real-time data flows into products that are fast, scalable, and built to convert.",
+  bio: "I am an operations consultant and full-stack engineer specializing in AI workflows, digital platform development, and business systems. I build with React, Next.js, Node.js, GraphQL, and many more modern technology languages, as well as integrate OpenAI APIs, design systems, and real-time data flows into products that are fast, scalable, and built to convert. I bring a founder's instinct to every engagement.",
   avatarUrl: "/DSCF8979.jpg",
 };
