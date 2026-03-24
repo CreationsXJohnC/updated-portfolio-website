@@ -42,7 +42,7 @@ export const mockProjects = [
     liveUrl: "https://de-troyt-website.vercel.app/",
     githubUrl: "https://github.com/CreationsXJohnC/DeTroyt-Website",
     featured: true,
-    order: 2,
+    order: 3,
     status: "published",
     category: "web-app",
     createdAt: new Date("2026-02-20").toISOString(),
@@ -58,7 +58,7 @@ export const mockProjects = [
     liveUrl: "https://www.jvecapitalinvestments.com/",
     githubUrl: "https://github.com/CreationsXJohnC/jve-capital-investments-website",
     featured: true,
-    order: 3,
+    order: 2,
     status: "published",
     category: "web-app",
     createdAt: new Date("2024-06-01").toISOString(),
@@ -258,7 +258,7 @@ export const mockExperiences = [
 export const mockProfile = {
   id: "1",
   name: "John Che Larracuente",
-  title: "Software Engineer & Creative Technologist",
-  bio: "I'm a Software Engineer and Creative Technologist specializing in modern JavaScript with HTML5/CSS3 across the full stack. I build performant, responsive interfaces with React 18 and Vue.js 3, and implement secure backends using Node.js, Express, and Apollo GraphQL.",
+  title: "Full-Stack Engineer & Creative Technologist",
+  bio: "I am a full-stack engineer and creative technologist specializing in modern JavaScript, TypeScript, and the React/Next.js/Vue.js ecosystem. I build performant, accessible, and visually polished interfaces on the frontend, backed by Node.js, Express, GraphQL (Apollo), and PostgreSQL on the backend. I integrate AI APIs, design systems, and real-time data flows into products that are fast, scalable, and built to convert.",
   avatarUrl: "/DSCF8979.jpg",
 };

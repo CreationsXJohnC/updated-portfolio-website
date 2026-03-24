@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField" 
       :enableMouse="true" 
-      :starDensityNear="5250"
-      :starDensityFar="10500"
+      :starDensityNear="20000"
+      :starDensityFar="40000"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
       :motionScale="0.08"
@@ -264,8 +264,8 @@
         </div>
         
         <div class="projects-grid" v-else-if="featuredProjects.length">
-          <div 
-            v-for="project in featuredProjects" 
+          <div
+            v-for="project in featuredProjects"
             :key="project.id"
             class="project-card hover-large"
             :style="{ backgroundImage: `url('${encodeURI(project.imageUrl)}')` }"
@@ -1840,7 +1840,26 @@ export default {
   }
 }
 
+.projects-grid .project-card:nth-child(3) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 110%;
+    background-position: center;
+    background-image: inherit;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
 
+  &:hover::before {
+    background-size: 340%;
+    background-position: top left;
+  }
+}
 
 .project-actions {
   display: flex;
@@ -1848,7 +1867,9 @@ export default {
   margin-bottom: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  
+  position: relative;
+  z-index: 10;
+
   .project-card:hover & {
     opacity: 1;
   }
@@ -1885,6 +1906,7 @@ export default {
   padding: 2rem;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
   color: white;
+  z-index: 2;
 }
 
 .project-title {

@@ -3,8 +3,8 @@
     <ThreeBackground 
       variant="starField"
       :enableMouse="true"
-      :starDensityNear="35000"
-      :starDensityFar="70000"
+      :starDensityNear="50000"
+      :starDensityFar="100000"
       :starSizeNear="0.09"
       :starSizeFar="0.07"
       colorPrimary="#000000"
@@ -453,8 +453,8 @@
 
         <!-- Projects Grid -->
      <div v-if="filteredProjects.length" class="projects-grid">
-          <div 
-            v-for="project in filteredProjects" 
+          <div
+            v-for="project in filteredProjects"
             :key="project.id"
             class="project-card hover-large"
             :style="{ backgroundImage: `url('${encodeURI(project.imageUrl)}')` }"
